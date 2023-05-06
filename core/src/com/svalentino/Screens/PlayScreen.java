@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.svalentino.MarioGame;
+import com.svalentino.Scenes.GameHud;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -15,15 +15,15 @@ Any screen class should implement Screen.
  */
 public class PlayScreen implements Screen {
     private MarioGame game;
-    Texture tex;
-    private OrthographicCamera gameCamera;
+    private OrthographicCamera camera;
     private Viewport vport;
+    private GameHud hud;
 
     public PlayScreen(MarioGame game) {
         this.game = game;
-        this.tex = new Texture("badlogic.jpg");
-        this.gameCamera = new OrthographicCamera();
-        this.vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, gameCamera);
+        this.camera = new OrthographicCamera();
+        this.vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, camera);
+        this.hud = new GameHud(game.batch);
     }
 
     @Override
@@ -38,10 +38,10 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         clearScreen();
-        game.batch.setProjectionMatrix(gameCamera.combined);
-        game.batch.begin();
-        game.batch.draw(tex, 0, 0);
-        game.batch.end();
+        // setup where the batch will project to
+        // getting the hud's camera
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     /*

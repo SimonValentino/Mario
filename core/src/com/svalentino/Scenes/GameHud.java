@@ -41,6 +41,10 @@ public class GameHud {
 
     }
 
+    /*
+    Construct the stage and its table. Add all labels to teh table.
+    Add table to stage.
+     */
     private void constructStage(SpriteBatch batch) {
         stage = new Stage(vport, batch);
         Table table = new Table();
@@ -49,17 +53,20 @@ public class GameHud {
 
         // expandX() allows all labels to share space on the x-axis
         // top row
-        table.add(marioLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        table.add(marioLabel).expandX().padTop(5);
+        table.add(timeLabel).expandX().padTop(5);
         table.row();
         // new row
-        table.add(scoreLabel).expandX().padTop(10);
-        table.add(countdownLabel).expandX().padTop(10);
+        table.add(scoreLabel).expandX();
+        table.add(countdownLabel).expandX();
 
         // goofy method name addActor()
         stage.addActor(table);
     }
 
+    /*
+    Init all the labels as white.
+     */
     private void constructLabels() {
         countdownLabel = new Label(String.format("%03d", timer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
