@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.svalentino.MarioGame;
@@ -24,7 +25,7 @@ public class PlayScreen implements Screen {
         this.game = game;
         this.tex = new Texture("badlogic.jpg");
         this.gameCamera = new OrthographicCamera();
-        this.gamePort = new StretchViewport(800, 480, gameCamera);
+        this.gamePort = new FitViewport(800, 480, gameCamera);
 
     }
 
@@ -40,6 +41,7 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         clearScreen();
+        game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
         game.batch.draw(tex, 0, 0);
         game.batch.end();
