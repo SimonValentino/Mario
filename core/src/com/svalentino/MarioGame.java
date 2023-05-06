@@ -7,6 +7,9 @@ import com.badlogic.gdx.Game;
 import com.svalentino.Screens.PlayScreen;
 
 public class MarioGame extends Game {
+	public static final int WIDTH = 400;
+	public static final int HEIGHT = 208;
+
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;
