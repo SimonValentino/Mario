@@ -71,7 +71,7 @@ public class GameHud {
         countdownLabel = new Label(String.format("%03d", timer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        scoreLabel = new Label(String.format("%06d", timer),
+        scoreLabel = new Label(String.format("%06d", score),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         timeLabel = new Label("TIME",
