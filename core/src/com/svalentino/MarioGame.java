@@ -7,12 +7,14 @@ import com.badlogic.gdx.Game;
 import com.svalentino.Screens.PlayScreen;
 
 public class MarioGame extends Game {
+	// Holds all sprites and images
+	// Public so all screens can have access to it
 	public SpriteBatch batch;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		setScreen(new PlayScreen(this));
+		super.setScreen(new PlayScreen(this));
 	}
 
 	@Override
