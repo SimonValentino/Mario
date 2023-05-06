@@ -1,13 +1,11 @@
 package com.svalentino.Screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.svalentino.MarioGame;
 
@@ -19,13 +17,13 @@ public class PlayScreen implements Screen {
     private MarioGame game;
     Texture tex;
     private OrthographicCamera gameCamera;
-    private Viewport gamePort;
+    private Viewport vport;
 
     public PlayScreen(MarioGame game) {
         this.game = game;
         this.tex = new Texture("badlogic.jpg");
         this.gameCamera = new OrthographicCamera();
-        this.gamePort = new FitViewport(800, 480, gameCamera);
+        this.vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, gameCamera);
     }
 
     @Override
@@ -51,7 +49,7 @@ public class PlayScreen implements Screen {
      */
     @Override
     public void resize(int width, int height) {
-        gamePort.update(width, height);
+        vport.update(width, height);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class PlayScreen implements Screen {
     }
 
     private void clearScreen() {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 1, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 }
