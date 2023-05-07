@@ -21,7 +21,6 @@ public class MarioGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		super.setScreen(new PlayScreen(this));
-		System.out.println("Test.");
 	}
 
 	/*
