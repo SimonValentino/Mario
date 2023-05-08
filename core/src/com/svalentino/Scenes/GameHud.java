@@ -52,14 +52,13 @@ public class GameHud {
 
         // expandX() allows all labels to share space on the x-axis
         // top row
-        table.add(marioLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        table.add(marioLabel).expandX().padTop(5f);
+        table.add(timeLabel).expandX().padTop(5f);
         table.row();
         // new row
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
 
-        // goofy method name addActor()
         stage.addActor(table);
     }
 
