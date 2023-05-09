@@ -8,7 +8,7 @@ import com.svalentino.Screens.PlayScreen;
 
 public class MarioGame extends Game {
 	public static final int WIDTH = 400;
-	public static final int HEIGHT = 245;
+	public static final int HEIGHT = 230;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it
