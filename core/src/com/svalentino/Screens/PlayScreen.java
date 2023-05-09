@@ -36,6 +36,7 @@ public class PlayScreen implements Screen {
         this.map = new TmxMapLoader().load("MarioMap.tmx");
         this.renderer = new OrthogonalTiledMapRenderer(map);
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
+        camera.update();
     }
 
     @Override
