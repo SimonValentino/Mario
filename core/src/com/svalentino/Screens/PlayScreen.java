@@ -98,7 +98,7 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
             camera.position.x -= 100 * delta;
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            camera.position.x += 1 * delta;
+            camera.position.x += 100 * delta;
     } 
 
     private void renderMap(float delta) {
