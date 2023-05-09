@@ -51,7 +51,7 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         clearScreen();
 
-        renderMap();
+        renderMap(delta);
         renderer.render();
 
         // setup where the batch will project to
@@ -93,15 +93,16 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
-    private void getInput() {
+    private void getInput(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            camera.position.x -= 1;
+            camera.position.x -= 100 * delta;
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            camera.position.x += 1;
+            camera.position.x += 1 * delta;
     } 
 
-    private void renderMap() {
-        getInput();
+    private void renderMap(float delta) {
+        getInput(delta);
+        camera.update();
         renderer.setView(camera);
     }
 }
