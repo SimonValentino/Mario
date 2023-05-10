@@ -19,17 +19,11 @@ Actual rendering of the MarioGame is delegated to a screen.
 Any screen class should implement Screen.
  */
 public class PlayScreen implements Screen {
-    // Game display variables
     private MarioGame game;
     private OrthographicCamera camera;
     private Viewport vport;
-
-    // Hud variables
     private GameHud hud;
 
-    // Physics engine variables
-
-    // Tiled map variables
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
