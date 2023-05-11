@@ -5,10 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,6 +27,9 @@ Actual rendering of the MarioGame is delegated to a screen.
 Any screen class should implement Screen.
  */
 public class PlayScreen implements Screen {
+    // Gravity force
+    private final Vector2 gravity;
+
     // Game
     private MarioGame game;
 
@@ -46,7 +48,12 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer box2DRenderer;
 
+    // Player
+    private Mario mario;
+
     public PlayScreen(MarioGame game) {
+        this.gravity = new Vector2(0, -60f);
+
         this.game = game;
         this.camera = new OrthographicCamera();
         this.vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, camera);
@@ -57,7 +64,9 @@ public class PlayScreen implements Screen {
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
 
-        setupPhysicsEngineBody();
+        setupPhysicsEngine();
+
+        this.mario = new Mario(world);
     }
 
     @Override
@@ -76,7 +85,6 @@ public class PlayScreen implements Screen {
         renderMap(delta);
         renderer.render();
 
-        Mario mario = new Mario(world);
         // render the Box2D blocks
         box2DRenderer.render(world, camera.combined);
 
@@ -85,9 +93,9 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         hud.update(delta);
-        if(hud.getWorldTimer() <= 0) {
+
+        if(hud.getWorldTimer() <= 0)
             clearScreen();
-        }
     }
 
     /*
@@ -124,21 +132,21 @@ public class PlayScreen implements Screen {
     }
 
     private void getInput(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            camera.position.x -= 100 * delta;
-        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            camera.position.x += 100 * delta;
+
     }
 
     private void renderMap(float delta) {
         getInput(delta);
+
+        world.step(1 / 40f, 3, 3);
+
         camera.update();
         renderer.setView(camera);
 
     }
 
-    private void setupPhysicsEngineBody() {
-        this.world = new World(new Vector2(0, -10), true);
+    private void setupPhysicsEngine() {
+        this.world = new World(gravity, true);
         this.box2DRenderer = new Box2DDebugRenderer();
 
         Body body;
