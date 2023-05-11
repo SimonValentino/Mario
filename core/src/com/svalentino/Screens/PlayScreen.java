@@ -104,6 +104,10 @@ public class PlayScreen implements Screen {
         // getting the hud's camera
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+        hud.update(delta);
+        if(hud.getWorldTimer() <= 0) {
+            clearScreen();
+        }
     }
 
     /*
@@ -150,6 +154,7 @@ public class PlayScreen implements Screen {
         getInput(delta);
         camera.update();
         renderer.setView(camera);
+
     }
 
     private void setupPhysicsEngineBody() {

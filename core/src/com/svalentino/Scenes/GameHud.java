@@ -20,7 +20,7 @@ public class GameHud {
     // the hud stays
     private Viewport vport;
 
-    private int timer;
+    private int worldTimer;
     private double timeCount;
     private int score;
 
@@ -29,8 +29,12 @@ public class GameHud {
     private Label timeLabel;
     private Label marioLabel;
 
+    public int getWorldTimer() {
+        return worldTimer;
+    }
+
     public GameHud(SpriteBatch batch) {
-        timer = 300;
+        worldTimer = 300;
         timeCount = 0;
         score = 0;
 
@@ -65,8 +69,20 @@ public class GameHud {
     /*
     Init all the labels as white.
      */
+    public void update(float dt) {
+        timeCount += dt;
+        if(timeCount >=1 ) {
+            worldTimer--;
+            String strWorldTimer = Integer.toString(worldTimer);
+            countdownLabel.setText(String.format("%0" + strWorldTimer.length()+ "d", worldTimer));
+            timeCount = 0;
+        }
+        if(worldTimer <= 0) {
+            return;
+        }
+    }
     private void constructLabels() {
-        countdownLabel = new Label(String.format("%03d", timer),
+        countdownLabel = new Label(String.format("%03d", worldTimer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         scoreLabel = new Label(String.format("%06d", score),
@@ -78,4 +94,9 @@ public class GameHud {
         marioLabel = new Label("MARIO",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
     }
+//    public void setCountdownLabel(float delta) {
+//        String strCountDownLabel = countdownLabel.getText().toString();
+//        float f = (float) (Integer.parseInt(strCountDownLabel)) - delta;
+//        countdownLabel.setText(String.valueOf(f));
+//    }
 }
