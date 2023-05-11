@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -46,7 +47,7 @@ public class PlayScreen implements Screen {
     World world;
     Box2DDebugRenderer box2DRenderer;
 
-    
+
 
     public PlayScreen(MarioGame game) {
         this.game = game;
@@ -67,17 +68,21 @@ public class PlayScreen implements Screen {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
+        Rectangle rect;
 
         for (int i = 2; i <= 6; i++) {
             for (RectangleMapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = (Rectangle) obj.getRectangle();
+                rect = obj.getRectangle();
 
+                // StaticBody means not effected by gravity, cant move, etc.
+                bodyDef.type = BodyDef.BodyType.StaticBody;
                 bodyDef.position.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
 
                 shape.setAsBox(rect.width / 2, rect.height / 2);
-
+                fixtureDef.shape = shape;
 
                 body = world.createBody(bodyDef);
+                body.createFixture(fixtureDef);
             }
         }
     }
@@ -98,6 +103,7 @@ public class PlayScreen implements Screen {
         renderMap(delta);
         renderer.render();
 
+        // render the Box2D blocks
         box2DRenderer.render(world, camera.combined);
 
         // setup where the batch will project to
@@ -148,7 +154,7 @@ public class PlayScreen implements Screen {
             camera.position.x -= 100 * delta;
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             camera.position.x += 100 * delta;
-    } 
+    }
 
     private void renderMap(float delta) {
         getInput(delta);
