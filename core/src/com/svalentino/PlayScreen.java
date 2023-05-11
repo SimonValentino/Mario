@@ -1,4 +1,4 @@
-package com.svalentino.Screens;
+package com.svalentino;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -21,8 +21,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.svalentino.MarioGame;
-import com.svalentino.Scenes.GameHud;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -44,10 +42,8 @@ public class PlayScreen implements Screen {
     private OrthogonalTiledMapRenderer renderer;
 
     // Physics engine
-    World world;
-    Box2DDebugRenderer box2DRenderer;
-
-
+    private World world;
+    private Box2DDebugRenderer box2DRenderer;
 
     public PlayScreen(MarioGame game) {
         this.game = game;
@@ -60,31 +56,7 @@ public class PlayScreen implements Screen {
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
 
-        this.world = new World(new Vector2(0, 0), true);
-        this.box2DRenderer = new Box2DDebugRenderer();
-
-        Body body;
-
-        BodyDef bodyDef = new BodyDef();
-        FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        Rectangle rect;
-
-        for (int i = 2; i <= 6; i++) {
-            for (RectangleMapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
-                rect = obj.getRectangle();
-
-                // StaticBody means not effected by gravity, cant move, etc.
-                bodyDef.type = BodyDef.BodyType.StaticBody;
-                bodyDef.position.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
-
-                shape.setAsBox(rect.width / 2, rect.height / 2);
-                fixtureDef.shape = shape;
-
-                body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
-            }
-        }
+        setupPhysicsEngineBody();
     }
 
     @Override
@@ -164,6 +136,30 @@ public class PlayScreen implements Screen {
     }
 
     private void setupPhysicsEngineBody() {
+        this.world = new World(new Vector2(0, 0), true);
+        this.box2DRenderer = new Box2DDebugRenderer();
 
+        Body body;
+
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape shape = new PolygonShape();
+        Rectangle rect;
+
+        for (int i = 2; i <= 6; i++) {
+            for (RectangleMapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
+                rect = obj.getRectangle();
+
+                // StaticBody means not effected by gravity, cant move, etc.
+                bodyDef.type = BodyDef.BodyType.StaticBody;
+                bodyDef.position.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
+
+                shape.setAsBox(rect.width / 2, rect.height / 2);
+                fixtureDef.shape = shape;
+
+                body = world.createBody(bodyDef);
+                body.createFixture(fixtureDef);
+            }
+        }
     }
 }
