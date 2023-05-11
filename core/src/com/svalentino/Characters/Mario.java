@@ -21,12 +21,13 @@ public class Mario extends Sprite {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(50f, 50f);
-        bodyDef.type = BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(100f, 100f);
+        hitbox.setAsBox(8f, 8f);
+
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);
     }

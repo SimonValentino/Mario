@@ -21,6 +21,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.svalentino.Characters.Mario;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -75,6 +76,7 @@ public class PlayScreen implements Screen {
         renderMap(delta);
         renderer.render();
 
+        Mario mario = new Mario(world);
         // render the Box2D blocks
         box2DRenderer.render(world, camera.combined);
 
@@ -136,7 +138,7 @@ public class PlayScreen implements Screen {
     }
 
     private void setupPhysicsEngineBody() {
-        this.world = new World(new Vector2(0, 0), true);
+        this.world = new World(new Vector2(0, -10), true);
         this.box2DRenderer = new Box2DDebugRenderer();
 
         Body body;
