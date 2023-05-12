@@ -94,8 +94,8 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
         hud.update(delta);
 
-        if(hud.getWorldTimer() <= 0)
-            clearScreen();
+        if(hud.getWorldTimer() <= 0) {
+        }
     }
 
     /*

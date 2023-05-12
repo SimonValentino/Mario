@@ -24,6 +24,7 @@ public class GameHud {
     private final int score;
     private int numLives;
 
+    final private int timeInLevel = 5;
     private Label numLivesLabel;
     private Label livesLabel;
     private Label countdownLabel;
@@ -36,7 +37,7 @@ public class GameHud {
     }
 
     public GameHud(SpriteBatch batch) {
-        worldTimer = 300;
+        worldTimer = timeInLevel;
         timeCount = 0;
         numLives = 3;
         score = 0;
@@ -79,10 +80,13 @@ public class GameHud {
         if(timeCount >=1 ) {
             worldTimer--;
             String strWorldTimer = Integer.toString(worldTimer);
-            countdownLabel.setText(String.format("%0" + strWorldTimer.length()+ "d", worldTimer));
+            countdownLabel.setText(String.format("%0" + strWorldTimer.length() + "d", worldTimer));
             timeCount = 0;
         }
         if(worldTimer <= 0) {
+            numLives--;
+            numLivesLabel.setText(String.format("%01d", numLives));
+            worldTimer = timeInLevel;
         }
     }
     private void constructLabels() {
