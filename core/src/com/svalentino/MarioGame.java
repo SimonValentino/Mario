@@ -1,5 +1,7 @@
 package com.svalentino;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -12,19 +14,29 @@ public class MarioGame extends Game {
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;
-
+	private Music music;
 	/*
 	init sprite bach and set the screen to PlayScreen
 	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		music = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\marri\\StudioProjects\\Mario\\assets\\Downloads\\Super Mario Bros. Theme Song.mp3"));
+		music.setLooping(true);
+		music.setVolume(0.15f);
+		music.play();
 		super.setScreen(new PlayScreen(this));
 	}
 
+	@Override
+	public void dispose() {
+		super.dispose();
+		music.dispose();
+	}
+
 	/*
-	render frame
-	 */
+        render frame
+         */
 	@Override
 	public void render () {
 		super.render();
