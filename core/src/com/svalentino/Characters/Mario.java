@@ -13,8 +13,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class Mario extends Sprite {
-    private World world;
-    private Body mario;
+    private final World world;
+    private final Body mario;
 
     private static final float MARIO_WIDTH = 8f;
     private static final float MARIO_HEIGHT = 8f;

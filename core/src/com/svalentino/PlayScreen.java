@@ -31,25 +31,25 @@ public class PlayScreen implements Screen {
     private final Vector2 gravity;
 
     // Game
-    private MarioGame game;
+    private final MarioGame game;
 
     // Camera
-    private OrthographicCamera camera;
-    private Viewport vport;
+    private final OrthographicCamera camera;
+    private final Viewport vport;
 
     // Hud
-    private GameHud hud;
+    private final GameHud hud;
 
     // Map
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    private final TiledMap map;
+    private final OrthogonalTiledMapRenderer renderer;
 
     // Physics engine
     private World world;
     private Box2DDebugRenderer box2DRenderer;
 
     // Player
-    private Mario mario;
+    private final Mario mario;
 
     public PlayScreen(MarioGame game) {
         this.gravity = new Vector2(0, -60f);

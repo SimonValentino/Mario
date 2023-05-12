@@ -17,11 +17,11 @@ public class GameHud {
 
     // Hud has it's own viewport so that while the game moves around
     // the hud stays
-    private Viewport vport;
+    private final Viewport vport;
 
     private int worldTimer;
     private double timeCount;
-    private int score;
+    private final int score;
 
     private Label countdownLabel;
     private Label scoreLabel;
@@ -77,7 +77,6 @@ public class GameHud {
             timeCount = 0;
         }
         if(worldTimer <= 0) {
-            return;
         }
     }
     private void constructLabels() {
