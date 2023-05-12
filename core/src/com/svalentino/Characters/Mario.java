@@ -4,6 +4,7 @@ import org.w3c.dom.css.Rect;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -33,5 +34,17 @@ public class Mario extends Sprite {
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);
+    }
+
+    public void jump() {
+        mario.applyLinearImpulse(new Vector2(0, 140f), mario.getWorldCenter(), true);
+    }
+
+    public void moveRight() {
+        mario.applyLinearImpulse(new Vector2(0, 100f), mario.getWorldCenter(), true);
+    }
+
+    public void moveLeft() {
+        mario.applyLinearImpulse(new Vector2(0, -100f), mario.getWorldCenter(), true);
     }
 }
