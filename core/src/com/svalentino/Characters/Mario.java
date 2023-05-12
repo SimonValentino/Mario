@@ -37,14 +37,18 @@ public class Mario extends Sprite {
     }
 
     public void jump() {
-        mario.applyLinearImpulse(new Vector2(0, 140f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0, 500f), mario.getWorldCenter(), true);
     }
 
     public void moveRight() {
-        mario.applyLinearImpulse(new Vector2(0, 100f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(5f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
-        mario.applyLinearImpulse(new Vector2(0, -100f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(-5f, 0), mario.getWorldCenter(), true);
+    }
+
+    public float getXCoordinate() {
+        return mario.getWorldCenter().x;
     }
 }

@@ -132,18 +132,20 @@ public class PlayScreen implements Screen {
     }
 
     private void getInput(float delta) {
-        if (Gdx.input.isButtonJustPressed(Input.Keys.SPACE))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             mario.jump();
-        if (Gdx.input.isButtonPressed(Input.Keys.RIGHT))
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             mario.moveRight();
-        if (Gdx.input.isButtonPressed(Input.Keys.LEFT))
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
             mario.moveLeft();
+        
+        camera.position.x = mario.getXCoordinate();
     }
 
     private void renderMap(float delta) {
         getInput(delta);
 
-        world.step(1 / 40f, 3, 3);
+        world.step(1 / 40f, 6, 6);
 
         camera.update();
         renderer.setView(camera);
