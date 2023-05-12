@@ -52,7 +52,7 @@ public class PlayScreen implements Screen {
     private final Mario mario;
 
     public PlayScreen(MarioGame game) {
-        this.gravity = new Vector2(0, -60f);
+        this.gravity = new Vector2(0, -120f);
 
         this.game = game;
         this.camera = new OrthographicCamera();

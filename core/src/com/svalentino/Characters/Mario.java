@@ -37,7 +37,7 @@ public class Mario extends Sprite {
     }
 
     public void jump() {
-        mario.applyLinearImpulse(new Vector2(0, 500f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0, 100_000_000f), mario.getWorldCenter(), true);
     }
 
     public void moveRight() {
