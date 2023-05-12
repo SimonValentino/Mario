@@ -22,7 +22,10 @@ public class GameHud {
     private int worldTimer;
     private double timeCount;
     private final int score;
+    private int numLives;
 
+    private Label numLivesLabel;
+    private Label livesLabel;
     private Label countdownLabel;
     private Label scoreLabel;
     private Label timeLabel;
@@ -35,6 +38,7 @@ public class GameHud {
     public GameHud(SpriteBatch batch) {
         worldTimer = 300;
         timeCount = 0;
+        numLives = 3;
         score = 0;
 
         vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, new OrthographicCamera());
@@ -57,10 +61,12 @@ public class GameHud {
         // top row
         table.add(marioLabel).expandX().padTop(5f);
         table.add(timeLabel).expandX().padTop(5f);
+        table.add(livesLabel).expandX().padTop(5f);
         table.row();
         // new row
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
+        table.add(numLivesLabel);
 
         stage.addActor(table);
     }
@@ -82,15 +88,17 @@ public class GameHud {
     private void constructLabels() {
         countdownLabel = new Label(String.format("%03d", worldTimer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
         scoreLabel = new Label(String.format("%06d", score),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
+        numLivesLabel = new Label(String.format("%01d", numLives),
+                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("TIME",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
         marioLabel = new Label("MARIO",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        livesLabel = new Label("LIVES",
+                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        
     }
 //    public void setCountdownLabel(float delta) {
 //        String strCountDownLabel = countdownLabel.getText().toString();
