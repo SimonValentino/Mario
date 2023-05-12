@@ -21,7 +21,7 @@ public class MarioGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		music = Gdx.audio.newMusic(Gdx.files.internal("C:\\Users\\marri\\StudioProjects\\Mario\\assets\\Downloads\\Super Mario Bros. Theme Song.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("assets\\Downloads\\Super Mario Bros. Theme Song.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.15f);
 		music.play();
