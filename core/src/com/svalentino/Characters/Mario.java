@@ -42,7 +42,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void jump() {
-        mario.applyLinearImpulse(new Vector2(0, 25f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
     }
 
     public void moveRight() {
