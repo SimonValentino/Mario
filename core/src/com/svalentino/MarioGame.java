@@ -10,7 +10,17 @@ import com.badlogic.gdx.Game;
 public class MarioGame extends Game {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 240;
-	public static final int BOX_2D_SCALE = 100;
+
+	/*
+	By default, Box2D uses MKS (meters, kg, and sec) as units.
+	Out Mario is an 8 x 8 rectangle, so 64m squared in volume, so
+	he is affected by gravity and linear impulse very weird in a world
+	that was coded based off pixels.
+	Everything must be scaled from pixels to meters.
+	This game will have 100pixels / 1m.
+	The rendering env and actors must be tailored to this.
+	 */
+	public static final float BOX_2D_SCALE = 100f;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it

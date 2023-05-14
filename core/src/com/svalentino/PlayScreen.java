@@ -46,6 +46,7 @@ public class PlayScreen implements Screen {
     // Physics engine
     private World world;
     private Box2DDebugRenderer box2DRenderer;
+    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
 
     // Player
     private final Mario mario;
@@ -55,11 +56,11 @@ public class PlayScreen implements Screen {
 
         this.game = game;
         this.camera = new OrthographicCamera();
-        this.vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, camera);
+        this.vport = new FitViewport(MarioGame.WIDTH * scale, MarioGame.HEIGHT * scale, camera);
         this.hud = new GameHud(game.batch);
 
         this.map = new TmxMapLoader().load("MarioMap.tmx");
-        this.renderer = new OrthogonalTiledMapRenderer(map);
+        this.renderer = new OrthogonalTiledMapRenderer(map, scale);
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
 
@@ -144,7 +145,7 @@ public class PlayScreen implements Screen {
     private void updateWorld(float delta) {
         getInput(delta);
 
-        world.step(1 / 40f, 6, 2);
+        world.step(1 / 60f, 6, 2);
 
         camera.update();
         renderer.setView(camera);
@@ -168,9 +169,9 @@ public class PlayScreen implements Screen {
 
                 // StaticBody means not effected by gravity, cant move, etc.
                 bodyDef.type = BodyDef.BodyType.StaticBody;
-                bodyDef.position.set(rect.x + rect.width / 2, rect.y + rect.height / 2);
+                bodyDef.position.set((rect.x + rect.width / 2) * scale, (rect.y + rect.height / 2)  * scale);
 
-                shape.setAsBox(rect.width / 2, rect.height / 2);
+                shape.setAsBox(rect.width / 2 * scale, rect.height / 2 * scale);
                 fixtureDef.shape = shape;
 
                 body = world.createBody(bodyDef);

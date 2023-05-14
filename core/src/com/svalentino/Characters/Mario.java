@@ -12,8 +12,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.svalentino.MarioGame;
 
 public class Mario extends Sprite {
+    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
+
     private final World world;
     private final Body mario;
 
@@ -26,13 +29,13 @@ public class Mario extends Sprite {
         this.world = world;
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(50f, 50f);
+        bodyDef.position.set(50f * scale, 50f * scale);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(MARIO_WIDTH, MARIO_HEIGHT);
+        hitbox.setAsBox(MARIO_WIDTH * scale, MARIO_HEIGHT * scale);
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);
