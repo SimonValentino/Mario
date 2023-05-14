@@ -24,7 +24,7 @@ public class Mario extends Sprite implements Disposable {
     // Body dimensions
     private final float marioWidth = MarioGame.TILE_LENGTH / 2;
     private final float marioHeight = MarioGame.TILE_LENGTH / 2;
-    private final float marioMaxSpeed = 12.5f;
+    private final float marioMaxSpeed = 11.5f;
 
     public Mario(World world) {
         this.world = world;
@@ -49,12 +49,12 @@ public class Mario extends Sprite implements Disposable {
 
     public void moveRight() {
         if (isBelowMaxSpeed())
-            mario.applyLinearImpulse(new Vector2(0.5f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(0.4f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
         if (isBelowMaxSpeed())
-            mario.applyLinearImpulse(new Vector2(-0.5f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(-0.4f, 0), mario.getWorldCenter(), true);
     }
 
     public float getXCoordinate() {
