@@ -17,9 +17,11 @@ public class Mario extends Sprite {
     private final World world;
     private final Body mario;
 
-    private static final float MARIO_WIDTH = 8f;
-    private static final float MARIO_HEIGHT = 8f;
-    
+    private final float MARIO_WIDTH = 8f;
+    private final float MARIO_HEIGHT = 8f;
+
+    private final int MARIO_MAX_SPEED = 2;
+
     public Mario(World world) {
         this.world = world;
 
@@ -37,15 +39,15 @@ public class Mario extends Sprite {
     }
 
     public void jump() {
-        mario.applyLinearImpulse(new Vector2(0, 100_000_000f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0, 4f), mario.getWorldCenter(), true);
     }
 
     public void moveRight() {
-        mario.applyLinearImpulse(new Vector2(5f, 0), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0.1f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
-        mario.applyLinearImpulse(new Vector2(-5f, 0), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(-0.1f, 0), mario.getWorldCenter(), true);
     }
 
     public float getXCoordinate() {

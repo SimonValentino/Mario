@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -52,7 +51,7 @@ public class PlayScreen implements Screen {
     private final Mario mario;
 
     public PlayScreen(MarioGame game) {
-        this.gravity = new Vector2(0, -120f);
+        this.gravity = new Vector2(0, -10f);
 
         this.game = game;
         this.camera = new OrthographicCamera();
@@ -82,7 +81,7 @@ public class PlayScreen implements Screen {
     public void render(float delta) {
         clearScreen();
 
-        renderMap(delta);
+        updateWorld(delta);
         renderer.render();
 
         // render the Box2D blocks
@@ -142,10 +141,10 @@ public class PlayScreen implements Screen {
         camera.position.x = mario.getXCoordinate();
     }
 
-    private void renderMap(float delta) {
+    private void updateWorld(float delta) {
         getInput(delta);
 
-        world.step(1 / 40f, 6, 6);
+        world.step(1 / 40f, 6, 2);
 
         camera.update();
         renderer.setView(camera);

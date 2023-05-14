@@ -10,21 +10,20 @@ import com.badlogic.gdx.Game;
 public class MarioGame extends Game {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 240;
+	public static final int BOX_2D_SCALE = 100;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;
 	private Music music;
+
 	/*
 	init sprite bach and set the screen to PlayScreen
 	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		music = Gdx.audio.newMusic(Gdx.files.internal("assets\\Downloads\\Super Mario Bros. Theme Song.mp3"));
-		music.setLooping(true);
-		music.setVolume(0.15f);
-		music.play();
+		playMusic();
 		super.setScreen(new PlayScreen(this));
 	}
 
@@ -40,5 +39,12 @@ public class MarioGame extends Game {
 	@Override
 	public void render () {
 		super.render();
+	}
+
+	private void playMusic() {
+		music = Gdx.audio.newMusic(Gdx.files.internal("/Users/simon/StudioProjects/Mario/assets/Downloads/Super Mario Bros. Theme Song.mp3"));
+		music.setLooping(true);
+		music.setVolume(0.15f);
+		music.play();
 	}
 }
