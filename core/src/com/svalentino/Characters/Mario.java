@@ -16,8 +16,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 
 public class Mario extends Sprite implements Disposable {
-    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
-
     private final World world;
     private final Body mario;
 
@@ -30,14 +28,14 @@ public class Mario extends Sprite implements Disposable {
         this.world = world;
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * scale,
-                (MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH) * scale);
+        bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
+                (MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(marioWidth * scale, marioHeight * scale);
+        hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);

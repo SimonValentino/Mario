@@ -23,8 +23,6 @@ Actual rendering of the MarioGame is delegated to a screen.
 Any screen class should implement Screen.
  */
 public class PlayScreen implements Screen {
-    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
-
     private final MarioGame game;
 
     private final OrthographicCamera camera;
@@ -41,7 +39,7 @@ public class PlayScreen implements Screen {
 
         this.game = game;
         this.camera = new OrthographicCamera();
-        this.vport = new FitViewport(MarioGame.WIDTH * scale, MarioGame.HEIGHT * scale, camera);
+        this.vport = new FitViewport(MarioGame.WIDTH * MarioGame.SCALE, MarioGame.HEIGHT * MarioGame.SCALE, camera);
         this.hud = new GameHud(game.batch);
 
         this.box2DRenderer = new Box2DDebugRenderer();

@@ -21,7 +21,7 @@ public class MarioGame extends Game {
 	each tile is 1m x 1m.
 	The rendering env and actors must be tailored to this.
 	 */
-	public static final float BOX_2D_SCALE = 16f;
+	public static final float SCALE = 1 / 16f;
 	public static final float TILE_LENGTH = 16f;
 
 	// Holds all sprites and images
@@ -54,7 +54,7 @@ public class MarioGame extends Game {
 	}
 
 	private void playMusic() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("assets/Downloads/Super Mario Bros. Theme Song.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("/Users/simon/StudioProjects/Mario/assets/Downloads/Super Mario Bros. Theme Song.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.15f);
 		music.play();

@@ -18,10 +18,12 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.Characters.Mario;
+import com.svalentino.Tiles.Brick;
+import com.svalentino.Tiles.CoinBlock;
+import com.svalentino.Tiles.Ground;
 
 public class WorldRenderer implements Disposable {
     private final Vector2 gravity = new Vector2(0, -62.5f);
-    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
 
     private World world = new World(gravity, true);
     private TiledMap map;
@@ -31,7 +33,7 @@ public class WorldRenderer implements Disposable {
 
     public WorldRenderer(TiledMap map) {
         this.map = map;
-        this.renderer = new OrthogonalTiledMapRenderer(map, scale);
+        this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
 
         constructWorld();
     }
@@ -63,27 +65,55 @@ public class WorldRenderer implements Disposable {
     }
 
     private void constructWorld() {
-        Body body;
+        constructGround();
+        constructBricks();
+        constructPipes();
+        constructCoinBlocks();
+        constructCoins();
+    }
 
-        BodyDef bodyDef = new BodyDef();
-        FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
+    private void constructGround() {
         Rectangle rect;
 
-        for (int i = 2; i <= 6; i++) {
-            for (RectangleMapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
-                rect = obj.getRectangle();
+        for (RectangleMapObject obj : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new Ground(world, map, rect);
+        }
+    }
 
-                // StaticBody means not effected by gravity, cant move, etc.
-                bodyDef.type = BodyDef.BodyType.StaticBody;
-                bodyDef.position.set((rect.x + rect.width / 2) * scale, (rect.y + rect.height / 2)  * scale);
+    public void constructCoins() {
+        Rectangle rect;
 
-                shape.setAsBox(rect.width / 2 * scale, rect.height / 2 * scale);
-                fixtureDef.shape = shape;
+        for (RectangleMapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new Ground(world, map, rect);
+        }
+    }
 
-                body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
-            }
+    public void constructCoinBlocks() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new CoinBlock(world, map, rect);
+        }
+    }
+
+    public void constructPipes() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new CoinBlock(world, map, rect);
+        }
+    }
+
+    private void constructBricks() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new Brick(world, map, rect);
         }
     }
 
