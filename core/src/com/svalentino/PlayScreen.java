@@ -23,22 +23,18 @@ Actual rendering of the MarioGame is delegated to a screen.
 Any screen class should implement Screen.
  */
 public class PlayScreen implements Screen {
-    // Game
+    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
+
     private final MarioGame game;
 
-    // Camera
     private final OrthographicCamera camera;
     private final Viewport vport;
 
-    // Hud
     private final GameHud hud;
 
-    // Map
     private WorldRenderer worldRenderer;
-
-    // Physics engine
     private Box2DDebugRenderer box2DRenderer;
-    private final float scale = 1 / MarioGame.BOX_2D_SCALE;
+
 
     public PlayScreen(MarioGame game) {
 
@@ -110,7 +106,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        game.dispose();
+        box2DRenderer.dispose();
+        worldRenderer.dispose();
+        hud.dispose();
     }
 
     private void clearScreen() {

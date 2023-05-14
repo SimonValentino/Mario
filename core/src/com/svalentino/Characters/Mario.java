@@ -12,9 +12,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 
-public class Mario extends Sprite {
+public class Mario extends Sprite implements Disposable {
     private final float scale = 1 / MarioGame.BOX_2D_SCALE;
 
     private final World world;
@@ -62,5 +63,10 @@ public class Mario extends Sprite {
 
     private boolean isBelowMaxSpeed() {
         return mario.getLinearVelocity().x < marioMaxSpeed && mario.getLinearVelocity().x > - marioMaxSpeed;
+    }
+
+    @Override
+    public void dispose() {
+        world.dispose();
     }
 }

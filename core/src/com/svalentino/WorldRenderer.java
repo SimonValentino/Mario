@@ -16,9 +16,10 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.Characters.Mario;
 
-public class WorldRenderer {
+public class WorldRenderer implements Disposable {
     private final Vector2 gravity = new Vector2(0, -62.5f);
     private final float scale = 1 / MarioGame.BOX_2D_SCALE;
 
@@ -92,5 +93,13 @@ public class WorldRenderer {
 
     public float getMarioX() {
         return mario.getXCoordinate();
+    }
+
+    @Override
+    public void dispose() {
+        world.dispose();
+        map.dispose();
+        renderer.dispose();
+        mario.dispose();
     }
 }
