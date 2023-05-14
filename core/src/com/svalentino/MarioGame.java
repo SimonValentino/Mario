@@ -17,10 +17,12 @@ public class MarioGame extends Game {
 	he is affected by gravity and linear impulse very weird in a world
 	that was coded based off pixels.
 	Everything must be scaled from pixels to meters.
-	This game will have 100pixels / 1m.
+	This game will have 16pixels / 1m.
+	each tile is 1m x 1m.
 	The rendering env and actors must be tailored to this.
 	 */
-	public static final float BOX_2D_SCALE = 100f;
+	public static final float BOX_2D_SCALE = 16f;
+	public static final float TILE_LENGTH = 16f;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it

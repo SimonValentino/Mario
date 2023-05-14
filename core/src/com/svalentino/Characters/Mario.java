@@ -20,40 +20,47 @@ public class Mario extends Sprite {
     private final World world;
     private final Body mario;
 
-    private final float MARIO_WIDTH = 8f;
-    private final float MARIO_HEIGHT = 8f;
-
-    private final int MARIO_MAX_SPEED = 2;
+    // Body dimensions
+    private final float marioWidth = 8f;
+    private final float marioHeight = 8f;
+    private final float marioMaxSpeed = 12.5f;
 
     public Mario(World world) {
         this.world = world;
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(50f * scale, 50f * scale);
+        bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * scale,
+                (MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH) * scale);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(MARIO_WIDTH * scale, MARIO_HEIGHT * scale);
+        hitbox.setAsBox(marioWidth * scale, marioHeight * scale);
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);
     }
 
     public void jump() {
-        mario.applyLinearImpulse(new Vector2(0, 4f), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0, 25f), mario.getWorldCenter(), true);
     }
 
     public void moveRight() {
-        mario.applyLinearImpulse(new Vector2(0.1f, 0), mario.getWorldCenter(), true);
+        if (isBelowMaxSpeed())
+            mario.applyLinearImpulse(new Vector2(0.5f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
-        mario.applyLinearImpulse(new Vector2(-0.1f, 0), mario.getWorldCenter(), true);
+        if (isBelowMaxSpeed())
+            mario.applyLinearImpulse(new Vector2(-0.5f, 0), mario.getWorldCenter(), true);
     }
 
     public float getXCoordinate() {
         return mario.getWorldCenter().x;
+    }
+
+    private boolean isBelowMaxSpeed() {
+        return mario.getLinearVelocity().x < marioMaxSpeed && mario.getLinearVelocity().x > - marioMaxSpeed;
     }
 }
