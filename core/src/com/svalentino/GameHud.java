@@ -7,10 +7,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class GameHud {
+public class GameHud implements Disposable {
     // Empty box that holds widgets
     // Need a Table to organize them
     public Stage stage;
@@ -89,6 +90,7 @@ public class GameHud {
             worldTimer = timeInLevel;
         }
     }
+
     private void constructLabels() {
         countdownLabel = new Label(String.format("%03d", worldTimer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -102,11 +104,16 @@ public class GameHud {
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         livesLabel = new Label("LIVES",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        
+
     }
 //    public void setCountdownLabel(float delta) {
 //        String strCountDownLabel = countdownLabel.getText().toString();
 //        float f = (float) (Integer.parseInt(strCountDownLabel)) - delta;
 //        countdownLabel.setText(String.valueOf(f));
 //    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 }
