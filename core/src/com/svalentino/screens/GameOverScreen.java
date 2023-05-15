@@ -1,6 +1,7 @@
 package com.svalentino.screens;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.svalentino.MarioGame;
 import com.svalentino.characters.Mario;
 import com.badlogic.gdx.Gdx;
 
@@ -20,13 +22,13 @@ import com.badlogic.gdx.Gdx;
 public class GameOverScreen implements Screen {
     private final Viewport vport;
     public final Stage stage;
-    private final Game game;
+    private final MarioGame game;
 
     public final SpriteBatch batch;
 
     private final OrthographicCamera camera;
 
-    public GameOverScreen (Game game) {
+    public GameOverScreen (MarioGame game) {
         this.camera = new OrthographicCamera();
         this.game = game;
 
@@ -35,7 +37,7 @@ public class GameOverScreen implements Screen {
         stage = new Stage(vport, batch);
 
         camera.position.set(4, 4, 0);
-        camera.zoom += 10f;
+        camera.zoom += 20f;
         camera.update();
 
 
@@ -46,7 +48,11 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
+        Label restartLabel = new Label("Press L to play again", font);
+
         table.add(gameOverLabel).expandX();
+        table.row();
+        table.add(restartLabel).expandX().padTop(20);
 
         stage.addActor(table);
     }
@@ -56,10 +62,14 @@ public class GameOverScreen implements Screen {
     }
     @Override
     public void render(float delta) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            game.setScreen(new PlayScreen(game));
+            game.playMusic();
+        }
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-
     }
 
     @Override

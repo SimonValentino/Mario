@@ -36,7 +36,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(MarioGame game) {
 
-        this.deathSound = Gdx.audio.newSound(Gdx.files.internal("assets/Downloads/Sounds & Music/Y2Mate.is - Mario Death - Sound Effect (HD)-m9zhgDsd4P4-160k-1659760324829.mp3"));
+        this.deathSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Y2Mate.is - Mario Death - Sound Effect (HD)-m9zhgDsd4P4-160k-1659760324829.mp3"));
         this.game = game;
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();

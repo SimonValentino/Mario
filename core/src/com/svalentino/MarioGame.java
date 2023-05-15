@@ -52,8 +52,8 @@ public class MarioGame extends Game {
 		super.render();
 	}
 
-	private void playMusic() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("assets/Downloads/Sounds & Music/Super Mario Bros. Theme Song.mp3"));
+	public void playMusic() {
+		music = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Super Mario Bros. Theme Song.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.15f);
 		music.play();
