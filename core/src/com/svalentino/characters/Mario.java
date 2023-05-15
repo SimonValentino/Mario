@@ -39,7 +39,6 @@ public class Mario extends Sprite implements Disposable {
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.shape = hitbox;
-        fixtureDef.friction = 0.0f;
         mario.createFixture(fixtureDef);
     }
 
