@@ -13,8 +13,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 
 public class Mario extends Sprite implements Disposable {
-    private final World world;
-    private final Body mario;
+    private World world;
+    private Body mario;
 
     // Body dimensions
     public static final float marioWidth = MarioGame.TILE_LENGTH / 2;
@@ -26,7 +26,7 @@ public class Mario extends Sprite implements Disposable {
 
     public Mario(World world) {
         this.world = world;
-        this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("assets\\Downloads\\Sounds & Music\\Mario Jump Sound Effect.mp3"));
+        jumpSound.setVolume(0.9f);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
@@ -63,6 +63,14 @@ public class Mario extends Sprite implements Disposable {
         }
         else if (isBelowMaxSpeed())
             mario.applyLinearImpulse(new Vector2(-0.7f, 0), mario.getWorldCenter(), true);
+    }
+
+    public void resetPosition() {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
+                (MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        mario = world.createBody(bodyDef);
     }
 
     public float getXCoordinate() {
