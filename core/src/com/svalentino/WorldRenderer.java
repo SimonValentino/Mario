@@ -2,34 +2,28 @@ package com.svalentino;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
-import com.svalentino.Characters.Mario;
-import com.svalentino.Tiles.Brick;
-import com.svalentino.Tiles.CoinBlock;
-import com.svalentino.Tiles.Ground;
+import com.svalentino.characters.Mario;
+import com.svalentino.tiles.Brick;
+import com.svalentino.tiles.CoinBlock;
+import com.svalentino.tiles.Ground;
 
 public class WorldRenderer implements Disposable {
     private final Vector2 gravity = new Vector2(0, -62.5f);
 
-    private World world = new World(gravity, true);
-    private TiledMap map;
-    private Mario mario = new Mario(world);
+    private final World world = new World(gravity, true);
+    private final TiledMap map;
+    private final Mario mario = new Mario(world);
 
-    private OrthogonalTiledMapRenderer renderer;
+    private final OrthogonalTiledMapRenderer renderer;
 
     public WorldRenderer(TiledMap map) {
         this.map = map;

@@ -1,4 +1,4 @@
-package com.svalentino.Tiles;
+package com.svalentino.tiles;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;

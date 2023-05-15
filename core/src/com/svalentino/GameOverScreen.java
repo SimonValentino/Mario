@@ -1,6 +1,5 @@
 package com.svalentino;
 
-import static com.svalentino.MarioGame.music;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.svalentino.Characters.Mario;
+import com.svalentino.characters.Mario;
 import com.badlogic.gdx.Gdx;
 
 
@@ -23,7 +22,7 @@ public class GameOverScreen implements Screen {
     public final Stage stage;
     private final Game game;
 
-    public SpriteBatch batch;
+    public final SpriteBatch batch;
 
     private final OrthographicCamera camera;
 
