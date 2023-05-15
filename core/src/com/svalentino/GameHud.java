@@ -25,7 +25,7 @@ public class GameHud implements Disposable {
     private final int score;
     public static int numLives;
 
-    final private int timeInLevel = 200;
+    final private int timeInLevel = 5;
     private Label numLivesLabel;
     private Label livesLabel;
     private Label countdownLabel;
@@ -77,7 +77,7 @@ public class GameHud implements Disposable {
      */
     public void update(float dt) {
         timeCount += dt;
-        if(timeCount >=1 ) {
+        if(timeCount >= 1 ) {
             worldTimer--;
             String strWorldTimer = Integer.toString(worldTimer);
             countdownLabel.setText(String.format("%0" + strWorldTimer.length() + "d", worldTimer));

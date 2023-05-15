@@ -1,4 +1,4 @@
-package com.svalentino;
+package com.svalentino.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;

@@ -3,6 +3,7 @@ package com.svalentino;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.svalentino.screens.PlayScreen;
 import com.badlogic.gdx.Game;
 
 public class MarioGame extends Game {
