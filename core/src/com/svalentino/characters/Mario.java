@@ -26,8 +26,8 @@ public class Mario extends Sprite implements Disposable {
 
     public Mario(World world) {
         this.world = world;
-        jumpSound.setVolume(0.9f);
 
+        this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("assets/Downloads/Sounds & Music/Y2Mate.is - Mario Death - Sound Effect (HD)-m9zhgDsd4P4-160k-1659760324829.mp3"));
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
                 (MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
