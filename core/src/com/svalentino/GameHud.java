@@ -25,7 +25,7 @@ public class GameHud implements Disposable {
     private final int score;
     public static int numLives;
 
-    final private int timeInLevel = 5;
+    final private int timeInLevel = 300;
     private Label numLivesLabel;
     private Label livesLabel;
     private Label countdownLabel;

@@ -27,7 +27,7 @@ public class Mario extends Sprite implements Disposable {
     public Mario(World world) {
         this.world = world;
 
-        this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("assets/Downloads/Sounds & Music/Y2Mate.is - Mario Death - Sound Effect (HD)-m9zhgDsd4P4-160k-1659760324829.mp3"));
+        this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("assets/Downloads/Sounds & Music/Mario Jump Sound Effect.mp3"));
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
                 (MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
@@ -50,18 +50,12 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void moveRight() {
-        if (!isOnGround()) {
-            mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
-        }
-        else if (isBelowMaxSpeed())
+        if (isBelowMaxSpeedRight())
             mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
-        if (!isOnGround()) {
-            mario.applyLinearImpulse(new Vector2(-0.7f, 0), mario.getWorldCenter(), true);
-        }
-        else if (isBelowMaxSpeed())
+        if (isBelowMaxSpeedLeft())
             mario.applyLinearImpulse(new Vector2(-0.7f, 0), mario.getWorldCenter(), true);
     }
 
@@ -77,8 +71,11 @@ public class Mario extends Sprite implements Disposable {
         return mario.getWorldCenter().x;
     }
 
-    private boolean isBelowMaxSpeed() {
-        return mario.getLinearVelocity().x < marioMaxSpeed && mario.getLinearVelocity().x > - marioMaxSpeed;
+    private boolean isBelowMaxSpeedRight() {
+        return mario.getLinearVelocity().x < marioMaxSpeed;
+    }
+    private boolean isBelowMaxSpeedLeft() {
+        return mario.getLinearVelocity().x > - marioMaxSpeed;
     }
 
     private boolean isOnGround() {
