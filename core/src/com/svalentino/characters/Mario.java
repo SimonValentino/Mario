@@ -1,7 +1,7 @@
 package com.svalentino.characters;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -22,11 +22,11 @@ public class Mario extends Sprite implements Disposable {
     private final float marioMaxSpeed = 10f;
 
     // Sounds
-    private Music jumpSound = Gdx.audio.newMusic(Gdx.files.internal("assets/Downloads/Sounds & Music/Mario Jump - QuickSounds.com.mp3"));;
+    private final Sound jumpSound; 
 
     public Mario(World world) {
         this.world = world;
-        jumpSound.setVolume(0.9f);
+        this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("assets\\Downloads\\Sounds & Music\\Mario Jump Sound Effect.mp3"));
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
@@ -39,17 +39,13 @@ public class Mario extends Sprite implements Disposable {
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.shape = hitbox;
-<<<<<<< HEAD
-=======
-        // fixtureDef.friction = 0.7f;
->>>>>>> 1b380a0a7836cf50ff88f3d90881388e82181383
         mario.createFixture(fixtureDef);
     }
 
     public void jump() {
         if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
-            jumpSound.play();
+            jumpSound.play(0.05f);
         }
     }
 
