@@ -33,7 +33,7 @@ public class Mario extends Sprite implements Disposable {
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.shape = hitbox;
-        fixtureDef.friction = 0.0f;
+        // fixtureDef.friction = 0.7f;
         mario.createFixture(fixtureDef);
     }
 
@@ -43,12 +43,18 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void moveRight() {
-        if (isBelowMaxSpeed())
+        if (!isOnGround()) {
+            mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
+        }
+        else if (isBelowMaxSpeed())
             mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
-        if (isBelowMaxSpeed())
+        if (!isOnGround()) {
+            mario.applyLinearImpulse(new Vector2(-0.7f, 0), mario.getWorldCenter(), true);
+        }
+        else if (isBelowMaxSpeed())
             mario.applyLinearImpulse(new Vector2(-0.7f, 0), mario.getWorldCenter(), true);
     }
 
