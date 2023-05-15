@@ -20,8 +20,8 @@ public class Mario extends Sprite implements Disposable {
     private final Body mario;
 
     // Body dimensions
-    private final float marioWidth = MarioGame.TILE_LENGTH / 2;
-    private final float marioHeight = MarioGame.TILE_LENGTH / 2;
+    public static final float marioWidth = MarioGame.TILE_LENGTH / 2;
+    public static final float marioHeight = MarioGame.TILE_LENGTH / 2;
     private final float marioMaxSpeed = 10f;
 
     public Mario(World world) {

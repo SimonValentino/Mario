@@ -6,7 +6,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import static com.svalentino.MarioGame.music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -27,6 +29,9 @@ Any screen class should implement Screen.
 public class PlayScreen implements Screen {
     private final MarioGame game;
 
+    private float elapsed;
+
+    private final Sound deathSound;
     private final OrthographicCamera camera;
     private final Viewport vport;
 
@@ -39,7 +44,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(MarioGame game) {
 
-
+        this.deathSound = Gdx.audio.newSound(Gdx.files.internal("assets/Downloads/Sounds & Music/Y2Mate.is - Mario Death - Sound Effect (HD)-m9zhgDsd4P4-160k-1659760324829.mp3"));
         this.game = game;
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
@@ -80,6 +85,9 @@ public class PlayScreen implements Screen {
         hud.update(delta);
 
         if(GameHud.numLives <= 0) {
+            music.stop();
+            deathSound.play(0.15f);
+            elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }

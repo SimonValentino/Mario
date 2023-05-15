@@ -26,7 +26,7 @@ public class GameHud implements Disposable {
     private final int score;
     public static int numLives;
 
-    final private int timeInLevel = 5;
+    final private int timeInLevel = 200;
     private Label numLivesLabel;
     private Label livesLabel;
     private Label countdownLabel;
@@ -42,7 +42,7 @@ public class GameHud implements Disposable {
         worldTimer = timeInLevel;
         timeCount = 0;
         score = 0;
-        numLives = 2;
+        numLives = 3;
         vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, new OrthographicCamera());
 
         constructLabels();

@@ -27,7 +27,7 @@ public class MarioGame extends Game {
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;
-	private Music music;
+	public static Music music;
 
 	/*
 	init sprite bach and set the screen to PlayScreen
@@ -54,7 +54,7 @@ public class MarioGame extends Game {
 	}
 
 	private void playMusic() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("assets/Downloads/Super Mario Bros. Theme Song.mp3"));
+		music = Gdx.audio.newMusic(Gdx.files.internal("assets/Downloads/Sounds & Music/Super Mario Bros. Theme Song.mp3"));
 		music.setLooping(true);
 		music.setVolume(0.15f);
 		music.play();
