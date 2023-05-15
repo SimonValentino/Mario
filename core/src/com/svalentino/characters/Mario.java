@@ -43,7 +43,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void moveRight() {
-        // if (isBelowMaxSpeed())
+        if (isBelowMaxSpeed())
             mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
     }
 
