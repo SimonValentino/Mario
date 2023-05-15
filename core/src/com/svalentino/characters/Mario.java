@@ -1,5 +1,7 @@
 package com.svalentino.characters;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -19,8 +21,12 @@ public class Mario extends Sprite implements Disposable {
     public static final float marioHeight = MarioGame.TILE_LENGTH / 2;
     private final float marioMaxSpeed = 10f;
 
+    // Sounds
+    private Music jumpSound = Gdx.audio.newMusic(Gdx.files.internal("assets/Downloads/Sounds & Music/Mario Jump - QuickSounds.com.mp3"));;
+
     public Mario(World world) {
         this.world = world;
+        jumpSound.setVolume(0.9f);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((MarioGame.TILE_LENGTH / 2 + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
@@ -38,8 +44,10 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void jump() {
-        if (isOnGround())
+        if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
+            jumpSound.play();
+        }
     }
 
     public void moveRight() {
