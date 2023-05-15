@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.svalentino.Characters.Mario;
 
 public class GameHud implements Disposable {
     // Empty box that holds widgets
@@ -23,7 +24,7 @@ public class GameHud implements Disposable {
     private int worldTimer;
     private double timeCount;
     private final int score;
-    private int numLives;
+    public static int numLives;
 
     final private int timeInLevel = 5;
     private Label numLivesLabel;
@@ -40,9 +41,8 @@ public class GameHud implements Disposable {
     public GameHud(SpriteBatch batch) {
         worldTimer = timeInLevel;
         timeCount = 0;
-        numLives = 3;
         score = 0;
-
+        numLives = 2;
         vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, new OrthographicCamera());
 
         constructLabels();

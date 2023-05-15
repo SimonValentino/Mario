@@ -1,10 +1,12 @@
 package com.svalentino;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -30,14 +32,16 @@ public class PlayScreen implements Screen {
 
     private final GameHud hud;
 
-    private WorldRenderer worldRenderer;
-    private Box2DDebugRenderer box2DRenderer;
+    private final GameOverScreen gameOverScreen;
+    private final WorldRenderer worldRenderer;
+    private final Box2DDebugRenderer box2DRenderer;
 
 
     public PlayScreen(MarioGame game) {
 
 
         this.game = game;
+        this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
         this.vport = new FitViewport(MarioGame.WIDTH * MarioGame.SCALE, MarioGame.HEIGHT * MarioGame.SCALE, camera);
         this.hud = new GameHud(game.batch);
@@ -75,7 +79,9 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
         hud.update(delta);
 
-        if(hud.getWorldTimer() <= 0) {
+        if(GameHud.numLives <= 0) {
+            game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
+            game.setScreen(new GameOverScreen(game));
         }
     }
 
