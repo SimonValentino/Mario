@@ -88,6 +88,7 @@ public class PlayScreen implements Screen {
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
+        
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
             themeSong.stop();
             spedUpThemeSong.setVolume(0.15f);

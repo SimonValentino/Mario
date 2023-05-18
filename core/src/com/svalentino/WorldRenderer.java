@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
+import com.svalentino.characters.Goomba;
 import com.svalentino.characters.Mario;
 import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.CoinBlock;
@@ -64,6 +65,12 @@ public class WorldRenderer implements Disposable {
         constructPipes();
         constructCoinBlocks();
         constructCoins();
+        constructGoombas();
+    }
+
+    private void constructGoombas() {
+        Goomba g = new Goomba(world, 50, 50);
+        g.move();
     }
 
     private void constructGround() {
