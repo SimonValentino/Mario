@@ -23,19 +23,14 @@ public class GameHud implements Disposable {
     private int worldTimer;
     private double timeCount;
     private final int score;
-    public static int numLives;
-
-    final private int timeInLevel = 200;
+    public int numLives;
+    final private int timeInLevel = 20;
     private Label numLivesLabel;
     private Label livesLabel;
     private Label countdownLabel;
     private Label scoreLabel;
     private Label timeLabel;
     private Label marioLabel;
-
-    public int getWorldTimer() {
-        return worldTimer;
-    }
 
     public GameHud(SpriteBatch batch) {
         worldTimer = timeInLevel;
@@ -110,4 +105,14 @@ public class GameHud implements Disposable {
     public void dispose() {
         stage.dispose();
     }
+    public int getWorldTimer() {
+        return worldTimer;
+    }
+    public int getNumLives() {
+        return numLives;
+    }
+    public int getTimeInLevel() {
+        return timeInLevel;
+    }
 }
+

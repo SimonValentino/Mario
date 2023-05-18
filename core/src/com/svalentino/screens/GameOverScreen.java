@@ -64,7 +64,7 @@ public class GameOverScreen implements Screen {
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
             game.setScreen(new PlayScreen(game));
-            game.playMusic();
+            game.playThemeSong();
         }
 
         Gdx.gl.glClearColor(0, 0, 0, 1);

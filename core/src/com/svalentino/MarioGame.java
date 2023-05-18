@@ -26,7 +26,7 @@ public class MarioGame extends Game {
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;
-	public static Music music;
+	public static Music themeSong;
 
 	/*
 	init sprite bach and set the screen to PlayScreen
@@ -34,14 +34,14 @@ public class MarioGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		playMusic();
+		playThemeSong();
 		super.setScreen(new PlayScreen(this));
 	}
 
 	@Override
 	public void dispose() {
 		super.dispose();
-		music.dispose();
+		themeSong.dispose();
 	}
 
 	/*
@@ -52,10 +52,10 @@ public class MarioGame extends Game {
 		super.render();
 	}
 
-	public void playMusic() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Super Mario Bros. Theme Song.mp3"));
-		music.setLooping(true);
-		music.setVolume(0.15f);
-		music.play();
+	public void playThemeSong() {
+		themeSong = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+		themeSong.setLooping(true);
+		themeSong.setVolume(0.15f);
+		themeSong.play();
 	}
 }

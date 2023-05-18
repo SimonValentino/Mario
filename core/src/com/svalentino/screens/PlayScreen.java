@@ -1,11 +1,13 @@
 package com.svalentino.screens;
 
+import static com.svalentino.MarioGame.themeSong;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import static com.svalentino.MarioGame.music;
-
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -24,6 +26,8 @@ public class PlayScreen implements Screen {
     private float elapsed;
 
     private final Sound deathSound;
+
+    private final Music spedUpThemeSong;
     private final OrthographicCamera camera;
     private final Viewport vport;
 
@@ -36,7 +40,8 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(MarioGame game) {
 
-        this.deathSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Y2Mate.is - Mario Death - Sound Effect (HD)-m9zhgDsd4P4-160k-1659760324829.mp3"));
+        this.spedUpThemeSong = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Sped up Theme Music.mp3"));
+        this.deathSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Death Sound Effect.mp3"));
         this.game = game;
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
@@ -76,12 +81,17 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
         hud.update(delta);
 
-        if(GameHud.numLives <= 0) {
-            music.stop();
+        if(hud.getNumLives() <= 0) {
+            spedUpThemeSong.stop();
             deathSound.play(0.15f);
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
+        }
+        if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
+            themeSong.stop();
+            spedUpThemeSong.setVolume(0.15f);
+            spedUpThemeSong.play();
         }
     }
 

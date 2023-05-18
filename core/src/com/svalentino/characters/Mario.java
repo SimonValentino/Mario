@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 
 public class Mario extends Sprite implements Disposable {
-    private World world;
+    private final World world;
     private Body mario;
 
     // Body dimensions
