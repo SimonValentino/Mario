@@ -76,7 +76,7 @@ public class Mario extends Sprite implements Disposable {
         return mario.getLinearVelocity().x < marioMaxSpeed;
     }
     private boolean isBelowMaxSpeedLeft() {
-        return mario.getLinearVelocity().x > -marioMaxSpeed;
+        return mario.getLinearVelocity().x > - marioMaxSpeed;
     }
 
     private boolean isOnGround() {

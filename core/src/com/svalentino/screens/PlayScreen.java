@@ -88,7 +88,6 @@ public class PlayScreen implements Screen {
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
-        
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
             themeSong.stop();
             spedUpThemeSong.setVolume(0.15f);
@@ -136,8 +135,20 @@ public class PlayScreen implements Screen {
         worldRenderer.updateWorld(delta);
         camera.position.x = worldRenderer.getMarioX();
         camera.update();
-
         worldRenderer.setView(camera);
+        
+        if(hud.getNumLives() <= 0) {
+            spedUpThemeSong.stop();
+            deathSound.play(0.15f);
+            elapsed += Gdx.graphics.getDeltaTime();
+            game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
+            game.setScreen(new GameOverScreen(game));
+        }
+        if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
+            themeSong.stop();
+            spedUpThemeSong.setVolume(0.15f);
+            spedUpThemeSong.play();
+        }
 
     }
 }
