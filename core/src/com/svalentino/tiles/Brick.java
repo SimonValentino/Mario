@@ -8,4 +8,9 @@ public class Brick extends Tile {
     public Brick(World world, TiledMap map, Rectangle hitbox) {
         super(world, map, hitbox);
     }
+
+    @Override
+    public void hitMarioTop() {
+
+    }
 }

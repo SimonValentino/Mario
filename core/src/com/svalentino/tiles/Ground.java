@@ -8,4 +8,9 @@ public class Ground extends Tile {
     public Ground(World world, TiledMap map, Rectangle hitbox) {
         super(world, map, hitbox);
     }
+
+    @Override
+    public void hitMarioTop() {
+
+    }
 }

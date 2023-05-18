@@ -39,6 +39,8 @@ public class WorldRenderer implements Disposable {
 
     public void render() {
         renderer.render();
+
+        world.setContactListener(new GameContactListener());
     }
 
     public void setView(OrthographicCamera camera) {
@@ -65,7 +67,6 @@ public class WorldRenderer implements Disposable {
         constructPipes();
         constructCoinBlocks();
         constructCoins();
-        constructGoombas();
     }
 
     private void constructGoombas() {

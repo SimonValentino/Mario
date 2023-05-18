@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -41,6 +42,14 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.shape = hitbox;
         fixtureDef.friction = 0.6f;
         mario.createFixture(fixtureDef);
+
+        EdgeShape top = new EdgeShape();
+        top.set(new Vector2(-4 * MarioGame.SCALE, 8 * MarioGame.SCALE),
+                new Vector2(4 * MarioGame.SCALE, 8 * MarioGame.SCALE));
+        fixtureDef.shape = top;
+        fixtureDef.isSensor = true;
+        mario.createFixture(fixtureDef);
+        mario.setUserData("top");
     }
 
     public void jump() {

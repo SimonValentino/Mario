@@ -8,4 +8,9 @@ public class Pipe extends Tile {
     public Pipe(World world, TiledMap map, Rectangle hitbox) {
         super(world, map, hitbox);
     }
+
+    @Override
+    public void hitMarioTop() {
+
+    }
 }
