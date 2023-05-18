@@ -1,6 +1,7 @@
 package com.svalentino.characters;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -16,12 +17,11 @@ public class Goomba extends Sprite implements Disposable {
     public static final float goombaWidth = MarioGame.TILE_LENGTH / 2;
     public static final float goombaHeight = MarioGame.TILE_LENGTH / 2;
 
-    public Goomba(World world, int x, int y) {
+    public Goomba(World world, float x, float y) {
         this.world = world;
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set((goombaWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
-                (goombaHeight + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
+        bodyDef.position.set(x, y);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         goomba = world.createBody(bodyDef);
 
@@ -30,15 +30,15 @@ public class Goomba extends Sprite implements Disposable {
         hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
 
         fixtureDef.shape = hitbox;
-        fixtureDef.friction = 0.6f;
+        fixtureDef.friction = 0.0f;
         goomba.createFixture(fixtureDef);
     }
 
     public void move() {
         if (hitWall())
-            goomba.setLinearVelocity(-5f, 0);
+            goomba.setLinearVelocity(new Vector2(-1f, 0));
         else
-            goomba.setLinearVelocity(5f, 0);
+            goomba.setLinearVelocity(new Vector2(1f, 0));
     }
 
     private boolean hitWall() {

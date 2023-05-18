@@ -24,12 +24,14 @@ public class WorldRenderer implements Disposable {
     private final TiledMap map;
     private final Mario mario = new Mario(world);
 
+    private final Goomba goomba = new Goomba(world, 16.5f, 1f);
+
     private final OrthogonalTiledMapRenderer renderer;
 
     public WorldRenderer(TiledMap map) {
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
-
+        constructGoombas();
         constructWorld();
     }
 
@@ -70,8 +72,7 @@ public class WorldRenderer implements Disposable {
     }
 
     private void constructGoombas() {
-        Goomba g = new Goomba(world, 50, 50);
-        g.move();
+        goomba.move();
     }
 
     private void constructGround() {
