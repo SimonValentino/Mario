@@ -18,8 +18,8 @@ public class Mario extends Sprite implements Disposable {
     private Body mario;
 
     // Body dimensions
-    public static final float marioWidth = MarioGame.TILE_LENGTH / 2;
-    public static final float marioHeight = MarioGame.TILE_LENGTH / 2;
+    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
+    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 0.5f;
     private final float marioMaxSpeed = 10f;
 
     // Sounds
@@ -39,15 +39,25 @@ public class Mario extends Sprite implements Disposable {
         PolygonShape hitbox = new PolygonShape();
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
+        fixtureDef.filter.categoryBits = MarioGame.MARIO_BYTE;
+        fixtureDef.filter.maskBits = MarioGame.DEFAULT_BYTE | MarioGame.COIN_BYTE
+                | MarioGame.BRICK_BYTE | MarioGame.COIN_BLOCK_BYTE;
+
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);
 
         EdgeShape top = new EdgeShape();
-        top.set(new Vector2(-4 * MarioGame.SCALE, 8.1f * MarioGame.SCALE),
-                new Vector2(4 * MarioGame.SCALE, 8.1f * MarioGame.SCALE));
+        top.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
+                new Vector2((marioHeight / 2f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
         fixtureDef.shape = top;
         fixtureDef.isSensor = true;
         mario.createFixture(fixtureDef).setUserData("head");
+
+        EdgeShape bottom = new EdgeShape();
+        bottom.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (-marioHeight - 0.1f) * MarioGame.SCALE),
+                new Vector2((marioHeight / 2f) * MarioGame.SCALE, ((-marioHeight - 0.1f)) * MarioGame.SCALE));
+        fixtureDef.shape = bottom;
+        mario.createFixture(fixtureDef).setUserData("feet");
     }
 
     public void jump() {

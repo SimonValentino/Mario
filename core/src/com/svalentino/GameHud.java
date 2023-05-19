@@ -22,13 +22,14 @@ public class GameHud implements Disposable {
 
     private int worldTimer;
     private double timeCount;
-    private final int score;
+    private static int score;
     public int numLives;
     final private int timeInLevel = 20;
+
     private Label numLivesLabel;
     private Label livesLabel;
     private Label countdownLabel;
-    private Label scoreLabel;
+    private static Label scoreLabel;
     private Label timeLabel;
     private Label marioLabel;
 
@@ -99,6 +100,11 @@ public class GameHud implements Disposable {
         livesLabel = new Label("LIVES",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
+    }
+
+    public static void updateScore(int points) {
+        score += points;
+        scoreLabel.setText(String.format("%06d", score));
     }
 
     @Override

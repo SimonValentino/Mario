@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.InteractableObject;
 
 public class GameContactListener implements ContactListener {
@@ -26,6 +27,16 @@ public class GameContactListener implements ContactListener {
             if (InteractableObject.class.isAssignableFrom(colFixture.getUserData().getClass())) {
                 InteractableObject t = (InteractableObject) colFixture.getUserData();
                 t.hitMarioHead();
+            }
+        }
+
+        else if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
+            if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
+                Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
+                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
+
+                Coin c = (Coin) colFixture.getUserData();
+                c.hitMarioFeet();
             }
         }
     }
