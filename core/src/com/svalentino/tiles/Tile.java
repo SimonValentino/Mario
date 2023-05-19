@@ -34,9 +34,9 @@ public abstract class Tile {
 
         // StaticBody means not effected by gravity, cant move, etc.
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set((hitbox.x + hitbox.width / 2) * MarioGame.SCALE, (hitbox.y + hitbox.height / 2)  * MarioGame.SCALE);
+        bodyDef.position.set((hitbox.getX() + hitbox.getWidth() / 2) * MarioGame.SCALE, (hitbox.getY() + hitbox.getHeight() / 2)  * MarioGame.SCALE);
 
-        shape.setAsBox(hitbox.width / 2 * MarioGame.SCALE, hitbox.height / 2 * MarioGame.SCALE);
+        shape.setAsBox(hitbox.getWidth() / 2 * MarioGame.SCALE, hitbox.getHeight() / 2 * MarioGame.SCALE);
         fixtureDef.shape = shape;
 
         body = world.createBody(bodyDef);

@@ -23,7 +23,7 @@ public class GameContactListener implements ContactListener {
             Fixture marioHead = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
             Fixture colFixture = fixtureA == marioHead ? fixtureB : fixtureA;
 
-            if (colFixture != null && Tile.class.isAssignableFrom(colFixture.getUserData().getClass())) {
+            if (Tile.class.isAssignableFrom(colFixture.getUserData().getClass())) {
                 Tile t = (Tile) colFixture.getUserData();
                 t.hitMarioHead();
             }

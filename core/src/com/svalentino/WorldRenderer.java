@@ -35,6 +35,7 @@ public class WorldRenderer implements Disposable {
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructGoombas();
         constructWorld();
+        world.setContactListener(new GameContactListener());
     }
 
     public WorldRenderer(String mapName) {
@@ -43,8 +44,6 @@ public class WorldRenderer implements Disposable {
 
     public void render() {
         renderer.render();
-
-        world.setContactListener(new GameContactListener());
     }
 
     public void setView(OrthographicCamera camera) {

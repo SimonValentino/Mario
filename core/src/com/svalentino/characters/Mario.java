@@ -40,16 +40,14 @@ public class Mario extends Sprite implements Disposable {
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.shape = hitbox;
-        fixtureDef.friction = 0.6f;
         mario.createFixture(fixtureDef);
 
         EdgeShape top = new EdgeShape();
-        top.set(new Vector2(-4 * MarioGame.SCALE, 8 * MarioGame.SCALE),
-                new Vector2(4 * MarioGame.SCALE, 8 * MarioGame.SCALE));
+        top.set(new Vector2(-4 * MarioGame.SCALE, 8.1f * MarioGame.SCALE),
+                new Vector2(4 * MarioGame.SCALE, 8.1f * MarioGame.SCALE));
         fixtureDef.shape = top;
         fixtureDef.isSensor = true;
-        mario.createFixture(fixtureDef);
-        mario.setUserData("head");
+        mario.createFixture(fixtureDef).setUserData("head");
     }
 
     public void jump() {
