@@ -14,8 +14,10 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.characters.Goomba;
 import com.svalentino.characters.Mario;
 import com.svalentino.tiles.Brick;
+import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.CoinBlock;
 import com.svalentino.tiles.Ground;
+import com.svalentino.tiles.Pipe;
 
 public class WorldRenderer implements Disposable {
     private final Vector2 gravity = new Vector2(0, -62.5f);
@@ -89,7 +91,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new Ground(world, map, rect);
+            new Coin(world, map, rect);
         }
     }
 
@@ -107,7 +109,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new CoinBlock(world, map, rect);
+            new Pipe(world, map, rect);
         }
     }
 

@@ -43,5 +43,5 @@ public abstract class Tile {
         fixture = body.createFixture(fixtureDef);
     }
 
-    public abstract void hitMarioTop();
+    public abstract void hitMarioHead();
 }

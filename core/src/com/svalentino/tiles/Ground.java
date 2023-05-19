@@ -7,10 +7,11 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Ground extends Tile {
     public Ground(World world, TiledMap map, Rectangle hitbox) {
         super(world, map, hitbox);
+        fixture.setUserData(this);
     }
 
     @Override
-    public void hitMarioTop() {
+    public void hitMarioHead() {
 
     }
 }

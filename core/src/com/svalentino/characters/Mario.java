@@ -49,7 +49,7 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.shape = top;
         fixtureDef.isSensor = true;
         mario.createFixture(fixtureDef);
-        mario.setUserData("top");
+        mario.setUserData("head");
     }
 
     public void jump() {
