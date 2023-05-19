@@ -1,7 +1,6 @@
 package com.svalentino.tiles;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -11,22 +10,20 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.MarioGame;
 
-public abstract class Tile {
+public class PhysicalObject {
     protected final World world;
-    protected final TiledMap map;
-    protected TiledMapTile tile;
-    protected final Rectangle hitbox;
     protected Body body;
     protected Fixture fixture;
+    protected final Rectangle hitbox;
+    protected final TiledMap map;
 
-    public Tile(World world, TiledMap map, Rectangle hitbox) {
+    public PhysicalObject(World world, TiledMap map, Rectangle hitbox) {
         this.world = world;
         this.map = map;
         this.hitbox = hitbox;
 
         constructMapObj();
     }
-
     public void constructMapObj() {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -42,6 +39,4 @@ public abstract class Tile {
         body = world.createBody(bodyDef);
         fixture = body.createFixture(fixtureDef);
     }
-
-    public abstract void hitMarioHead();
 }

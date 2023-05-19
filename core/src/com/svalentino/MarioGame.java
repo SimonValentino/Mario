@@ -23,6 +23,19 @@ public class MarioGame extends Game {
 	public static final float SCALE = 1 / 16f;
 	public static final float TILE_LENGTH = 16f;
 
+	/*
+	These bytes are used to identify what mario can collide
+	with in his fixture filter
+
+	DESTROYED_BYTE is for when a tile gets destroyed
+	 */
+	public static final byte MARIO_BYTE = 1;
+	public static final byte COIN_BYTE = 2;
+	public static final byte BRICK_BYTE = 4;
+	public static final byte COIN_BLOCK_BYTE = 8;
+	public static final byte PIPE_BYTE = 16;
+	public static final byte DESTROYED_BYTE = 32;
+
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;

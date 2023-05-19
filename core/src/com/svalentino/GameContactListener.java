@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.svalentino.tiles.Tile;
+import com.svalentino.tiles.InteractableObject;
 
 public class GameContactListener implements ContactListener {
     /*
@@ -23,8 +23,8 @@ public class GameContactListener implements ContactListener {
             Fixture marioHead = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
             Fixture colFixture = fixtureA == marioHead ? fixtureB : fixtureA;
 
-            if (Tile.class.isAssignableFrom(colFixture.getUserData().getClass())) {
-                Tile t = (Tile) colFixture.getUserData();
+            if (InteractableObject.class.isAssignableFrom(colFixture.getUserData().getClass())) {
+                InteractableObject t = (InteractableObject) colFixture.getUserData();
                 t.hitMarioHead();
             }
         }
