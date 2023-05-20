@@ -9,7 +9,7 @@ import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
-public class Brick extends InteractableObject {
+public class Brick extends PhysicalObject implements InteractableObject {
     private Sound brickBreakingSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/breakblock.wav"));
 
     public Brick(WorldRenderer wr, Rectangle hitbox) {

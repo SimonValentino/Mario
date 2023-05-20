@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -47,5 +48,11 @@ public class PhysicalObject {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(1);
         return layer.getCell((int) (body.getPosition().x / MarioGame.SCALE / MarioGame.TILE_LENGTH),
                 (int) (body.getPosition().y / MarioGame.SCALE / MarioGame.TILE_LENGTH));
+    }
+
+    public void setCategory(short filterByte) {
+        Filter filter = new Filter();
+        filter.categoryBits = filterByte;
+        fixture.setFilterData(filter);
     }
 }

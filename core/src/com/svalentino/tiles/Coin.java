@@ -9,7 +9,7 @@ import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
-public class Coin extends InteractableObject {
+public class Coin extends PhysicalObject implements InteractableObject {
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/coin.wav"));
 
     public Coin(WorldRenderer wr, Rectangle hitbox) {

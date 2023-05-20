@@ -13,18 +13,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
-public abstract class InteractableObject extends PhysicalObject {
-    protected TiledMapTile tile;
-
-    public InteractableObject(WorldRenderer wr, Rectangle hitbox) {
-        super(wr, hitbox);
-    }
-
-    public void setCategory(byte filterByte) {
-        Filter filter = new Filter();
-        filter.categoryBits = filterByte;
-        fixture.setFilterData(filter);
-    }
-
-    public abstract void hitMarioHead();
+public interface InteractableObject {
+    void hitMarioHead();
 }

@@ -73,7 +73,7 @@ public class WorldRenderer implements Disposable {
     }
 
     private void constructGoombas() {
-        goomba.move();
+
     }
 
     private void constructGround() {

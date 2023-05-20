@@ -10,7 +10,7 @@ import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
-public class CoinBlock extends InteractableObject {
+public class CoinBlock extends PhysicalObject implements InteractableObject {
     private TiledMapTileSet tileset;
     private Sound coinBlockSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/coin.wav"));
     private Sound blankBlockSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/bump.wav"));
