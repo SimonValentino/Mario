@@ -13,4 +13,6 @@ public abstract class Enemy extends Sprite implements Disposable {
         this.world = world;
         setPosition(x, y);
     }
+
+    protected abstract void defBody();
 }

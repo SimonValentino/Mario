@@ -1,4 +1,4 @@
-package com.svalentino;
+package com.svalentino.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
-import com.svalentino.characters.Goomba;
+import com.svalentino.MarioGame;
 import com.svalentino.characters.Mario;
 import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.Coin;
@@ -24,13 +24,12 @@ public class WorldRenderer implements Disposable {
 
     private final World world = new World(gravity, true);
     private final TiledMap map;
-    private final Mario mario = new Mario(world);
-
-    private final Goomba goomba = new Goomba(world, 16.5f, 1f);
+    private final Mario mario;
 
     private final OrthogonalTiledMapRenderer renderer;
 
     public WorldRenderer(TiledMap map) {
+        this.mario = new Mario(world);
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructGoombas();
@@ -52,6 +51,7 @@ public class WorldRenderer implements Disposable {
 
     public void updateWorld(float delta) {
         getInput(delta);
+        mario.update(delta);
         world.step(1 / 60f, 6, 6);
     }
 
@@ -131,6 +131,10 @@ public class WorldRenderer implements Disposable {
 
     public TiledMap getMap() {
         return map;
+    }
+
+    public Mario getMario() {
+        return mario;
     }
 
     @Override
