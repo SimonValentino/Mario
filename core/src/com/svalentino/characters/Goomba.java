@@ -12,6 +12,7 @@ import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
 public class Goomba extends Enemy {
+
     private float goombaWidth = MarioGame.TILE_LENGTH / 2 - 0.2f;
     private float goombaHeight = MarioGame.TILE_LENGTH / 2 - 0.2f;
 
