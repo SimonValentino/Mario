@@ -8,14 +8,15 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
+import com.svalentino.WorldRenderer;
 
 public class CoinBlock extends InteractableObject {
     private TiledMapTileSet tileset;
     private Sound coinBlockSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/coin.wav"));
     private Sound blankBlockSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/bump.wav"));
 
-    public CoinBlock(World world, TiledMap map, Rectangle hitbox) {
-        super(world, map, hitbox);
+    public CoinBlock(WorldRenderer wr, Rectangle hitbox) {
+        super(wr, hitbox);
         fixture.setUserData(this);
         setCategory(MarioGame.COIN_BLOCK_BYTE);
         tileset = map.getTileSets().getTileSet("MarioTileset");

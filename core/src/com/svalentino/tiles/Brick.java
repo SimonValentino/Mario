@@ -7,12 +7,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
+import com.svalentino.WorldRenderer;
 
 public class Brick extends InteractableObject {
     private Sound brickBreakingSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/breakblock.wav"));
 
-    public Brick(World world, TiledMap map, Rectangle hitbox) {
-        super(world, map, hitbox);
+    public Brick(WorldRenderer wr, Rectangle hitbox) {
+        super(wr, hitbox);
         fixture.setUserData(this);
         setCategory(MarioGame.BRICK_BYTE);
     }

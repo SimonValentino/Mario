@@ -1,6 +1,8 @@
 package com.svalentino.tiles;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.MarioGame;
+import com.svalentino.WorldRenderer;
 
 public class PhysicalObject {
     protected final World world;
@@ -17,9 +20,9 @@ public class PhysicalObject {
     protected final Rectangle hitbox;
     protected final TiledMap map;
 
-    public PhysicalObject(World world, TiledMap map, Rectangle hitbox) {
-        this.world = world;
-        this.map = map;
+    public PhysicalObject(WorldRenderer wr, Rectangle hitbox) {
+        this.world = wr.getWorld();
+        this.map = wr.getMap();
         this.hitbox = hitbox;
 
         constructMapObj();
@@ -38,5 +41,11 @@ public class PhysicalObject {
 
         body = world.createBody(bodyDef);
         fixture = body.createFixture(fixtureDef);
+    }
+
+    public Cell getCell() {
+        TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(1);
+        return layer.getCell((int) (body.getPosition().x / MarioGame.SCALE / MarioGame.TILE_LENGTH),
+                (int) (body.getPosition().y / MarioGame.SCALE / MarioGame.TILE_LENGTH));
     }
 }

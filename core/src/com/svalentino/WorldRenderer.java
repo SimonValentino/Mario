@@ -81,7 +81,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new Ground(world, map, rect);
+            new Ground(this, rect);
         }
     }
 
@@ -90,7 +90,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new Coin(world, map, rect);
+            new Coin(this, rect);
         }
     }
 
@@ -99,7 +99,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new CoinBlock(world, map, rect);
+            new CoinBlock(this, rect);
         }
     }
 
@@ -108,7 +108,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new Pipe(world, map, rect);
+            new Pipe(this, rect);
         }
     }
 
@@ -117,7 +117,7 @@ public class WorldRenderer implements Disposable {
 
         for (RectangleMapObject obj : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new Brick(world, map, rect);
+            new Brick(this, rect);
         }
     }
 
@@ -127,6 +127,10 @@ public class WorldRenderer implements Disposable {
 
     public float getMarioX() {
         return mario.getXCoordinate();
+    }
+
+    public TiledMap getMap() {
+        return map;
     }
 
     @Override
