@@ -12,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.MarioGame;
-import com.svalentino.utils.WorldRenderer;
+import com.svalentino.WorldRenderer;
 
 public class PhysicalObject {
     protected final World world;

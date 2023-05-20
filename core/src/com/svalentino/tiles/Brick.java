@@ -2,10 +2,12 @@ package com.svalentino.tiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
-import com.svalentino.utils.WorldRenderer;
+import com.svalentino.WorldRenderer;
 
 public class Brick extends PhysicalObject implements InteractableObject {
     private Sound brickBreakingSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/breakblock.wav"));

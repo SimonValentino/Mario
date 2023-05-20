@@ -1,7 +1,5 @@
 package com.svalentino;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -22,33 +20,25 @@ public class GameHud implements Disposable {
     // the hud stays
     private final Viewport vport;
 
+    private final int timeInLevel = 20;
+
     private int worldTimer;
     private double timeCount;
     private static int score;
     public int numLives;
 
-    private static int coins;
-    final private int timeInLevel = 100;
-
     private Label numLivesLabel;
-
-    private Label coinsLabel;
-
-    private static Label numCoinsLabel;
     private Label livesLabel;
     private Label countdownLabel;
     private static Label scoreLabel;
     private Label timeLabel;
     private Label marioLabel;
 
-    private Sound oneUPSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario 1-UP Sound Effect.mp3"));
-
     public GameHud(SpriteBatch batch) {
         worldTimer = timeInLevel;
         timeCount = 0;
         score = 0;
         numLives = 3;
-        coins = 0;
         vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, new OrthographicCamera());
 
         constructLabels();
@@ -70,13 +60,11 @@ public class GameHud implements Disposable {
         table.add(marioLabel).expandX().padTop(5f);
         table.add(timeLabel).expandX().padTop(5f);
         table.add(livesLabel).expandX().padTop(5f);
-        table.add(coinsLabel).expandX().padTop(5f);
         table.row();
         // new row
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
-        table.add(numLivesLabel).expandX();
-        table.add(numCoinsLabel).expandX();
+        table.add(numLivesLabel);
 
         stage.addActor(table);
     }
@@ -97,20 +85,12 @@ public class GameHud implements Disposable {
             numLivesLabel.setText(String.format("%01d", numLives));
             worldTimer = timeInLevel;
         }
-        if(coins == 100) {
-            coins = 0;
-            numLives++;
-            oneUPSound.play();
-            numLivesLabel.setText(String.format("%0" + Integer.toString(numLives).length() + "d", numLives));
-        }
     }
 
     private void constructLabels() {
-        countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer),
+        countdownLabel = new Label(String.format("%03d", worldTimer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score),
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        numCoinsLabel = new Label(String.format("%01d", coins),
+        scoreLabel = new Label(String.format("%01d", score),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         numLivesLabel = new Label(String.format("%01d", numLives),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -120,19 +100,13 @@ public class GameHud implements Disposable {
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         livesLabel = new Label("LIVES",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        coinsLabel = new Label("COINS",
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
     }
 
     public static void updateScore(int points) {
         score += points;
-        scoreLabel.setText(String.format("%06d", score));
-    }
-    public static void updateCoins() {
-        coins += 1;
-        numCoinsLabel.setText(String.format("%0" + Integer.toString(coins).length() + "d", coins));
-
+        String strScore = Integer.toString(score);
+        scoreLabel.setText(String.format("%0" + strScore.length() + "d", score));
     }
 
     @Override
