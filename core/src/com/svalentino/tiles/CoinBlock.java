@@ -2,10 +2,8 @@ package com.svalentino.tiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
@@ -18,7 +16,7 @@ public class CoinBlock extends PhysicalObject implements InteractableObject {
     public CoinBlock(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
         fixture.setUserData(this);
-        setCategory(MarioGame.COIN_BLOCK_BYTE);
+        setCategory(MarioGame.COIN_BLOCK_COL);
         tileset = map.getTileSets().getTileSet("MarioTileset");
     }
 

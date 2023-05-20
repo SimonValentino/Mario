@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
+import com.svalentino.WorldRenderer;
 
 public class Mario extends Sprite implements Disposable {
     private final World world;
@@ -25,8 +26,8 @@ public class Mario extends Sprite implements Disposable {
     // Sounds
     private final Sound jumpSound; 
 
-    public Mario(World world) {
-        this.world = world;
+    public Mario(WorldRenderer worldRenderer) {
+        this.world = worldRenderer.getWorld();
 
         this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Jump Sound Effect.mp3"));
         BodyDef bodyDef = new BodyDef();
@@ -39,9 +40,10 @@ public class Mario extends Sprite implements Disposable {
         PolygonShape hitbox = new PolygonShape();
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
-        fixtureDef.filter.categoryBits = MarioGame.MARIO_BYTE;
-        fixtureDef.filter.maskBits = MarioGame.DEFAULT_BYTE | MarioGame.COIN_BYTE
-                | MarioGame.BRICK_BYTE | MarioGame.COIN_BLOCK_BYTE;
+        fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
+        fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.COIN_COl
+                | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.PIPE_COL
+                | MarioGame.ENEMY_HEAD_COL;
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);

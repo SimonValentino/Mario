@@ -24,9 +24,9 @@ public class WorldRenderer implements Disposable {
 
     private final World world = new World(gravity, true);
     private final TiledMap map;
-    private final Mario mario = new Mario(world);
+    private final Mario mario = new Mario(this);
 
-    private final Goomba goomba = new Goomba(world, 16.5f, 1f);
+    private Goomba goomba = new Goomba(this, 32 * MarioGame.SCALE, 32 * MarioGame.SCALE);
 
     private final OrthogonalTiledMapRenderer renderer;
 

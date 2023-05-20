@@ -8,6 +8,6 @@ public class Pipe extends PhysicalObject {
     public Pipe(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
         fixture.setUserData(this);
-        setCategory(MarioGame.PIPE_BYTE);
+        setCategory(MarioGame.PIPE_COL);
     }
 }

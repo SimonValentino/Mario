@@ -2,9 +2,7 @@ package com.svalentino.tiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
@@ -15,13 +13,13 @@ public class Brick extends PhysicalObject implements InteractableObject {
     public Brick(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
         fixture.setUserData(this);
-        setCategory(MarioGame.BRICK_BYTE);
+        setCategory(MarioGame.BRICK_COL);
     }
 
     @Override
     public void hitMarioHead() {
         Gdx.app.log("Brick", "Collision");
-        setCategory(MarioGame.DESTROYED_BYTE);
+        setCategory(MarioGame.DESTROYED_COL);
         getCell().setTile(null);
         GameHud.updateScore(50);
         brickBreakingSound.play();

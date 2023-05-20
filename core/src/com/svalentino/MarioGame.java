@@ -29,14 +29,15 @@ public class MarioGame extends Game {
 
 	DESTROYED_BYTE is for when a tile gets destroyed
 	 */
-	public static final byte DEFAULT_BYTE = 1;
-	public static final byte MARIO_BYTE = 2;
-	public static final byte COIN_BYTE = 4;
-	public static final byte BRICK_BYTE = 8;
-	public static final byte COIN_BLOCK_BYTE = 16;
-	public static final byte ENEMY_BYTE = 32;
-	public static final byte DESTROYED_BYTE = 64;
-	public static final short PIPE_BYTE = 128;
+	public static final byte DEFAULT_COL = 1;
+	public static final byte MARIO_COL = 2;
+	public static final byte COIN_COl = 4;
+	public static final byte BRICK_COL = 8;
+	public static final byte COIN_BLOCK_COL = 16;
+	public static final byte ENEMY_COL = 32;
+	public static final byte DESTROYED_COL = 64;
+	public static final short PIPE_COL = 128;
+	public static final short ENEMY_HEAD_COL = 256;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it
