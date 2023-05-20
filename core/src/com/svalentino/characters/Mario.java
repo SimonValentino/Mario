@@ -27,8 +27,12 @@ public class Mario extends Sprite implements Disposable {
 
     public Mario(World world) {
         this.world = world;
-
         this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Jump Sound Effect.mp3"));
+
+        defBody();
+    }
+
+    private void defBody() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((marioWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
                 (marioHeight + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
@@ -70,6 +74,10 @@ public class Mario extends Sprite implements Disposable {
     public void moveRight() {
         if (isBelowMaxSpeedRight())
             mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
+    }
+
+    public void update(float dt) {
+        setPosition(mario.getPosition().x - getWidth() / 2, mario.getPosition().y - getHeight() / 2);
     }
 
     public void moveLeft() {

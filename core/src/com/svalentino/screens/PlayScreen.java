@@ -7,14 +7,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
-import com.svalentino.WorldRenderer;
+import com.svalentino.utils.WorldRenderer;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -78,8 +77,11 @@ public class PlayScreen implements Screen {
         // setup where the batch will project to
         // getting the hud's camera
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        game.batch.begin();
+        worldRenderer.getMario().draw(game.batch);
+        game.batch.end();
+
         hud.stage.draw();
-        hud.update(delta);
 
         if(hud.getNumLives() <= 0) {
             spedUpThemeSong.stop();
@@ -133,6 +135,7 @@ public class PlayScreen implements Screen {
 
     private void update(float delta) {
         worldRenderer.updateWorld(delta);
+        hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
         camera.update();
         worldRenderer.setView(camera);

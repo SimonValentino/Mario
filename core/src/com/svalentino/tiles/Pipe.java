@@ -1,12 +1,13 @@
 package com.svalentino.tiles;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
+import com.svalentino.MarioGame;
+import com.svalentino.utils.WorldRenderer;
 
 public class Pipe extends PhysicalObject {
-    public Pipe(World world, TiledMap map, Rectangle hitbox) {
-        super(world, map, hitbox);
+    public Pipe(WorldRenderer wr, Rectangle hitbox) {
+        super(wr, hitbox);
         fixture.setUserData(this);
+        setCategory(MarioGame.PIPE_BYTE);
     }
 }

@@ -1,48 +1,39 @@
 package com.svalentino.characters;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 
-public class Goomba extends Sprite implements Disposable {
-    private World world;
-    private Body goomba;
-
-    public static final float goombaWidth = MarioGame.TILE_LENGTH / 2;
-    public static final float goombaHeight = MarioGame.TILE_LENGTH / 2;
+public class Goomba extends Enemy {
+    private float goombaWidth = MarioGame.TILE_LENGTH / 2 - 0.2f;
+    private float goombaHeight = MarioGame.TILE_LENGTH / 2 - 0.2f;
 
     public Goomba(World world, float x, float y) {
-        this.world = world;
+        super(world, x, y);
+        defBody();
+    }
 
+    @Override
+    protected void defBody() {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(x, y);
+        bodyDef.position.set((goombaWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
+                (goombaHeight + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        goomba = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
         hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
 
+        fixtureDef.filter.categoryBits = MarioGame.MARIO_BYTE;
+        fixtureDef.filter.maskBits = MarioGame.DEFAULT_BYTE | MarioGame.BRICK_BYTE
+                | MarioGame.COIN_BLOCK_BYTE | MarioGame.ENEMY_BYTE
+                | MarioGame.PIPE_BYTE;
+
         fixtureDef.shape = hitbox;
-        fixtureDef.friction = 0.0f;
-        goomba.createFixture(fixtureDef);
-    }
-
-    public void move() {
-        if (hitWall())
-            goomba.setLinearVelocity(new Vector2(-1f, 0));
-        else
-            goomba.setLinearVelocity(new Vector2(1f, 0));
-    }
-
-    private boolean hitWall() {
-        return goomba.getLinearVelocity().x == 0;
+        body.createFixture(fixtureDef);
     }
 
     @Override
