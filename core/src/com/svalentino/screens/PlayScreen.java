@@ -79,7 +79,6 @@ public class PlayScreen implements Screen {
         // getting the hud's camera
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-        hud.update(delta);
 
         if(hud.getNumLives() <= 0) {
             spedUpThemeSong.stop();
@@ -133,6 +132,7 @@ public class PlayScreen implements Screen {
 
     private void update(float delta) {
         worldRenderer.updateWorld(delta);
+        hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
         camera.update();
         worldRenderer.setView(camera);

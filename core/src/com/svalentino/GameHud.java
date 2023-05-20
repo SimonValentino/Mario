@@ -20,11 +20,12 @@ public class GameHud implements Disposable {
     // the hud stays
     private final Viewport vport;
 
+    private final int timeInLevel = 20;
+
     private int worldTimer;
     private double timeCount;
     private static int score;
     public int numLives;
-    final private int timeInLevel = 20;
 
     private Label numLivesLabel;
     private Label livesLabel;
