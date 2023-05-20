@@ -1,4 +1,4 @@
-package com.svalentino;
+package com.svalentino.utils;
 
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
