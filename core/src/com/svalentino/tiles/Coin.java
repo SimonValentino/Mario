@@ -21,6 +21,7 @@ public class Coin extends InteractableObject {
         setCategory(MarioGame.DESTROYED_BYTE);
         getCell().setTile(null);
         GameHud.updateScore(200);
+        GameHud.updateCoins();
     }
 
     public void hitMarioFeet() {
