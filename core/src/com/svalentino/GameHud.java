@@ -90,7 +90,7 @@ public class GameHud implements Disposable {
     private void constructLabels() {
         countdownLabel = new Label(String.format("%03d", worldTimer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score),
+        scoreLabel = new Label(String.format("%01d", score),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         numLivesLabel = new Label(String.format("%01d", numLives),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -105,7 +105,8 @@ public class GameHud implements Disposable {
 
     public static void updateScore(int points) {
         score += points;
-        scoreLabel.setText(String.format("%06d", score));
+        String strScore = Integer.toString(score);
+        scoreLabel.setText(String.format("%0" + strScore.length() + "d", score));
     }
 
     @Override
