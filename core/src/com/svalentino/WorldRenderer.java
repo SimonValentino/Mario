@@ -1,5 +1,5 @@
 package com.svalentino;
-
+import com.svalentino.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -21,16 +21,17 @@ import com.svalentino.tiles.Pipe;
 
 public class WorldRenderer implements Disposable {
     private final Vector2 gravity = new Vector2(0, -62.5f);
-
     private final World world = new World(gravity, true);
     private final TiledMap map;
     private final Mario mario = new Mario(this);
+    public float timeElapsed;
 
     private Goomba goomba = new Goomba(this, 32 * MarioGame.SCALE, 32 * MarioGame.SCALE);
 
     private final OrthogonalTiledMapRenderer renderer;
 
     public WorldRenderer(TiledMap map) {
+        timeElapsed = 0;
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructGoombas();
@@ -53,6 +54,18 @@ public class WorldRenderer implements Disposable {
     public void updateWorld(float delta) {
         getInput(delta);
         world.step(1 / 60f, 6, 6);
+        if(mario.isDead()) {
+            timeElapsed += delta;
+            System.out.println("delta time: " + delta);
+            System.out.println("Time Elapsed: " + timeElapsed);
+            SoundManager.themeSong.stop();
+            SoundManager.spedUpThemeSong.stop();
+            SoundManager.deathSound.play(1f, 1f, -100f);
+            if(timeElapsed >= 2f) {
+                mario.resetPosition();
+                SoundManager.themeSong.play();
+            }
+        }
     }
 
     private void getInput(float delta) {
