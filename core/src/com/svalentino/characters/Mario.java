@@ -83,9 +83,16 @@ public class Mario extends Sprite implements Disposable {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         mario = world.createBody(bodyDef);
     }
-
+    public boolean isDead() {
+        if(getYCoordinate() <= -8)
+            return true;
+        return false;
+    }
     public float getXCoordinate() {
         return mario.getWorldCenter().x;
+    }
+    public float getYCoordinate() {
+        return mario.getWorldCenter().y;
     }
 
     private boolean isBelowMaxSpeedRight() {
