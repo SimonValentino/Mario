@@ -6,9 +6,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
+import com.svalentino.SoundManager;
 
 public class Brick extends PhysicalObject implements InteractableObject {
-    private Sound brickBreakingSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/breakblock.wav"));
+
 
     public Brick(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
@@ -22,6 +23,6 @@ public class Brick extends PhysicalObject implements InteractableObject {
         setCategory(MarioGame.DESTROYED_COL);
         getCell().setTile(null);
         GameHud.updateScore(50);
-        brickBreakingSound.play();
+        SoundManager.brickBreakingSound.play();
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.svalentino.screens.PlayScreen;
 import com.badlogic.gdx.Game;
+import com.svalentino.SoundManager;
 
 public class MarioGame extends Game {
 	public static final int WIDTH = 400;
@@ -42,7 +43,6 @@ public class MarioGame extends Game {
 	// Holds all sprites and images
 	// Public so all screens can have access to it
 	public SpriteBatch batch;
-	public static Music themeSong;
 
 	/*
 	init sprite bach and set the screen to PlayScreen
@@ -57,7 +57,7 @@ public class MarioGame extends Game {
 	@Override
 	public void dispose() {
 		super.dispose();
-		themeSong.dispose();
+		SoundManager.themeSong.dispose();
 	}
 
 	/*
@@ -69,9 +69,9 @@ public class MarioGame extends Game {
 	}
 
 	public void playThemeSong() {
-		themeSong = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
-		themeSong.setLooping(true);
-		themeSong.setVolume(0.15f);
-		themeSong.play();
+
+		SoundManager.themeSong.setLooping(true);
+		SoundManager.themeSong.setVolume(0.15f);
+		SoundManager.themeSong.play();
 	}
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.svalentino.SoundManager;
 
 public class GameHud implements Disposable {
     // Empty box that holds widgets
@@ -41,7 +42,6 @@ public class GameHud implements Disposable {
     private Label timeLabel;
     private Label marioLabel;
 
-    private Sound oneUPSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario 1-UP Sound Effect.mp3"));
 
     public GameHud(SpriteBatch batch) {
         worldTimer = timeInLevel;
@@ -100,7 +100,7 @@ public class GameHud implements Disposable {
         if(coins == 100) {
             coins = 0;
             numLives++;
-            oneUPSound.play();
+            SoundManager.oneUPSound.play();
             numLivesLabel.setText(String.format("%0" + Integer.toString(numLives).length() + "d", numLives));
         }
     }

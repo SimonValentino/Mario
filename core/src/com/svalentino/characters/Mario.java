@@ -1,6 +1,5 @@
 package com.svalentino.characters;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
-
+import com.svalentino.SoundManager;
 public class Mario extends Sprite implements Disposable {
     private final World world;
     private Body mario;
@@ -24,12 +23,10 @@ public class Mario extends Sprite implements Disposable {
     private final float marioMaxSpeed = 10f;
 
     // Sounds
-    private final Sound jumpSound; 
 
     public Mario(WorldRenderer worldRenderer) {
         this.world = worldRenderer.getWorld();
 
-        this.jumpSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Jump Sound Effect.mp3"));
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((marioWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
                 (marioHeight + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
@@ -65,7 +62,7 @@ public class Mario extends Sprite implements Disposable {
     public void jump() {
         if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
-            jumpSound.play(0.05f);
+            SoundManager.jumpSound.play(0.05f);
         }
     }
 

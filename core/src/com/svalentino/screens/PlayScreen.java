@@ -1,20 +1,17 @@
 package com.svalentino.screens;
 
-import static com.svalentino.MarioGame.themeSong;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
+import com.svalentino.SoundManager;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -25,9 +22,7 @@ public class PlayScreen implements Screen {
 
     private float elapsed;
 
-    private final Sound deathSound;
 
-    private final Music spedUpThemeSong;
     private final OrthographicCamera camera;
     private final Viewport vport;
 
@@ -40,8 +35,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(MarioGame game) {
 
-        this.spedUpThemeSong = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Sped up Theme Music.mp3"));
-        this.deathSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Death Sound Effect.mp3"));
+
         this.game = game;
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
@@ -81,16 +75,16 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
 
         if(hud.getNumLives() <= 0) {
-            spedUpThemeSong.stop();
-            deathSound.play(0.15f);
+            SoundManager.spedUpThemeSong.stop();
+            SoundManager.deathSound.play(0.15f);
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
-            themeSong.stop();
-            spedUpThemeSong.setVolume(0.15f);
-            spedUpThemeSong.play();
+            SoundManager.themeSong.stop();
+            SoundManager.spedUpThemeSong.setVolume(0.15f);
+            SoundManager.spedUpThemeSong.play();
         }
     }
 
@@ -138,16 +132,16 @@ public class PlayScreen implements Screen {
         worldRenderer.setView(camera);
         
         if(hud.getNumLives() <= 0) {
-            spedUpThemeSong.stop();
-            deathSound.play(0.15f);
+            SoundManager.spedUpThemeSong.stop();
+            SoundManager.deathSound.play(0.15f);
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
-            themeSong.stop();
-            spedUpThemeSong.setVolume(0.15f);
-            spedUpThemeSong.play();
+            SoundManager.themeSong.stop();
+            SoundManager.spedUpThemeSong.setVolume(0.15f);
+            SoundManager.spedUpThemeSong.play();
         }
 
     }
