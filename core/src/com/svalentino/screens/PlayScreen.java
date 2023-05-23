@@ -75,16 +75,16 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
 
         if(hud.getNumLives() <= 0) {
-            SoundManager.spedUpThemeSong.stop();
-            SoundManager.deathSound.play();
+            SoundManager.SPED_UP_THEME_SONG.stop();
+            SoundManager.DEATH_SOUND.play();
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
-            SoundManager.themeSong.stop();
-            SoundManager.spedUpThemeSong.setVolume(0.15f);
-            SoundManager.spedUpThemeSong.play();
+            SoundManager.THEME_SONG.stop();
+            SoundManager.SPED_UP_THEME_SONG.setVolume(0.15f);
+            SoundManager.SPED_UP_THEME_SONG.play();
         }
     }
 
@@ -125,23 +125,23 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
-        worldRenderer.updateWorld(delta);
+        worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
         camera.update();
         worldRenderer.setView(camera);
         
         if(hud.getNumLives() <= 0) {
-            SoundManager.spedUpThemeSong.stop();
-            SoundManager.deathSound.play();
+            SoundManager.SPED_UP_THEME_SONG.stop();
+            SoundManager.DEATH_SOUND.play();
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
-            SoundManager.themeSong.stop();
-            SoundManager.spedUpThemeSong.setVolume(0.15f);
-            SoundManager.spedUpThemeSong.play();
+            SoundManager.THEME_SONG.stop();
+            SoundManager.SPED_UP_THEME_SONG.setVolume(0.15f);
+            SoundManager.SPED_UP_THEME_SONG.play();
         }
 
     }

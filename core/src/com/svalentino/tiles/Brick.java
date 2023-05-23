@@ -23,6 +23,6 @@ public class Brick extends PhysicalObject implements InteractableObject {
         setCategory(MarioGame.DESTROYED_COL);
         getCell().setTile(null);
         GameHud.updateScore(50);
-        SoundManager.brickBreakingSound.play();
+        SoundManager.BRICK_BREAKING_SOUND.play();
     }
 }

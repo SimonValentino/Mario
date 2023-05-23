@@ -57,7 +57,7 @@ public class MarioGame extends Game {
 	@Override
 	public void dispose() {
 		super.dispose();
-		SoundManager.themeSong.dispose();
+		SoundManager.THEME_SONG.dispose();
 	}
 
 	/*
@@ -70,8 +70,8 @@ public class MarioGame extends Game {
 
 	public void playThemeSong() {
 
-		SoundManager.themeSong.setLooping(true);
-		SoundManager.themeSong.setVolume(0.15f);
-		SoundManager.themeSong.play();
+		SoundManager.THEME_SONG.setLooping(true);
+		SoundManager.THEME_SONG.setVolume(0.15f);
+		SoundManager.THEME_SONG.play();
 	}
 }

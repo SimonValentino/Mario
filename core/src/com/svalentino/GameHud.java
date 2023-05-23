@@ -1,7 +1,5 @@
 package com.svalentino;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,9 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.svalentino.SoundManager;
 
 public class GameHud implements Disposable {
     // Empty box that holds widgets
@@ -23,10 +21,10 @@ public class GameHud implements Disposable {
     // the hud stays
     private final Viewport vport;
 
-    private int worldTimer;
+    private static int worldTimer;
     private double timeCount;
     private static int score;
-    public int numLives;
+    private int numLives;
 
     private static int coins;
     final private int timeInLevel = 100;
@@ -100,7 +98,7 @@ public class GameHud implements Disposable {
         if(coins == 100) {
             coins = 0;
             numLives++;
-            SoundManager.oneUPSound.play();
+            SoundManager.ONE_UP_SOUND.play();
             numLivesLabel.setText(String.format("%0" + Integer.toString(numLives).length() + "d", numLives));
         }
     }
@@ -132,6 +130,13 @@ public class GameHud implements Disposable {
     public static void updateCoins() {
         coins += 1;
         numCoinsLabel.setText(String.format("%0" + Integer.toString(coins).length() + "d", coins));
+    }
+    public void updateLives() {
+        numLivesLabel.setText(String.format("%0" + Integer.toString(numLives).length() + "d", numLives));
+    }
+    public void resetWorldTimer() {
+        worldTimer = timeInLevel;
+        timeLabel.setText(String.format("%0" + Integer.toString(worldTimer).length() + "d", worldTimer));
 
     }
 
@@ -147,5 +152,8 @@ public class GameHud implements Disposable {
     }
     public int getTimeInLevel() {
         return timeInLevel;
+    }
+    public void setNumLives(int numLives) {
+        this.numLives = numLives;
     }
 }

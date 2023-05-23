@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
+import com.svalentino.GameHud;
 public class Mario extends Sprite implements Disposable {
     private final World world;
     private Body mario;
@@ -62,7 +63,7 @@ public class Mario extends Sprite implements Disposable {
     public void jump() {
         if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
-            SoundManager.jumpSound.play(0.05f);
+            SoundManager.JUMP_SOUND.play(0.05f);
         }
     }
 

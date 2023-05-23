@@ -26,9 +26,9 @@ public class CoinBlock extends PhysicalObject implements InteractableObject {
         Gdx.app.log("Coin Block", "Collision");
 
         if (isBlankBlock())
-            SoundManager.blankBlockSound.play();
+            SoundManager.BLANK_BLOCK_SOUND.play();
         else
-            SoundManager.coinBlockSound.play();
+            SoundManager.COIN_BLOCK_SOUND.play();
 
         getCell().setTile(tileset.getTile(28));
         GameHud.updateScore(200);

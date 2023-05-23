@@ -51,18 +51,22 @@ public class WorldRenderer implements Disposable {
         renderer.setView(camera);
     }
 
-    public void updateWorld(float delta) {
+    public void updateWorld(float delta, GameHud hud) {
         getInput(delta);
         world.step(1 / 60f, 6, 6);
         if(mario.isDead()) {
             timeElapsed += delta;
-            SoundManager.themeSong.stop();
-            SoundManager.spedUpThemeSong.stop();
-            SoundManager.deathSound.play();
+            SoundManager.THEME_SONG.stop();
+            SoundManager.SPED_UP_THEME_SONG.stop();
+            SoundManager.DEATH_SOUND.setVolume(1f);
+            SoundManager.DEATH_SOUND.play();
             if(timeElapsed >= 2.5f) {
-
+                int newLives = hud.getNumLives()-1;
+                hud.setNumLives(newLives);
+                hud.updateLives();
+                hud.resetWorldTimer();
                 mario.resetPosition();
-                SoundManager.themeSong.play();
+                SoundManager.THEME_SONG.play();
             }
         }
     }
