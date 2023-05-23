@@ -56,12 +56,11 @@ public class WorldRenderer implements Disposable {
         world.step(1 / 60f, 6, 6);
         if(mario.isDead()) {
             timeElapsed += delta;
-            System.out.println("delta time: " + delta);
-            System.out.println("Time Elapsed: " + timeElapsed);
             SoundManager.themeSong.stop();
             SoundManager.spedUpThemeSong.stop();
-            SoundManager.deathSound.play(1f, 1f, -100f);
-            if(timeElapsed >= 2f) {
+            SoundManager.deathSound.play();
+            if(timeElapsed >= 2.5f) {
+
                 mario.resetPosition();
                 SoundManager.themeSong.play();
             }

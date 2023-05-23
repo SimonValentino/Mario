@@ -76,7 +76,7 @@ public class PlayScreen implements Screen {
 
         if(hud.getNumLives() <= 0) {
             SoundManager.spedUpThemeSong.stop();
-            SoundManager.deathSound.play(0.15f);
+            SoundManager.deathSound.play();
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
@@ -133,7 +133,7 @@ public class PlayScreen implements Screen {
         
         if(hud.getNumLives() <= 0) {
             SoundManager.spedUpThemeSong.stop();
-            SoundManager.deathSound.play(0.15f);
+            SoundManager.deathSound.play();
             elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
