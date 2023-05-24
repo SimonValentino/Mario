@@ -78,39 +78,10 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void resetPosition() {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set((marioWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
-                (marioHeight + MarioGame.TILE_LENGTH) * MarioGame.SCALE);
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        mario = world.createBody(bodyDef);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
-
-        fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
-        fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.COIN_COl
-                | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.PIPE_COL
-                | MarioGame.ENEMY_HEAD_COL;
-
-        fixtureDef.shape = hitbox;
-        mario.createFixture(fixtureDef);
-
-        EdgeShape top = new EdgeShape();
-        top.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
-                new Vector2((marioHeight / 2f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
-        fixtureDef.shape = top;
-        fixtureDef.isSensor = true;
-        mario.createFixture(fixtureDef).setUserData("head");
-
-        EdgeShape bottom = new EdgeShape();
-        bottom.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (-marioHeight - 0.1f) * MarioGame.SCALE),
-                new Vector2((marioHeight / 2f) * MarioGame.SCALE, ((-marioHeight - 0.1f)) * MarioGame.SCALE));
-        fixtureDef.shape = bottom;
-        mario.createFixture(fixtureDef).setUserData("feet");
+        mario.setTransform(new Vector2(5f, 5f), mario.getAngle());
     }
     public boolean isDead() {
-        if(getYCoordinate() <= -8)
+        if(getYCoordinate() <= -8 || GameHud.worldTimer <= 3)
             return true;
         return false;
     }
