@@ -67,6 +67,7 @@ public class WorldRenderer implements Disposable {
                 hud.resetWorldTimer();
                 mario.resetPosition();
                 SoundManager.THEME_SONG.play();
+                timeElapsed = 0;
             }
         }
     }
