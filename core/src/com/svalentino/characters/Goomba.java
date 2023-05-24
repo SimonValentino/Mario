@@ -12,6 +12,9 @@ public class Goomba extends Enemy {
 
     private float goombaWidth = MarioGame.TILE_LENGTH / 2 - 0.2f;
     private float goombaHeight = MarioGame.TILE_LENGTH / 2 - 0.2f;
+    private float goombaMaxSpeed = 1f;
+
+    private Vector2 movementVector = new Vector2(1f, 0f);
 
     public Goomba(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
@@ -60,5 +63,21 @@ public class Goomba extends Enemy {
     @Override
     public void hitMarioHead() {
 
+    }
+
+    @Override
+    public void update() {
+        if (isBelowMaxSpeedRight())
+            body.applyLinearImpulse(movementVector, body.getWorldCenter(), true);
+        if (body.getLinearVelocity().x <= 0)
+            movementVector = movementVector.scl(-1, 1);
+    }
+
+    private boolean isBelowMaxSpeedRight() {
+        return body.getLinearVelocity().x < goombaMaxSpeed;
+    }
+
+    private boolean isBelowMaxSpeedLeft() {
+        return body.getLinearVelocity().y > -goombaMaxSpeed;
     }
 }
