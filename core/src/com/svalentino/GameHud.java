@@ -136,7 +136,7 @@ public class GameHud implements Disposable {
     }
     public void resetWorldTimer() {
         worldTimer = timeInLevel;
-        timeLabel.setText(String.format("%0" + Integer.toString(worldTimer).length() + "d", worldTimer));
+        countdownLabel.setText(String.format("%0" + Integer.toString(worldTimer).length() + "d", worldTimer));
 
     }
 
