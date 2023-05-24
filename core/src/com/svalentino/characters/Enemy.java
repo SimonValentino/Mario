@@ -15,4 +15,6 @@ public abstract class Enemy extends Sprite implements Disposable, InteractableOb
         this.world = worldRenderer.getWorld();
         setPosition(x, y);
     }
+
+    public abstract void update();
 }

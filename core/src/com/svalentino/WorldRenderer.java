@@ -1,5 +1,9 @@
 package com.svalentino;
 import com.svalentino.SoundManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,21 +24,21 @@ import com.svalentino.tiles.Ground;
 import com.svalentino.tiles.Pipe;
 
 public class WorldRenderer implements Disposable {
-    private final Vector2 gravity = new Vector2(0, -62.5f);
-    private final World world = new World(gravity, true);
-    private final TiledMap map;
-    private final Mario mario = new Mario(this);
+    private Vector2 gravity = new Vector2(0, -62.5f);
+    private World world = new World(gravity, true);
+    private TiledMap map;
+    private Mario mario = new Mario(this);
     public float timeElapsed;
+    
+    private OrthogonalTiledMapRenderer renderer;
 
-    private Goomba goomba = new Goomba(this, 32 * MarioGame.SCALE, 32 * MarioGame.SCALE);
-
-    private final OrthogonalTiledMapRenderer renderer;
+    private List<Goomba> goombas;
 
     public WorldRenderer(TiledMap map) {
         timeElapsed = 0;
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
-        constructGoombas();
+        this.goombas = new ArrayList<>();
         constructWorld();
         world.setContactListener(new GameContactListener());
     }
@@ -54,6 +58,10 @@ public class WorldRenderer implements Disposable {
     public void updateWorld(float delta, GameHud hud) {
         getInput(delta);
         world.step(1 / 60f, 6, 6);
+
+        for (Goomba goomba : goombas)
+            goomba.update();
+
         if(mario.isDead()) {
             timeElapsed += delta;
             SoundManager.THEME_SONG.stop();
@@ -87,10 +95,11 @@ public class WorldRenderer implements Disposable {
         constructPipes();
         constructCoinBlocks();
         constructCoins();
+        constructGoombas();
     }
 
     private void constructGoombas() {
-
+        goombas.add(new Goomba(this, 10, 10));
     }
 
     private void constructGround() {
