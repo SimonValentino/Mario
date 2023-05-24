@@ -21,13 +21,13 @@ public class GameHud implements Disposable {
     // the hud stays
     private final Viewport vport;
 
-    private static int worldTimer;
+    public static int worldTimer;
     private double timeCount;
     private static int score;
     private int numLives;
 
     private static int coins;
-    final private int timeInLevel = 100;
+    final private int timeInLevel = 10;
 
     private Label numLivesLabel;
 
@@ -90,10 +90,10 @@ public class GameHud implements Disposable {
             countdownLabel.setText(String.format("%0" + strWorldTimer.length() + "d", worldTimer));
             timeCount = 0;
         }
+
         if(worldTimer <= 0) {
             numLives--;
             numLivesLabel.setText(String.format("%01d", numLives));
-            worldTimer = timeInLevel;
         }
         if(coins == 100) {
             coins = 0;
