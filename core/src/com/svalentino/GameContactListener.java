@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.svalentino.characters.Enemy;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.InteractableObject;
 
@@ -17,16 +18,28 @@ public class GameContactListener implements ContactListener {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
 
+        int col = fixtureA.getFilterData().categoryBits | fixtureB.getFilterData().categoryBits;
+
         if (fixtureA.getUserData() == null || fixtureB.getUserData() == null)
             return;
 
-        if (fixtureA.getUserData().equals("head") || fixtureB.getUserData().equals("head")) {
-            Fixture marioHead = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
-            Fixture colFixture = fixtureA == marioHead ? fixtureB : fixtureA;
-
-            if (InteractableObject.class.isAssignableFrom(colFixture.getUserData().getClass())) {
-                InteractableObject t = (InteractableObject) colFixture.getUserData();
-                t.hitMarioHead();
+        if (col == (MarioGame.MARIO_COL | MarioGame.BRICK_COL) ||
+            col == (MarioGame.MARIO_COL | MarioGame.COIN_COl) ||
+            col == (MarioGame.MARIO_COL | MarioGame.COIN_BLOCK_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                InteractableObject obj = (InteractableObject) fixtureB.getUserData();
+                obj.hitMarioHead();
+            } else {
+                InteractableObject obj = (InteractableObject) fixtureA.getUserData();
+                obj.hitMarioHead();
+            }
+        } else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Enemy enemy = (Enemy) fixtureB.getUserData();
+                enemy.receiveHit();
+            } else {
+                Enemy enemy = (Enemy) fixtureB.getUserData();
+                enemy.receiveHit();
             }
         }
 

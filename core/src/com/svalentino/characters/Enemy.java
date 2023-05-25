@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.WorldRenderer;
 import com.svalentino.tiles.InteractableObject;
 
-public abstract class Enemy extends Sprite implements Disposable, InteractableObject {
+public abstract class Enemy extends Sprite implements Disposable {
     protected World world;
     protected Body body;
 
@@ -17,4 +17,5 @@ public abstract class Enemy extends Sprite implements Disposable, InteractableOb
     }
 
     public abstract void update();
+    public abstract void receiveHit();
 }

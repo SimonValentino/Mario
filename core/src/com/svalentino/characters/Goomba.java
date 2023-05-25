@@ -13,6 +13,7 @@ public class Goomba extends Enemy {
     private float goombaWidth = MarioGame.TILE_LENGTH / 2 - 0.2f;
     private float goombaHeight = MarioGame.TILE_LENGTH / 2 - 0.2f;
     private float goombaMaxSpeed = 1f;
+    private boolean isDead = false;
 
     private Vector2 movementVector = new Vector2(1f, 0f);
 
@@ -44,8 +45,8 @@ public class Goomba extends Enemy {
         Vector2[] vericies = new Vector2[4];
         vericies[0] = new Vector2(-7, 10).scl(MarioGame.SCALE);
         vericies[1] = new Vector2(7, 10).scl(MarioGame.SCALE);
-        vericies[2] = new Vector2(-5, 3).scl(MarioGame.SCALE);
-        vericies[3] = new Vector2(5, 3).scl(MarioGame.SCALE);
+        vericies[2] = new Vector2(-7, 3).scl(MarioGame.SCALE);
+        vericies[3] = new Vector2(7, 3).scl(MarioGame.SCALE);
         head.set(vericies);
         
         fixtureDef.shape = head;
@@ -61,16 +62,18 @@ public class Goomba extends Enemy {
     }
 
     @Override
-    public void hitMarioHead() {
-
-    }
-
-    @Override
     public void update() {
+        if (isDead)
+            world.destroyBody(body);
         if (isBelowMaxSpeedRight())
             body.applyLinearImpulse(movementVector, body.getWorldCenter(), true);
         if (body.getLinearVelocity().x <= 0)
             movementVector = movementVector.scl(-1, 1);
+    }
+
+    @Override
+    public void receiveHit() {
+        isDead = true;
     }
 
     private boolean isBelowMaxSpeedRight() {
