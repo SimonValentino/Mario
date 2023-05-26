@@ -22,18 +22,18 @@ public class GameContactListener implements ContactListener {
 
         if (fixtureA.getUserData() == null || fixtureB.getUserData() == null)
             return;
+        
+        if (fixtureA.getUserData().equals("head") || fixtureB.getUserData().equals("head")) {
+            Fixture marioHead = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
+            Fixture colFixture = fixtureA == marioHead ? fixtureB : fixtureA;
 
-        if (col == (MarioGame.MARIO_COL | MarioGame.BRICK_COL) ||
-            col == (MarioGame.MARIO_COL | MarioGame.COIN_COl) ||
-            col == (MarioGame.MARIO_COL | MarioGame.COIN_BLOCK_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
-                InteractableObject obj = (InteractableObject) fixtureB.getUserData();
-                obj.hitMarioHead();
-            } else {
-                InteractableObject obj = (InteractableObject) fixtureA.getUserData();
-                obj.hitMarioHead();
+            if (InteractableObject.class.isAssignableFrom(colFixture.getUserData().getClass())) {
+                InteractableObject t = (InteractableObject) colFixture.getUserData();
+                t.hitMarioHead();
             }
-        } else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
+        }
+        
+        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
@@ -43,7 +43,7 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        else if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
+        if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
             if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
                 Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
                 Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
