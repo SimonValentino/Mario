@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,7 +20,7 @@ Any screen class should implement Screen.
  */
 public class PlayScreen implements Screen {
     private final MarioGame game;
-
+    private TextureAtlas atlas;
     private float elapsed;
 
 
@@ -34,7 +35,7 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen(MarioGame game) {
-
+        this.atlas = new TextureAtlas("Mario_and_Enemies.pack");
 
         this.game = game;
         this.gameOverScreen = new GameOverScreen(game);
@@ -48,8 +49,13 @@ public class PlayScreen implements Screen {
 
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
+        
+
     }
 
+    public TextureAtlas getAtlas() {
+        return atlas;
+    }
     @Override
     public void show() {
 
