@@ -14,6 +14,7 @@ public class Goomba extends Enemy {
     private float goombaHeight = MarioGame.TILE_LENGTH / 2 - 0.2f;
     private float goombaMaxSpeed = 1f;
     private boolean isDead = false;
+    private boolean hasDied = false;
 
     private Vector2 movementVector = new Vector2(1f, 0f);
 
@@ -63,8 +64,10 @@ public class Goomba extends Enemy {
 
     @Override
     public void update() {
-        if (isDead)
+        if (hasDied && !isDead) {
             world.destroyBody(body);
+            isDead = true;
+        }
         if (isBelowMaxSpeedRight())
             body.applyLinearImpulse(movementVector, body.getWorldCenter(), true);
         if (body.getLinearVelocity().x <= 0)
@@ -73,7 +76,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void receiveHit() {
-        isDead = true;
+        hasDied = true;
     }
 
     private boolean isBelowMaxSpeedRight() {
