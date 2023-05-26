@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
+import com.svalentino.screens.PlayScreen;
 import com.svalentino.SoundManager;
 import com.svalentino.GameHud;
 public class Mario extends Sprite implements Disposable {
@@ -25,7 +26,7 @@ public class Mario extends Sprite implements Disposable {
 
     // Sounds
 
-    public Mario(WorldRenderer worldRenderer) {
+    public Mario(WorldRenderer worldRenderer, PlayScreen screen) {
         this.world = worldRenderer.getWorld();
 
         BodyDef bodyDef = new BodyDef();
