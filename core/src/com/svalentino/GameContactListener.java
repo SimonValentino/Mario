@@ -27,16 +27,32 @@ public class GameContactListener implements ContactListener {
             Fixture marioHead = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
             Fixture colFixture = fixtureA == marioHead ? fixtureB : fixtureA;
 
-            if (InteractableObject.class.isAssignableFrom(colFixture.getUserData().getClass())) {
-                InteractableObject t = (InteractableObject) colFixture.getUserData();
-                t.hitMarioHead();
+        if (InteractableObject.class.isAssignableFrom(fixtureA.getUserData().getClass()) ||
+                InteractableObject.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
+            if (fixtureA.getUserData().equals("head") || fixtureB.getUserData().equals("head")) {
+                Fixture marioFeet = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
+                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
+
+                InteractableObject obj = (InteractableObject) colFixture.getUserData();
+                obj.hitMarioHead();
             }
         }
-        
-        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
+
+        else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
+            } else {
+                Enemy enemy = (Enemy) fixtureA.getUserData();
+                enemy.receiveHit();
+            }
+        }
+
+        else if (col == (MarioGame.ENEMY_COL | MarioGame.PIPE_COL) ||
+                    col == (MarioGame.ENEMY_COL | MarioGame.GROUND_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+                Enemy enemy = (Enemy) fixtureA.getUserData();
+                enemy.reverse();
             } else {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();

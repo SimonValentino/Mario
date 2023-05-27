@@ -7,6 +7,6 @@ import com.svalentino.WorldRenderer;
 public class Ground extends PhysicalObject {
     public Ground(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
-        setCategory(MarioGame.DEFAULT_COL);
+        setCategory(MarioGame.GROUND_COL);
     }
 }

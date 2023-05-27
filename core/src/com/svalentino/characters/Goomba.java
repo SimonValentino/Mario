@@ -2,7 +2,6 @@ package com.svalentino.characters;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.svalentino.MarioGame;
@@ -15,8 +14,6 @@ public class Goomba extends Enemy {
     private float goombaMaxSpeed = 1f;
     private boolean isDead = false;
     private boolean hasDied = false;
-
-    private Vector2 movementVector = new Vector2(1f, 0f);
 
     public Goomba(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
@@ -31,12 +28,12 @@ public class Goomba extends Enemy {
         hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
-        fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.BRICK_COL |
+        fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.BRICK_COL |
                 MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL | MarioGame.PIPE_COL
                 | MarioGame.MARIO_COL;
 
         fixtureDef.shape = hitbox;
-        body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef).setUserData(this);
 
 //        EdgeShape head = new EdgeShape();
 //        head.set(new Vector2((-goombaWidth / 2f) * MarioGame.SCALE, (goombaHeight + 0.1f) * MarioGame.SCALE),
@@ -68,10 +65,8 @@ public class Goomba extends Enemy {
             world.destroyBody(body);
             isDead = true;
         }
-        if (isBelowMaxSpeedRight())
-            body.applyLinearImpulse(movementVector, body.getWorldCenter(), true);
-        if (body.getLinearVelocity().x <= 0)
-            movementVector = movementVector.scl(-1, 1);
+
+        body.setLinearVelocity(movement);
     }
 
     @Override
