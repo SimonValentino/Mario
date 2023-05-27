@@ -1,11 +1,8 @@
 package com.svalentino;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.svalentino.screens.PlayScreen;
 import com.badlogic.gdx.Game;
-import com.svalentino.SoundManager;
 
 public class MarioGame extends Game {
 	public static final int WIDTH = 400;
@@ -30,7 +27,7 @@ public class MarioGame extends Game {
 
 	DESTROYED_BYTE is for when a tile gets destroyed
 	 */
-	public static final byte DEFAULT_COL = 1;
+	public static final byte GROUND_COL = 1;
 	public static final byte MARIO_COL = 2;
 	public static final byte COIN_COl = 4;
 	public static final byte BRICK_COL = 8;

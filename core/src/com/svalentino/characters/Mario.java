@@ -1,6 +1,5 @@
 package com.svalentino.characters;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -39,7 +38,7 @@ public class Mario extends Sprite implements Disposable {
         hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
-        fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.COIN_COl
+        fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
                 | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.PIPE_COL
                 | MarioGame.ENEMY_HEAD_COL;
 

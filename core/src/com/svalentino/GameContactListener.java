@@ -39,6 +39,17 @@ public class GameContactListener implements ContactListener {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
             } else {
+                Enemy enemy = (Enemy) fixtureA.getUserData();
+                enemy.receiveHit();
+            }
+        }
+
+        else if (col == (MarioGame.ENEMY_COL | MarioGame.PIPE_COL) ||
+                    col == (MarioGame.ENEMY_COL | MarioGame.GROUND_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+                Enemy enemy = (Enemy) fixtureA.getUserData();
+                enemy.reverse();
+            } else {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
             }

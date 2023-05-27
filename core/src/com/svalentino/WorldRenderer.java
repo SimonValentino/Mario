@@ -57,10 +57,12 @@ public class WorldRenderer implements Disposable {
 
     public void updateWorld(float delta, GameHud hud) {
         getInput(delta);
-        world.step(1 / 60f, 6, 6);
 
         for (Goomba goomba : goombas)
             goomba.update();
+
+        world.step(1 / 60f, 6, 6);
+
 
         if(mario.isDead()) {
             timeElapsed += delta;
@@ -99,7 +101,8 @@ public class WorldRenderer implements Disposable {
     }
 
     private void constructGoombas() {
-        goombas.add(new Goomba(this, 10, 10));
+        goombas.add(new Goomba(this, MarioGame.TILE_LENGTH * 8 * MarioGame.SCALE,
+                MarioGame.TILE_LENGTH * MarioGame.SCALE));
     }
 
     private void constructGround() {
