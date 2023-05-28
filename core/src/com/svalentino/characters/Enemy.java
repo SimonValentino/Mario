@@ -17,7 +17,7 @@ public abstract class Enemy extends Sprite implements Disposable {
     public Enemy(WorldRenderer worldRenderer, float x, float y) {
         this.world = worldRenderer.getWorld();
         setPosition(x, y);
-        movement = new Vector2(3, 0);
+        movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
     }
 
     public abstract void update();

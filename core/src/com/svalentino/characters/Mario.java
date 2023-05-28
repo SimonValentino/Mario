@@ -20,7 +20,7 @@ public class Mario extends Sprite implements Disposable {
     // Body dimensions
     public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 0.5f;
-    private final float marioMaxSpeed = 13f;
+    private final float marioMaxSpeed = 11.4f;
 
     // Sounds
 
