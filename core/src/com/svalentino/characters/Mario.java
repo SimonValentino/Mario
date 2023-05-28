@@ -46,15 +46,15 @@ public class Mario extends Sprite implements Disposable {
         mario.createFixture(fixtureDef);
 
         EdgeShape top = new EdgeShape();
-        top.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
-                new Vector2((marioHeight / 2f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
+        top.set(new Vector2((-marioHeight / 1.1f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
+                new Vector2((marioHeight / 1.1f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
         fixtureDef.shape = top;
         fixtureDef.isSensor = true;
         mario.createFixture(fixtureDef).setUserData("head");
 
         EdgeShape bottom = new EdgeShape();
-        bottom.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (-marioHeight - 0.1f) * MarioGame.SCALE),
-                new Vector2((marioHeight / 2f) * MarioGame.SCALE, ((-marioHeight - 0.1f)) * MarioGame.SCALE));
+        bottom.set(new Vector2((-marioHeight / 1.1f) * MarioGame.SCALE, (-marioHeight - 0.1f) * MarioGame.SCALE),
+                new Vector2((marioHeight / 1.1f) * MarioGame.SCALE, ((-marioHeight - 0.1f)) * MarioGame.SCALE));
         fixtureDef.shape = bottom;
         fixtureDef.isSensor = true;
         mario.createFixture(fixtureDef).setUserData("feet");
