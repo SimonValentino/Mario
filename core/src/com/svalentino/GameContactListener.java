@@ -45,7 +45,7 @@ public class GameContactListener implements ContactListener {
         }
 
         else if (col == (MarioGame.ENEMY_COL | MarioGame.PIPE_COL) ||
-                    col == (MarioGame.ENEMY_COL | MarioGame.GROUND_COL)) {
+                col == (MarioGame.ENEMY_COL | MarioGame.GROUND_COL)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
                 enemy.reverse();
