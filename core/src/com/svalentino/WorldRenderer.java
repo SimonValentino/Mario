@@ -1,5 +1,4 @@
 package com.svalentino;
-import com.svalentino.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +17,10 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.characters.Goomba;
 import com.svalentino.characters.Mario;
 import com.svalentino.tiles.Brick;
-import com.svalentino.tiles.Cement;
+import com.svalentino.tiles.DefaultTile;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.CoinBlock;
 import com.svalentino.tiles.Ground;
-import com.svalentino.tiles.Pipe;
 
 public class WorldRenderer implements Disposable {
     private Vector2 gravity = new Vector2(0, -62.5f);
@@ -94,18 +92,17 @@ public class WorldRenderer implements Disposable {
     private void constructWorld() {
         constructGround();
         constructBricks();
-        constructPipes();
         constructCoinBlocks();
         constructCoins();
         constructGoombas();
-        constructCement();
+        constructCementAndPipes();
     }
 
     private void constructGoombas() {
         goombas = new ArrayList<>();
         Rectangle rect;
 
-        for (RectangleMapObject obj : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+        for (RectangleMapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             goombas.add(new Goomba(this, rect.getX() * MarioGame.SCALE,
                     rect.getY() * MarioGame.SCALE));
@@ -124,7 +121,7 @@ public class WorldRenderer implements Disposable {
     public void constructCoins() {
         Rectangle rect;
 
-        for (RectangleMapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+        for (RectangleMapObject obj : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             new Coin(this, rect);
         }
@@ -133,34 +130,25 @@ public class WorldRenderer implements Disposable {
     public void constructCoinBlocks() {
         Rectangle rect;
 
-        for (RectangleMapObject obj : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+        for (RectangleMapObject obj : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             new CoinBlock(this, rect);
         }
     }
 
-    public void constructCement() {
+    public void constructCementAndPipes() {
         Rectangle rect;
 
-        for (RectangleMapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+        for (RectangleMapObject obj : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
-            new Cement(this, rect);
-        }
-    }
-
-    public void constructPipes() {
-        Rectangle rect;
-
-        for (RectangleMapObject obj : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-            rect = obj.getRectangle();
-            new Pipe(this, rect);
+            new DefaultTile(this, rect);
         }
     }
 
     private void constructBricks() {
         Rectangle rect;
 
-        for (RectangleMapObject obj : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
+        for (RectangleMapObject obj : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             new Brick(this, rect);
         }

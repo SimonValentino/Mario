@@ -20,7 +20,7 @@ public class Mario extends Sprite implements Disposable {
     // Body dimensions
     public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 0.5f;
-    private final float marioMaxSpeed = 10f;
+    private final float marioMaxSpeed = 13f;
 
     // Sounds
 
@@ -39,8 +39,8 @@ public class Mario extends Sprite implements Disposable {
 
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
-                | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.PIPE_COL
-                | MarioGame.ENEMY_HEAD_COL | MarioGame.CEMENT_COL;
+                | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL
+                | MarioGame.ENEMY_HEAD_COL | MarioGame.DEFAULT_COL;
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);

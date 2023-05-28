@@ -34,9 +34,8 @@ public class MarioGame extends Game {
 	public static final byte COIN_BLOCK_COL = 16;
 	public static final byte ENEMY_COL = 32;
 	public static final byte DESTROYED_COL = 64;
-	public static final short PIPE_COL = 128;
+	public static final short DEFAULT_COL = 128;
 	public static final short ENEMY_HEAD_COL = 256;
-	public static final short CEMENT_COL = 512;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it

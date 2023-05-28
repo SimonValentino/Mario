@@ -23,6 +23,23 @@ public class GameContactListener implements ContactListener {
         if (fixtureA.getUserData() == null || fixtureB.getUserData() == null)
             return;
 
+        if (col == (MarioGame.ENEMY_COL | MarioGame.DEFAULT_COL) ||
+                col == (MarioGame.ENEMY_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL &&
+                    fixtureB.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+                Enemy enemy1 = (Enemy) fixtureA.getUserData();
+                Enemy enemy2 = (Enemy) fixtureB.getUserData();
+                enemy1.reverse();
+                enemy2.reverse();
+            } else if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+                Enemy enemy = (Enemy) fixtureA.getUserData();
+                enemy.reverse();
+            } else {
+                Enemy enemy = (Enemy) fixtureB.getUserData();
+                enemy.receiveHit();
+            }
+        }
+
         if (InteractableObject.class.isAssignableFrom(fixtureA.getUserData().getClass()) ||
                 InteractableObject.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
             if (fixtureA.getUserData().equals("head") || fixtureB.getUserData().equals("head")) {
@@ -50,25 +67,6 @@ public class GameContactListener implements ContactListener {
                 enemy.receiveHit();
             } else {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
-                enemy.receiveHit();
-            }
-        }
-
-        if (col == (MarioGame.ENEMY_COL | MarioGame.PIPE_COL) ||
-                col == (MarioGame.ENEMY_COL | MarioGame.CEMENT_COL) ||
-                col == (MarioGame.ENEMY_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL &&
-                fixtureB.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
-                Enemy enemy1 = (Enemy) fixtureA.getUserData();
-                Enemy enemy2 = (Enemy) fixtureB.getUserData();
-                enemy1.reverse();
-                enemy2.reverse();
-            }
-            else if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
-                Enemy enemy = (Enemy) fixtureA.getUserData();
-                enemy.reverse();
-            } else {
-                Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
             }
         }

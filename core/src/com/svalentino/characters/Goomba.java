@@ -11,7 +11,6 @@ public class Goomba extends Enemy {
 
     private float goombaWidth = MarioGame.TILE_LENGTH / 2 - 0.2f;
     private float goombaHeight = MarioGame.TILE_LENGTH / 2 - 0.2f;
-    private float goombaMaxSpeed = 1f;
     private boolean isDead = false;
     private boolean hasDied = false;
 
@@ -28,8 +27,8 @@ public class Goomba extends Enemy {
         hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
-        fixtureDef.filter.maskBits = MarioGame.CEMENT_COL | MarioGame.BRICK_COL |
-                MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL | MarioGame.PIPE_COL
+        fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.BRICK_COL |
+                MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL
                 | MarioGame.MARIO_COL | MarioGame.GROUND_COL;
 
         fixtureDef.shape = hitbox;
@@ -37,14 +36,15 @@ public class Goomba extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vericies = new Vector2[4];
-        vericies[0] = new Vector2(-7, 10).scl(MarioGame.SCALE);
-        vericies[1] = new Vector2(7, 10).scl(MarioGame.SCALE);
-        vericies[2] = new Vector2(-7, 3).scl(MarioGame.SCALE);
-        vericies[3] = new Vector2(7, 3).scl(MarioGame.SCALE);
+        vericies[0] = new Vector2(-5.5f, 10).scl(MarioGame.SCALE);
+        vericies[1] = new Vector2(5.5f, 10).scl(MarioGame.SCALE);
+        vericies[2] = new Vector2(-5.5f, 3).scl(MarioGame.SCALE);
+        vericies[3] = new Vector2(5.5f, 3).scl(MarioGame.SCALE);
         head.set(vericies);
 
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
+        fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
         // How much mario will bounce up
         fixtureDef.restitution = 0.75f;
         body.createFixture(fixtureDef).setUserData(this);
