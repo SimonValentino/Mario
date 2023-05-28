@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.characters.Goomba;
 import com.svalentino.characters.Mario;
 import com.svalentino.tiles.Brick;
+import com.svalentino.tiles.Cement;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.CoinBlock;
 import com.svalentino.tiles.Ground;
@@ -38,7 +39,6 @@ public class WorldRenderer implements Disposable {
         timeElapsed = 0;
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
-        this.goombas = new ArrayList<>();
         constructWorld();
         world.setContactListener(new GameContactListener());
     }
@@ -98,11 +98,18 @@ public class WorldRenderer implements Disposable {
         constructCoinBlocks();
         constructCoins();
         constructGoombas();
+        constructCement();
     }
 
     private void constructGoombas() {
-        goombas.add(new Goomba(this, MarioGame.TILE_LENGTH * 8 * MarioGame.SCALE,
-                MarioGame.TILE_LENGTH * MarioGame.SCALE));
+        goombas = new ArrayList<>();
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            goombas.add(new Goomba(this, rect.getX() * MarioGame.SCALE,
+                    rect.getY() * MarioGame.SCALE));
+        }
     }
 
     private void constructGround() {
@@ -129,6 +136,15 @@ public class WorldRenderer implements Disposable {
         for (RectangleMapObject obj : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             new CoinBlock(this, rect);
+        }
+    }
+
+    public void constructCement() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new Cement(this, rect);
         }
     }
 

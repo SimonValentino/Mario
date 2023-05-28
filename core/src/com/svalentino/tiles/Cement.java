@@ -4,10 +4,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
-public class Ground extends PhysicalObject {
-    public Ground(WorldRenderer wr, Rectangle hitbox) {
+public class Cement extends PhysicalObject {
+    public Cement(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
         fixture.setUserData(this);
-        setCategory(MarioGame.GROUND_COL);
+        setCategory(MarioGame.CEMENT_COL);
     }
 }

@@ -34,7 +34,17 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
+        if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
+            if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
+                Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
+                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
+
+                Coin c = (Coin) colFixture.getUserData();
+                c.hitMarioFeet();
+            }
+        }
+
+        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
@@ -44,9 +54,17 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        else if (col == (MarioGame.ENEMY_COL | MarioGame.PIPE_COL) ||
-                col == (MarioGame.ENEMY_COL | MarioGame.GROUND_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+        if (col == (MarioGame.ENEMY_COL | MarioGame.PIPE_COL) ||
+                col == (MarioGame.ENEMY_COL | MarioGame.CEMENT_COL) ||
+                col == (MarioGame.ENEMY_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL &&
+                fixtureB.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+                Enemy enemy1 = (Enemy) fixtureA.getUserData();
+                Enemy enemy2 = (Enemy) fixtureB.getUserData();
+                enemy1.reverse();
+                enemy2.reverse();
+            }
+            else if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
                 enemy.reverse();
             } else {
@@ -55,14 +73,9 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        else if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
-            if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
-                Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
-                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
+        // mario hits enemy
+        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
 
-                Coin c = (Coin) colFixture.getUserData();
-                c.hitMarioFeet();
-            }
         }
     }
 

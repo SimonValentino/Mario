@@ -28,16 +28,12 @@ public class Goomba extends Enemy {
         hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
-        fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.BRICK_COL |
+        fixtureDef.filter.maskBits = MarioGame.CEMENT_COL | MarioGame.BRICK_COL |
                 MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL | MarioGame.PIPE_COL
-                | MarioGame.MARIO_COL;
+                | MarioGame.MARIO_COL | MarioGame.GROUND_COL;
 
         fixtureDef.shape = hitbox;
         body.createFixture(fixtureDef).setUserData(this);
-
-//        EdgeShape head = new EdgeShape();
-//        head.set(new Vector2((-goombaWidth / 2f) * MarioGame.SCALE, (goombaHeight + 0.1f) * MarioGame.SCALE),
-//        new Vector2((goombaWidth / 2f) * MarioGame.SCALE, (goombaHeight + 0.1f) * MarioGame.SCALE));
 
         PolygonShape head = new PolygonShape();
         Vector2[] vericies = new Vector2[4];
@@ -72,13 +68,5 @@ public class Goomba extends Enemy {
     @Override
     public void receiveHit() {
         hasDied = true;
-    }
-
-    private boolean isBelowMaxSpeedRight() {
-        return body.getLinearVelocity().x < goombaMaxSpeed;
-    }
-
-    private boolean isBelowMaxSpeedLeft() {
-        return body.getLinearVelocity().y > -goombaMaxSpeed;
     }
 }

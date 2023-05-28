@@ -40,7 +40,7 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
                 | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.PIPE_COL
-                | MarioGame.ENEMY_HEAD_COL;
+                | MarioGame.ENEMY_HEAD_COL | MarioGame.CEMENT_COL;
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef);
@@ -56,6 +56,7 @@ public class Mario extends Sprite implements Disposable {
         bottom.set(new Vector2((-marioHeight / 2f) * MarioGame.SCALE, (-marioHeight - 0.1f) * MarioGame.SCALE),
                 new Vector2((marioHeight / 2f) * MarioGame.SCALE, ((-marioHeight - 0.1f)) * MarioGame.SCALE));
         fixtureDef.shape = bottom;
+        fixtureDef.isSensor = true;
         mario.createFixture(fixtureDef).setUserData("feet");
     }
 
