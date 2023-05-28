@@ -46,7 +46,7 @@ public class Goomba extends Enemy {
         vericies[2] = new Vector2(-7, 3).scl(MarioGame.SCALE);
         vericies[3] = new Vector2(7, 3).scl(MarioGame.SCALE);
         head.set(vericies);
-        
+
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         // How much mario will bounce up

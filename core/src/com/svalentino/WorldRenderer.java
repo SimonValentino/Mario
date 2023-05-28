@@ -29,7 +29,7 @@ public class WorldRenderer implements Disposable {
     private TiledMap map;
     private Mario mario = new Mario(this);
     public float timeElapsed;
-    
+
     private OrthogonalTiledMapRenderer renderer;
 
     private List<Goomba> goombas;
