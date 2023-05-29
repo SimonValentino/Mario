@@ -1,9 +1,11 @@
 package com.svalentino.characters;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.svalentino.SoundManager;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
@@ -70,5 +72,7 @@ public class Goomba extends Enemy {
     public void receiveHit() {
         hasDied = true;
         GameHud.updateScore(300);
+        SoundManager.GOOMBA_DEATH_SOUND.play();
+
     }
 }
