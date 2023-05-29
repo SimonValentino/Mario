@@ -1,14 +1,13 @@
 package com.svalentino.tiles;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
+import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
 
 public class Coin extends PhysicalObject implements InteractableObject {
-    private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/coin.wav"));
 
     public Coin(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);
@@ -24,7 +23,7 @@ public class Coin extends PhysicalObject implements InteractableObject {
         getCell().setTile(null);
         GameHud.updateScore(200);
         GameHud.updateCoins();
-        coinSound.play(10f);
+        SoundManager.COIN_SOUND.play();
     }
 
     public void hitMarioFeet() {

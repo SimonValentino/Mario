@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -27,7 +26,7 @@ public class GameHud implements Disposable {
     private int numLives;
 
     private static int coins;
-    final private int timeInLevel = 100;
+    final private int timeInLevel = 30;
 
     private Label numLivesLabel;
 

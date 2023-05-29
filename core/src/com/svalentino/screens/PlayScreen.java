@@ -20,7 +20,6 @@ Any screen class should implement Screen.
 public class PlayScreen implements Screen {
     private final MarioGame game;
 
-    private float elapsed;
 
 
     private final OrthographicCamera camera;
@@ -73,19 +72,6 @@ public class PlayScreen implements Screen {
         // getting the hud's camera
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-
-        if(hud.getNumLives() <= 0) {
-            SoundManager.SPED_UP_THEME_SONG.stop();
-            SoundManager.DEATH_SOUND.play();
-            elapsed += Gdx.graphics.getDeltaTime();
-            game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
-            game.setScreen(new GameOverScreen(game));
-        }
-        if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
-            SoundManager.THEME_SONG.stop();
-            SoundManager.SPED_UP_THEME_SONG.setVolume(0.15f);
-            SoundManager.SPED_UP_THEME_SONG.play();
-        }
     }
 
     /*
@@ -134,7 +120,6 @@ public class PlayScreen implements Screen {
         if(hud.getNumLives() <= 0) {
             SoundManager.SPED_UP_THEME_SONG.stop();
             SoundManager.DEATH_SOUND.play();
-            elapsed += Gdx.graphics.getDeltaTime();
             game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }

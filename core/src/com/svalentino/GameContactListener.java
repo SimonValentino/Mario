@@ -72,9 +72,6 @@ public class GameContactListener implements ContactListener {
         }
 
         // mario hits enemy
-        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
-
-        }
     }
 
     /*

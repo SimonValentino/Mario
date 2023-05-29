@@ -1,6 +1,5 @@
 package com.svalentino.characters;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -38,12 +37,12 @@ public class Goomba extends Enemy {
         body.createFixture(fixtureDef).setUserData(this);
 
         PolygonShape head = new PolygonShape();
-        Vector2[] vericies = new Vector2[4];
-        vericies[0] = new Vector2(-5.5f, 10).scl(MarioGame.SCALE);
-        vericies[1] = new Vector2(5.5f, 10).scl(MarioGame.SCALE);
-        vericies[2] = new Vector2(-5.5f, 3).scl(MarioGame.SCALE);
-        vericies[3] = new Vector2(5.5f, 3).scl(MarioGame.SCALE);
-        head.set(vericies);
+        Vector2[] vertices = new Vector2[4];
+        vertices[0] = new Vector2(-5.5f, 10).scl(MarioGame.SCALE);
+        vertices[1] = new Vector2(5.5f, 10).scl(MarioGame.SCALE);
+        vertices[2] = new Vector2(-5.5f, 3).scl(MarioGame.SCALE);
+        vertices[3] = new Vector2(5.5f, 3).scl(MarioGame.SCALE);
+        head.set(vertices);
 
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;

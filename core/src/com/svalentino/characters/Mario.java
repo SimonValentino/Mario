@@ -81,9 +81,7 @@ public class Mario extends Sprite implements Disposable {
         mario.setTransform(new Vector2(5f, 5f), mario.getAngle());
     }
     public boolean isDead() {
-        if(getYCoordinate() <= -8 || GameHud.worldTimer <= 3)
-            return true;
-        return false;
+        return getYCoordinate() <= -8 || GameHud.worldTimer <= 3;
     }
     public float getXCoordinate() {
         return mario.getWorldCenter().x;

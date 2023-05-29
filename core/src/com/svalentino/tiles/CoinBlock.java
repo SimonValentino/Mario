@@ -1,8 +1,6 @@
 package com.svalentino.tiles;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import com.svalentino.GameHud;
@@ -28,7 +26,7 @@ public class CoinBlock extends PhysicalObject implements InteractableObject {
         if (isBlankBlock())
             SoundManager.BLANK_BLOCK_SOUND.play();
         else
-            SoundManager.COIN_BLOCK_SOUND.play();
+            SoundManager.COIN_SOUND.play();
 
         getCell().setTile(tileset.getTile(28));
         GameHud.updateScore(200);
