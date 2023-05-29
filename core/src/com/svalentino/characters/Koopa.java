@@ -4,21 +4,22 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 
-public class Goomba extends Enemy {
+public class Koopa extends Enemy {
+    public boolean isShell = false;
 
-    private final float goombaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
-    private final float goombaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
+    private final float koopaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
+    private final float koopaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
     private boolean isDead = false;
     private boolean hasDied = false;
+    private float timeInState = 0.0f;
 
-    public Goomba(WorldRenderer worldRenderer, float x, float y) {
+    public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
-        movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
+        movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(getX(), getY());
@@ -27,7 +28,7 @@ public class Goomba extends Enemy {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
+        hitbox.setAsBox(koopaWidth * MarioGame.SCALE, koopaHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
         fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.BRICK_COL |
@@ -54,15 +55,13 @@ public class Goomba extends Enemy {
     }
 
     @Override
-    public void dispose() {
-
-    }
-
-    @Override
     public void update(float dt) {
-        if (hasDied && !isDead) {
-            world.destroyBody(body);
-            isDead = true;
+        timeInState += dt;
+
+        if (isShell && timeInState > 5) {
+            isShell = false;
+            movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
+            timeInState = 0;
         }
 
         body.setLinearVelocity(movement);
@@ -70,7 +69,15 @@ public class Goomba extends Enemy {
 
     @Override
     public void receiveHit() {
-        hasDied = true;
-        GameHud.updateScore(300);
+        if (!isShell) {
+            isShell = true;
+            movement = new Vector2(0, 0);
+            timeInState = 0;
+        }
+    }
+
+    @Override
+    public void dispose() {
+
     }
 }

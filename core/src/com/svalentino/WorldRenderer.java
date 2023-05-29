@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.characters.Goomba;
+import com.svalentino.characters.Koopa;
 import com.svalentino.characters.Mario;
 import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.DefaultTile;
@@ -32,6 +33,7 @@ public class WorldRenderer implements Disposable {
     private OrthogonalTiledMapRenderer renderer;
 
     private List<Goomba> goombas;
+    private List<Koopa> koopas;
 
     public WorldRenderer(TiledMap map) {
         timeElapsed = 0;
@@ -57,7 +59,7 @@ public class WorldRenderer implements Disposable {
         getInput(delta);
 
         for (Goomba goomba : goombas)
-            goomba.update();
+            goomba.update(delta);
 
         world.step(1 / 60f, 6, 6);
 
@@ -96,6 +98,7 @@ public class WorldRenderer implements Disposable {
         constructCoins();
         constructGoombas();
         constructCementAndPipes();
+        constructKoopas();
     }
 
     private void constructGoombas() {
@@ -105,6 +108,17 @@ public class WorldRenderer implements Disposable {
         for (RectangleMapObject obj : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             goombas.add(new Goomba(this, rect.getX() * MarioGame.SCALE,
+                    rect.getY() * MarioGame.SCALE));
+        }
+    }
+
+    private void constructKoopas() {
+        koopas = new ArrayList<>();
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            koopas.add(new Koopa(this, rect.getX() * MarioGame.SCALE,
                     rect.getY() * MarioGame.SCALE));
         }
     }
