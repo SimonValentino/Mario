@@ -39,12 +39,12 @@ public class Koopa extends Enemy {
         body.createFixture(fixtureDef).setUserData(this);
 
         PolygonShape head = new PolygonShape();
-        Vector2[] vericies = new Vector2[4];
-        vericies[0] = new Vector2(-5.5f, 9).scl(MarioGame.SCALE);
-        vericies[1] = new Vector2(5.5f, 9).scl(MarioGame.SCALE);
-        vericies[2] = new Vector2(-5.5f, 3).scl(MarioGame.SCALE);
-        vericies[3] = new Vector2(5.5f, 3).scl(MarioGame.SCALE);
-        head.set(vericies);
+        Vector2[] vertice = new Vector2[4];
+        vertice[0] = new Vector2(-5f, 8).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(5f, 8).scl(MarioGame.SCALE);
+        vertice[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
+        vertice[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
+        head.set(vertice);
 
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
