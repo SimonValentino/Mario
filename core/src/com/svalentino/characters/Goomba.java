@@ -39,8 +39,8 @@ public class Goomba extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5f, 8).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(5f, 8).scl(MarioGame.SCALE);
+        vertice[0] = new Vector2(-6f, 11).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(6f, 11).scl(MarioGame.SCALE);
         vertice[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
         vertice[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
         head.set(vertice);
@@ -49,7 +49,7 @@ public class Goomba extends Enemy {
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
         // How much mario will bounce up
-        fixtureDef.restitution = 0.75f;
+        fixtureDef.restitution = 0.9f;
         body.createFixture(fixtureDef).setUserData(this);
     }
 
