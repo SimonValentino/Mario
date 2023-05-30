@@ -47,7 +47,7 @@ public class GameOverScreen implements Screen {
         table.setFillParent(true);
 
         Label gameOverLabel = new Label("GAME OVER", font);
-        Label restartLabel = new Label("Press L to play again", font);
+        Label restartLabel = new Label("Press R to play again", font);
 
         table.add(gameOverLabel).expandX();
         table.row();
@@ -61,7 +61,7 @@ public class GameOverScreen implements Screen {
     }
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             game.setScreen(new PlayScreen(game));
             game.playThemeSong();
         }

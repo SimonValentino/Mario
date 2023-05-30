@@ -75,7 +75,8 @@ public class WorldRenderer implements Disposable {
                 hud.setNumLives(newLives);
                 hud.updateLives();
                 hud.resetWorldTimer();
-                mario.die(); 
+                mario.die();
+                mario.isDead = false;
                 SoundManager.THEME_SONG.play();
                 timeElapsed = 0;
             }

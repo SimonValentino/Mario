@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
+import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
 
 public class Goomba extends Enemy {
@@ -71,6 +72,7 @@ public class Goomba extends Enemy {
     @Override
     public void receiveHit() {
         hasDied = true;
+        SoundManager.GOOMBA_DEATH_SOUND.play();
         GameHud.updateScore(300);
     }
 }
