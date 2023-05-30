@@ -72,6 +72,8 @@ public class GameContactListener implements ContactListener {
         if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
             Mario.isDead = true;
         }
+
+        // mario hits enemy
     }
 
     /*
