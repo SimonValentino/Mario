@@ -70,9 +70,7 @@ public class GameContactListener implements ContactListener {
             }
         }
         if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
-                Mario.isDead = true;
-            }
+            Mario.isDead = true;
         }
 
         // mario hits enemy

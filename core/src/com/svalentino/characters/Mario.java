@@ -62,6 +62,10 @@ public class Mario extends Sprite implements Disposable {
         mario.createFixture(fixtureDef).setUserData("feet");
     }
 
+    public void die() {
+        resetPosition();
+    }
+
     public void jump() {
         if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
