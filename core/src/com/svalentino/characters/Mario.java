@@ -16,6 +16,7 @@ import com.svalentino.GameHud;
 public class Mario extends Sprite implements Disposable {
     private final World world;
     private Body mario;
+    public static boolean isDead;
 
     // Body dimensions
     public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
@@ -25,6 +26,7 @@ public class Mario extends Sprite implements Disposable {
     // Sounds
 
     public Mario(WorldRenderer worldRenderer) {
+        this.isDead = false;
         this.world = worldRenderer.getWorld();
 
         BodyDef bodyDef = new BodyDef();
@@ -81,7 +83,7 @@ public class Mario extends Sprite implements Disposable {
         mario.setTransform(new Vector2(5f, 5f), mario.getAngle());
     }
     public boolean isDead() {
-        return getYCoordinate() <= -8 || GameHud.worldTimer <= 3;
+        return getYCoordinate() <= -8 || GameHud.worldTimer <= 3 || isDead;
     }
     public float getXCoordinate() {
         return mario.getWorldCenter().x;
