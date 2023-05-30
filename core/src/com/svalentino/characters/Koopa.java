@@ -40,8 +40,8 @@ public class Koopa extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5f, 8).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(5f, 8).scl(MarioGame.SCALE);
+        vertice[0] = new Vector2(-6f, 11).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(6f, 11).scl(MarioGame.SCALE);
         vertice[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
         vertice[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
         head.set(vertice);
