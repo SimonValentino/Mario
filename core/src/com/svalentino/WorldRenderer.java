@@ -61,6 +61,9 @@ public class WorldRenderer implements Disposable {
         for (Goomba goomba : goombas)
             goomba.update(delta);
 
+        for (Koopa koopa : koopas)
+            koopa.update(delta);
+
         world.step(1 / 60f, 6, 6);
 
 

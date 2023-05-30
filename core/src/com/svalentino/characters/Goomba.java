@@ -72,7 +72,7 @@ public class Goomba extends Enemy {
     @Override
     public void receiveHit() {
         hasDied = true;
-        SoundManager.GOOMBA_DEATH_SOUND.play();
+        SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);
     }
 }

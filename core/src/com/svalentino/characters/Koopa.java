@@ -4,17 +4,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
+import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
 
 public class Koopa extends Enemy {
-    public boolean isShell = false;
 
     private final float koopaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
     private final float koopaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
-    private boolean isDead = false;
-    private boolean hasDied = false;
-    private float timeInState = 0.0f;
+
+    private boolean isShell = false;
+    private float stateTime = 0.0f;
 
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
@@ -39,30 +40,35 @@ public class Koopa extends Enemy {
         body.createFixture(fixtureDef).setUserData(this);
 
         PolygonShape head = new PolygonShape();
-        Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-6f, 11).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(6f, 11).scl(MarioGame.SCALE);
-        vertice[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
-        vertice[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
-        head.set(vertice);
+        Vector2[] vertices = new Vector2[4];
+        vertices[0] = new Vector2(-6f, 11).scl(MarioGame.SCALE);
+        vertices[1] = new Vector2(6f, 11).scl(MarioGame.SCALE);
+        vertices[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
+        vertices[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
+        head.set(vertices);
 
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
         // How much mario will bounce up
-        fixtureDef.restitution = 0.75f;
+        fixtureDef.restitution = 0.9f;
         body.createFixture(fixtureDef).setUserData(this);
     }
 
     @Override
-    public void update(float dt) {
-        timeInState += dt;
+    public void dispose() {
 
-        if (isShell && timeInState > 5) {
+    }
+
+    @Override
+    public void update(float dt) {
+        stateTime += dt;
+
+        if (isShell && stateTime > 3) {
             isShell = false;
             movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
-            timeInState = 0;
-        }
+            stateTime = 0f;
+         }
 
         body.setLinearVelocity(movement);
     }
@@ -71,13 +77,11 @@ public class Koopa extends Enemy {
     public void receiveHit() {
         if (!isShell) {
             isShell = true;
-            movement = new Vector2(0, 0);
-            timeInState = 0;
+            movement = new Vector2(0f, 0f);
+            stateTime = 0f;
         }
-    }
 
-    @Override
-    public void dispose() {
-
+        SoundManager.ENEMY_HIT_SOUND.play();
+        GameHud.updateScore(300);
     }
 }
