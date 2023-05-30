@@ -20,6 +20,8 @@ Any screen class should implement Screen.
 public class PlayScreen implements Screen {
     private final MarioGame game;
 
+
+
     private final OrthographicCamera camera;
     private final Viewport vport;
 
@@ -69,10 +71,6 @@ public class PlayScreen implements Screen {
         // setup where the batch will project to
         // getting the hud's camera
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        game.batch.begin();
-        worldRenderer.getMario().draw(game.batch);
-        game.batch.end();
-
         hud.stage.draw();
     }
 

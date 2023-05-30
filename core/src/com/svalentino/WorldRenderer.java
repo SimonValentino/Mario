@@ -6,7 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -31,15 +30,12 @@ public class WorldRenderer implements Disposable {
     private Mario mario = new Mario(this);
     public float timeElapsed;
 
-    private TextureAtlas sprites;
-
     private OrthogonalTiledMapRenderer renderer;
 
     private List<Goomba> goombas;
     private List<Koopa> koopas;
 
     public WorldRenderer(TiledMap map) {
-        sprites = new TextureAtlas("sprites.txt");
         timeElapsed = 0;
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
@@ -183,14 +179,6 @@ public class WorldRenderer implements Disposable {
 
     public TiledMap getMap() {
         return map;
-    }
-
-    public TextureAtlas getSprites() {
-        return sprites;
-    }
-
-    public Mario getMario() {
-        return mario;
     }
 
     @Override
