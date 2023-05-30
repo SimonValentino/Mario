@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.svalentino.characters.Enemy;
+import com.svalentino.characters.Koopa;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.InteractableObject;
 import com.svalentino.characters.Mario;
@@ -39,13 +40,14 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        if (InteractableObject.class.isAssignableFrom(fixtureA.getUserData().getClass()) ||
-                InteractableObject.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
-            if (fixtureA.getUserData().equals("head") || fixtureB.getUserData().equals("head")) {
-                Fixture marioFeet = fixtureA.getUserData().equals("head") ? fixtureA : fixtureB;
-                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
-
-                InteractableObject obj = (InteractableObject) colFixture.getUserData();
+        if (col == (MarioGame.MARIO_HEAD_COL | MarioGame.BRICK_COL) ||
+                col == (MarioGame.MARIO_HEAD_COL | MarioGame.COIN_BLOCK_COL) ||
+                col == (MarioGame.MARIO_HEAD_COL | MarioGame.COIN_COl)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_HEAD_COL) {
+                InteractableObject obj = (InteractableObject) fixtureB.getUserData();
+                obj.hitMarioHead();
+            } else {
+                InteractableObject obj = (InteractableObject) fixtureA.getUserData();
                 obj.hitMarioHead();
             }
         }
@@ -70,7 +72,15 @@ public class GameContactListener implements ContactListener {
             }
         }
         if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
-            Mario.isDead = true;
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                if (fixtureB.getUserData() instanceof Koopa) {
+                    Koopa koopa = (Koopa) fixtureB.getUserData();
+                    if (koopa.isShell())
+                        koopa.receiveHit();
+                }
+            } else {
+                Mario.isDead = true;
+            }
         }
 
         // mario hits enemy

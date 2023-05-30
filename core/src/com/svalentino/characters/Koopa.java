@@ -10,16 +10,19 @@ import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
 
 public class Koopa extends Enemy {
+    private WorldRenderer wr;
 
     private final float koopaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
     private final float koopaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
 
     private boolean isShell = false;
+    private boolean isMovingShell = false;
     private float stateTime = 0.0f;
 
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
+        wr = worldRenderer;
         movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
 
         BodyDef bodyDef = new BodyDef();
@@ -77,11 +80,28 @@ public class Koopa extends Enemy {
     public void receiveHit() {
         if (!isShell) {
             isShell = true;
+            isMovingShell = false;
             movement = new Vector2(0f, 0f);
+            stateTime = 0f;
+        } else {
+            kickShell(wr.getMarioX() <= this.getX());
+            isShell = false;
+            isMovingShell = true;
             stateTime = 0f;
         }
 
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);
+    }
+
+    private void kickShell(boolean kickingLeft) {
+        if (kickingLeft)
+            movement = new Vector2(-10f, 0f);
+        else
+            movement = new Vector2(10f, 0f);
+    }
+
+    public boolean isShell() {
+        return isShell;
     }
 }
