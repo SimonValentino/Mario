@@ -8,11 +8,10 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.svalentino.characters.Enemy;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.InteractableObject;
+import com.svalentino.characters.Mario;
 
 public class GameContactListener implements ContactListener {
-    /*
-    called when two fixtures begin to collide
-     */
+
     @Override
     public void beginContact(Contact contact) {
         Fixture fixtureA = contact.getFixtureA();
@@ -68,6 +67,11 @@ public class GameContactListener implements ContactListener {
             } else {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
                 enemy.receiveHit();
+            }
+        }
+        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Mario.isDead = true;
             }
         }
 
