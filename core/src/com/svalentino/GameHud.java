@@ -82,12 +82,15 @@ public class GameHud implements Disposable {
     Init all the labels as white.
      */
     public void update(float dt) {
+        
         timeCount += dt;
         if(timeCount >= 1 ) {
-            worldTimer--;
-            String strWorldTimer = Integer.toString(worldTimer);
-            countdownLabel.setText(String.format("%0" + strWorldTimer.length() + "d", worldTimer));
-            timeCount = 0;
+            if(worldTimer >= 3.5) {
+                worldTimer--;
+                String strWorldTimer = Integer.toString(worldTimer - 3);
+                countdownLabel.setText(String.format("%0" + strWorldTimer.length() + "d", worldTimer - 3));
+                timeCount = 0;
+            }
         }
 
         if(worldTimer <= 0) {
