@@ -24,4 +24,8 @@ public abstract class Enemy extends Sprite implements Disposable {
     public void reverse() {
         movement.x = -movement.x;
     }
+
+    public Body getBody() {
+        return body;
+    }
 }

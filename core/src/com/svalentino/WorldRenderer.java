@@ -68,6 +68,7 @@ public class WorldRenderer implements Disposable {
 
 
         if(mario.isDead()) {
+            freeze();
             timeElapsed += delta;
             SoundManager.THEME_SONG.stop();
             SoundManager.SPED_UP_THEME_SONG.stop();
@@ -79,9 +80,10 @@ public class WorldRenderer implements Disposable {
                 hud.updateLives();
                 hud.resetWorldTimer();
                 mario.die();
-                mario.isDead = false;
+                mario.setDead(false);
                 SoundManager.THEME_SONG.play();
                 timeElapsed = 0;
+                unfreeze();
             }
         }
     }
@@ -93,6 +95,22 @@ public class WorldRenderer implements Disposable {
             mario.moveRight();
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
             mario.moveLeft();
+    }
+
+    private void freeze() {
+        for (Goomba goomba : goombas)
+            goomba.getBody().setActive(false);
+        for (Koopa koopa : koopas)
+            koopa.getBody().setActive(false);
+        mario.getBody().setActive(false);
+    }
+
+    private void unfreeze() {
+        for (Goomba goomba : goombas)
+            goomba.getBody().setActive(true);
+        for (Koopa koopa : koopas)
+            koopa.getBody().setActive(true);
+        mario.getBody().setActive(true);
     }
 
     private void constructWorld() {

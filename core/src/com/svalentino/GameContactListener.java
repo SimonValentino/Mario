@@ -72,14 +72,20 @@ public class GameContactListener implements ContactListener {
             }
         }
         if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
-                if (fixtureB.getUserData() instanceof Koopa) {
-                    Koopa koopa = (Koopa) fixtureB.getUserData();
-                    if (koopa.isShell())
-                        koopa.receiveHit();
-                }
+            if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).isShell()) {
+                Koopa koopa = (Koopa) fixtureB.getUserData();
+                koopa.receiveHit();
+            } else if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).isShell()) {
+                Koopa koopa = (Koopa) fixtureA.getUserData();
+                koopa.receiveHit();
             } else {
-                Mario.isDead = true;
+                if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                    Mario mario = (Mario) fixtureA.getUserData();
+                    mario.setDead(true);
+                } else {
+                    Mario mario = (Mario) fixtureB.getUserData();
+                    mario.setDead(true);
+                }
             }
         }
 
