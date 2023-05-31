@@ -29,7 +29,7 @@ public class WorldRenderer implements Disposable {
     private TiledMap map;
     private Mario mario = new Mario(this);
     public float timeElapsed;
-
+    
     private OrthogonalTiledMapRenderer renderer;
 
     private List<Goomba> goombas;
@@ -81,9 +81,14 @@ public class WorldRenderer implements Disposable {
                 hud.resetWorldTimer();
                 mario.die();
                 mario.setDead(false);
-                SoundManager.THEME_SONG.play();
-                timeElapsed = 0;
-                unfreeze();
+                if(hud.getNumLives() > 0) {
+                    SoundManager.THEME_SONG.play();
+                    timeElapsed = 0;
+                    unfreeze();
+                }
+                else {
+                    SoundManager.GAME_OVER_SOUND.play();
+                }
             }
         }
     }
