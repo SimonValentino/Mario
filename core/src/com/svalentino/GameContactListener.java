@@ -73,11 +73,13 @@ public class GameContactListener implements ContactListener {
         }
         if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
             if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).isShell()) {
+                Mario mario = (Mario) fixtureB.getUserData();
                 Koopa koopa = (Koopa) fixtureB.getUserData();
-                koopa.receiveHit();
+                koopa.kickShell(mario.getXCoordinate() <= koopa.getOriginX());
             } else if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).isShell()) {
                 Koopa koopa = (Koopa) fixtureA.getUserData();
-                koopa.receiveHit();
+                Mario mario = (Mario) fixtureB.getUserData();
+                koopa.kickShell(mario.getXCoordinate() <= koopa.getOriginX());
             } else {
                 if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                     Mario mario = (Mario) fixtureA.getUserData();

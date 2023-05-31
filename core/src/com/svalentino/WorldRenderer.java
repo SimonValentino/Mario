@@ -84,6 +84,7 @@ public class WorldRenderer implements Disposable {
                 SoundManager.THEME_SONG.play();
                 timeElapsed = 0;
                 unfreeze();
+                resetEnemies();
             }
         }
     }
@@ -111,6 +112,15 @@ public class WorldRenderer implements Disposable {
         for (Koopa koopa : koopas)
             koopa.getBody().setActive(true);
         mario.getBody().setActive(true);
+    }
+
+    private void resetEnemies() {
+        for (Goomba goomba : goombas)
+            world.destroyBody(goomba.getBody());
+        for (Koopa koopa : koopas)
+            world.destroyBody(koopa.getBody());
+        constructGoombas();
+        constructKoopas();
     }
 
     private void constructWorld() {
