@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -31,11 +32,15 @@ public class WorldRenderer implements Disposable {
     public float timeElapsed;
     
     private OrthogonalTiledMapRenderer renderer;
-
+    private Texture texture;
     private List<Goomba> goombas;
     private List<Koopa> koopas;
+    
 
     public WorldRenderer(TiledMap map) {
+        texture = new Texture(Gdx.files.absolute("C:/Users/MJeyakumar2025/OneDrive - amsacs.org/Documents/AP CS Final Project/Mario/assets/Downloads/Mario_and_Enemies.png"));
+        MarioGame.batch.begin();
+        MarioGame.batch.draw(texture, 10, 10);
         timeElapsed = 0;
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);

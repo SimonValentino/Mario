@@ -40,7 +40,7 @@ public class MarioGame extends Game {
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it
-	public SpriteBatch batch;
+	public static SpriteBatch batch;
 
 	/*
 	init sprite bach and set the screen to PlayScreen
