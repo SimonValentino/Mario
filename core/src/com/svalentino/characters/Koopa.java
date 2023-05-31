@@ -94,7 +94,7 @@ public class Koopa extends Enemy {
         GameHud.updateScore(300);
     }
 
-    private void kickShell(boolean kickingLeft) {
+    public void kickShell(boolean kickingLeft) {
         if (kickingLeft)
             movement = new Vector2(-10f, 0f);
         else
