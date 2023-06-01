@@ -21,8 +21,6 @@ public class CoinBlock extends PhysicalObject implements InteractableObject {
 
     @Override
     public void hitMarioHead() {
-        Gdx.app.log("Coin Block", "Collision");
-
         if (isBlankBlock())
             SoundManager.BLANK_BLOCK_SOUND.play();
         else

@@ -39,11 +39,10 @@ public class WorldRenderer implements Disposable {
 
     private TextureRegion texture;
     private TextureAtlas textureAtlas;
-    
+
 
     public WorldRenderer(TiledMap map) {
-        //texture = new Texture(Gdx.files.absolute("C:/Users/MJeyakumar2025/OneDrive - amsacs.org/Documents/AP CS Final Project/Mario/assets/Downloads/Mario_and_Enemies.png"));
-        timeElapsed = 0;
+
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructWorld();
@@ -56,18 +55,20 @@ public class WorldRenderer implements Disposable {
 
     public void render() {
         renderer.render();
-        MarioGame.batch.begin();
-        MarioGame.batch.draw(texture, 10, 10);
-        MarioGame.batch.end();
+//        MarioGame.batch.draw(texture, 100, 10);
+//        MarioGame.batch.end();
     }
 
     public void setView(OrthographicCamera camera) {
         renderer.setView(camera);
     }
 
-    public void updateWorld(float delta, GameHud hud) {
+    public void updateWorld(float delta, GameHud hud, SpriteManager spriteManager) {
         getInput(delta);
-
+       // spriteManager.update(delta, mario.getXCoordinate(), mario.getYCoordinate());
+        MarioGame.batch.begin();
+        MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), mario.getXCoordinate(), mario.getYCoordinate());
+        MarioGame.batch.end();
         for (Goomba goomba : goombas)
             goomba.update(delta);
 
@@ -91,7 +92,7 @@ public class WorldRenderer implements Disposable {
                 hud.resetWorldTimer();
                 mario.die();
                 mario.setDead(false);
-                if(hud.getNumLives() > 0) {   
+                if(hud.getNumLives() > 0) {
                     SoundManager.THEME_SONG.play();
                     timeElapsed = 0;
                     unfreeze();

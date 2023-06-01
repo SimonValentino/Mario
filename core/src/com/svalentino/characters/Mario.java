@@ -1,6 +1,7 @@
 package com.svalentino.characters;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -13,6 +14,7 @@ import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
 import com.svalentino.GameHud;
+import com.svalentino.SpriteManager;
 public class Mario extends Sprite implements Disposable {
     private final World world;
     private Body mario;
@@ -27,9 +29,10 @@ public class Mario extends Sprite implements Disposable {
 
     public Mario(WorldRenderer worldRenderer) {
 
-        
         this.isDead = false;
         this.world = worldRenderer.getWorld();
+
+
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((marioWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
@@ -65,7 +68,9 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.filter.categoryBits = MarioGame.MARIO_HEAD_COL;
         mario.createFixture(fixtureDef).setUserData(this);
     }
-
+    public void update(float dt) {
+        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
+    }
     public void die() {
         resetPosition();
     }

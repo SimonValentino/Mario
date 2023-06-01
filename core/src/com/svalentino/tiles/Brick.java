@@ -18,7 +18,7 @@ public class Brick extends PhysicalObject implements InteractableObject {
 
     @Override
     public void hitMarioHead() {
-        Gdx.app.log("Brick", "Collision");
+
         setCategory(MarioGame.DESTROYED_COL);
         getCell().setTile(null);
         GameHud.updateScore(50);

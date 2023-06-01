@@ -12,6 +12,7 @@ import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
+import com.svalentino.SpriteManager;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -31,6 +32,8 @@ public class PlayScreen implements Screen {
     private final WorldRenderer worldRenderer;
     private final Box2DDebugRenderer box2DRenderer;
 
+    private final SpriteManager spriteManager;
+
 
     public PlayScreen(MarioGame game) {
 
@@ -40,7 +43,7 @@ public class PlayScreen implements Screen {
         this.camera = new OrthographicCamera();
         this.vport = new FitViewport(MarioGame.WIDTH * MarioGame.SCALE, MarioGame.HEIGHT * MarioGame.SCALE, camera);
         this.hud = new GameHud(game.batch);
-
+        this.spriteManager = new SpriteManager();
         this.box2DRenderer = new Box2DDebugRenderer();
 
         this.worldRenderer = new WorldRenderer("MarioMap.tmx");
@@ -70,7 +73,6 @@ public class PlayScreen implements Screen {
 
         // setup where the batch will project to
         // getting the hud's camera
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
     }
 
@@ -111,7 +113,7 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
-        worldRenderer.updateWorld(delta, hud);
+        worldRenderer.updateWorld(delta, hud, spriteManager);
         hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
         camera.update();

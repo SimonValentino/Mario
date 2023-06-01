@@ -18,7 +18,6 @@ public class Coin extends PhysicalObject implements InteractableObject {
 
     @Override
     public void hitMarioHead() {
-        Gdx.app.log("Coin", "Collision");
         setCategory(MarioGame.DESTROYED_COL);
         getCell().setTile(null);
         GameHud.updateScore(200);
