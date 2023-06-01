@@ -23,15 +23,24 @@ public class GameContactListener implements ContactListener {
         if (fixtureA.getUserData() == null || fixtureB.getUserData() == null)
             return;
 
-        if (col == (MarioGame.ENEMY_COL | MarioGame.DEFAULT_COL) ||
-                col == (MarioGame.ENEMY_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL &&
-                    fixtureB.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+        if (col == (MarioGame.ENEMY_COL)) {
+            if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).isMovingShell()) {
+                Enemy enemy = (Enemy) fixtureB.getUserData();
+                enemy.receiveHit();
+            } else if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).isMovingShell()) {
+                Enemy enemy = (Enemy) fixtureA.getUserData();
+                enemy.receiveHit();
+            } else {
                 Enemy enemy1 = (Enemy) fixtureA.getUserData();
                 Enemy enemy2 = (Enemy) fixtureB.getUserData();
                 enemy1.reverse();
                 enemy2.reverse();
-            } else if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+            }
+        }
+
+        if (col == (MarioGame.ENEMY_COL | MarioGame.DEFAULT_COL) ||
+                col == (MarioGame.ENEMY_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
                 enemy.reverse();
             } else {
@@ -40,7 +49,7 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        if (col == (MarioGame.MARIO_HEAD_COL | MarioGame.BRICK_COL) ||
+        else if (col == (MarioGame.MARIO_HEAD_COL | MarioGame.BRICK_COL) ||
                 col == (MarioGame.MARIO_HEAD_COL | MarioGame.COIN_BLOCK_COL) ||
                 col == (MarioGame.MARIO_HEAD_COL | MarioGame.COIN_COl)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_HEAD_COL) {
@@ -52,7 +61,7 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
+        else if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
             if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
                 Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
                 Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
@@ -62,7 +71,7 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
+        else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
@@ -71,9 +80,10 @@ public class GameContactListener implements ContactListener {
                 enemy.receiveHit();
             }
         }
-        if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
+
+        else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
             if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).isShell()) {
-                Mario mario = (Mario) fixtureB.getUserData();
+                Mario mario = (Mario) fixtureA.getUserData();
                 Koopa koopa = (Koopa) fixtureB.getUserData();
                 koopa.kickShell(mario.getXCoordinate() <= koopa.getOriginX());
             } else if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).isShell()) {
@@ -90,8 +100,6 @@ public class GameContactListener implements ContactListener {
                 }
             }
         }
-
-        // mario hits enemy
     }
 
     /*

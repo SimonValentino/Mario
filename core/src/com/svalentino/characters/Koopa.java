@@ -67,11 +67,15 @@ public class Koopa extends Enemy {
     public void update(float dt) {
         stateTime += dt;
 
-        if (isShell && stateTime > 3) {
+        if (isMovingShell) {
+            stateTime = 0;
+        }
+
+        else if (isShell && stateTime > 3) {
             isShell = false;
             movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
             stateTime = 0f;
-         }
+        }
 
         body.setLinearVelocity(movement);
     }
@@ -84,7 +88,7 @@ public class Koopa extends Enemy {
             movement = new Vector2(0f, 0f);
             stateTime = 0f;
         } else {
-            kickShell(wr.getMarioX() <= this.getX());
+            kickShell(wr.getMarioX() <= body.getWorldCenter().x);
             isShell = false;
             isMovingShell = true;
             stateTime = 0f;
@@ -103,5 +107,9 @@ public class Koopa extends Enemy {
 
     public boolean isShell() {
         return isShell;
+    }
+
+    public boolean isMovingShell() {
+        return isMovingShell;
     }
 }

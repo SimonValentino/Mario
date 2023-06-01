@@ -38,9 +38,6 @@ public class WorldRenderer implements Disposable {
     
 
     public WorldRenderer(TiledMap map) {
-        texture = new Texture(Gdx.files.absolute("C:/Users/MJeyakumar2025/OneDrive - amsacs.org/Documents/AP CS Final Project/Mario/assets/Downloads/Mario_and_Enemies.png"));
-        MarioGame.batch.begin();
-        MarioGame.batch.draw(texture, 10, 10);
         timeElapsed = 0;
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
