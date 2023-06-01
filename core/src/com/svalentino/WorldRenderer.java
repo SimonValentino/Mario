@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -30,18 +32,19 @@ public class WorldRenderer implements Disposable {
     private TiledMap map;
     private Mario mario = new Mario(this);
     public float timeElapsed;
-    
+
     private OrthogonalTiledMapRenderer renderer;
-    private Texture texture;
     private List<Goomba> goombas;
     private List<Koopa> koopas;
+
+    private TextureRegion texture;
+    private TextureAtlas textureAtlas;
     
 
     public WorldRenderer(TiledMap map) {
-        texture = new Texture(Gdx.files.absolute("C:/Users/MJeyakumar2025/OneDrive - amsacs.org/Documents/AP CS Final Project/Mario/assets/Downloads/Mario_and_Enemies.png"));
-        MarioGame.batch.begin();
-        MarioGame.batch.draw(texture, 10, 10);
-        timeElapsed = 0;
+        textureAtlas = new TextureAtlas(Gdx.files.absolute("C:/Users/MJeyakumar2025/OneDrive - amsacs.org/Documents/AP CS Final Project/Mario/assets/Downloads/Mario_and_Enemies.pack"));
+        texture = textureAtlas.findRegion("small_mario_stand");
+        
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructWorld();
@@ -54,6 +57,9 @@ public class WorldRenderer implements Disposable {
 
     public void render() {
         renderer.render();
+        MarioGame.batch.begin();
+        MarioGame.batch.draw(texture, 10, 10);
+        MarioGame.batch.end();
     }
 
     public void setView(OrthographicCamera camera) {
