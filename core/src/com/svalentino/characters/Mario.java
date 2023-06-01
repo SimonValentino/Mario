@@ -26,6 +26,8 @@ public class Mario extends Sprite implements Disposable {
     // Sounds
 
     public Mario(WorldRenderer worldRenderer) {
+
+        
         this.isDead = false;
         this.world = worldRenderer.getWorld();
 
