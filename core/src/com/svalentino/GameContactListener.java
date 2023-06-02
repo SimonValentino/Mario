@@ -27,14 +27,10 @@ public class GameContactListener implements ContactListener {
         if (col == (MarioGame.ENEMY_COL)) {
             if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).getCurrentState() == KoopaState.MOVING_SHELL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
-                Koopa movingShell = (Koopa) fixtureA.getUserData();
                 enemy.receiveHit();
-                movingShell.reverse();
             } else if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).getCurrentState() == KoopaState.MOVING_SHELL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
-                Koopa movingShell = (Koopa) fixtureB.getUserData();
                 enemy.receiveHit();
-                movingShell.reverse();
             } else {
                 Enemy enemy1 = (Enemy) fixtureA.getUserData();
                 Enemy enemy2 = (Enemy) fixtureB.getUserData();
