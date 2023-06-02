@@ -19,6 +19,9 @@ public class Koopa extends Enemy {
     private KoopaState previousState;
     private float stateTime = 0.0f;
 
+    private boolean isDead = false;
+    private boolean hasDied = false;
+
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
@@ -65,6 +68,11 @@ public class Koopa extends Enemy {
 
     @Override
     public void update(float dt) {
+        if (hasDied && !isDead) {
+            world.destroyBody(body);
+            isDead = true;
+        }
+
         stateTime += dt;
 
         if (currentState == KoopaState.SHELL && stateTime > 4) {
@@ -84,6 +92,13 @@ public class Koopa extends Enemy {
             stateTime = 0f;
         }
 
+        SoundManager.ENEMY_HIT_SOUND.play();
+        GameHud.updateScore(300);
+    }
+
+    @Override
+    public void obliterate() {
+        hasDied = true;
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);
     }

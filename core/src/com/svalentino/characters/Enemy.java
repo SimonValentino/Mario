@@ -22,6 +22,8 @@ public abstract class Enemy extends Sprite implements Disposable {
     public abstract void update(float dt);
     public abstract void receiveHit();
 
+    public abstract void obliterate();
+
     public void reverse() {
         movement.x = -movement.x;
     }

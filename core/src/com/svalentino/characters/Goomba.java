@@ -75,4 +75,11 @@ public class Goomba extends Enemy {
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);
     }
+
+    @Override
+    public void obliterate() {
+        hasDied = true;
+        SoundManager.ENEMY_HIT_SOUND.play();
+        GameHud.updateScore(300);
+    }
 }
