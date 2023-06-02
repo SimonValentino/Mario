@@ -43,7 +43,7 @@ public class WorldRenderer implements Disposable {
 
     public WorldRenderer(TiledMap map) {
         atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
-        mario = new Mario(world, this);
+        mario = new Mario(this);
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructWorld();

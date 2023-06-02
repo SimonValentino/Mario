@@ -27,10 +27,10 @@ public class Mario extends Sprite implements Disposable {
 
     // Sounds
 
-    public Mario(World world, WorldRenderer worldRenderer) {
+    public Mario(WorldRenderer worldRenderer) {
         super(worldRenderer.atlas.findRegion("small_marrio_stand"));
         this.isDead = false;
-        this.world = world;
+        this.world = worldRenderer.getWorld();
 
 
 
