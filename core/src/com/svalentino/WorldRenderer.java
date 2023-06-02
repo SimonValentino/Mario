@@ -30,19 +30,20 @@ public class WorldRenderer implements Disposable {
     private Vector2 gravity = new Vector2(0, -62.5f);
     private World world = new World(gravity, true);
     private TiledMap map;
-    private Mario mario = new Mario(this);
+    private Mario mario;
     public float timeElapsed;
 
+    public TextureAtlas atlas;
     private OrthogonalTiledMapRenderer renderer;
     private List<Goomba> goombas;
     private List<Koopa> koopas;
 
-    private TextureRegion texture;
-    private TextureAtlas textureAtlas;
+    
 
 
     public WorldRenderer(TiledMap map) {
-
+        atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
+        mario = new Mario(world, this);
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructWorld();
@@ -65,9 +66,8 @@ public class WorldRenderer implements Disposable {
 
     public void updateWorld(float delta, GameHud hud, SpriteManager spriteManager) {
         getInput(delta);
-       // spriteManager.update(delta, mario.getXCoordinate(), mario.getYCoordinate());
         MarioGame.batch.begin();
-        MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), mario.getXCoordinate(), mario.getYCoordinate());
+        MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), 50, 10 + delta);
         MarioGame.batch.end();
         for (Goomba goomba : goombas)
             goomba.update(delta);
