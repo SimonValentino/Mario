@@ -101,7 +101,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public float getXCoordinate() {
-        return mario.getWorldCenter().x;
+        return mario.getPosition().x;
     }
 
     public float getYCoordinate() {

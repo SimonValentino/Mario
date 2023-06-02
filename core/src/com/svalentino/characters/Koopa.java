@@ -15,15 +15,15 @@ public class Koopa extends Enemy {
     private final float koopaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
     private final float koopaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
 
-    private boolean isShell = false;
-    private boolean isMovingShell = false;
+    private KoopaState currentState = KoopaState.WALKING;
+    private KoopaState previousState;
     private float stateTime = 0.0f;
 
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
         wr = worldRenderer;
-        movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
+        movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(getX(), getY());
@@ -67,14 +67,10 @@ public class Koopa extends Enemy {
     public void update(float dt) {
         stateTime += dt;
 
-        if (isMovingShell) {
+        if (currentState == KoopaState.SHELL && stateTime > 4) {
+            currentState = KoopaState.WALKING;
+            movement.x = 5f * (Math.random() - 0.5 >= 0 ? 1 : -1);
             stateTime = 0;
-        }
-
-        else if (isShell && stateTime > 3) {
-            isShell = false;
-            movement = new Vector2(3f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
-            stateTime = 0f;
         }
 
         body.setLinearVelocity(movement);
@@ -82,15 +78,9 @@ public class Koopa extends Enemy {
 
     @Override
     public void receiveHit() {
-        if (!isShell) {
-            isShell = true;
-            isMovingShell = false;
-            movement = new Vector2(0f, 0f);
-            stateTime = 0f;
-        } else {
-            kickShell(wr.getMarioX() <= body.getWorldCenter().x);
-            isShell = false;
-            isMovingShell = true;
+        if (currentState != KoopaState.SHELL) {
+            currentState = KoopaState.SHELL;
+            movement.x = 0;
             stateTime = 0f;
         }
 
@@ -100,16 +90,19 @@ public class Koopa extends Enemy {
 
     public void kickShell(boolean kickingLeft) {
         if (kickingLeft)
-            movement = new Vector2(-10f, 0f);
+            movement.x = -10f;
         else
-            movement = new Vector2(10f, 0f);
+            movement.x = 10f;
+
+        currentState = KoopaState.MOVING_SHELL;
+        stateTime = 0;
     }
 
-    public boolean isShell() {
-        return isShell;
+    public KoopaState getCurrentState() {
+        return currentState;
     }
 
-    public boolean isMovingShell() {
-        return isMovingShell;
+    public KoopaState getPreviousState() {
+        return previousState;
     }
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.svalentino.characters.Enemy;
 import com.svalentino.characters.Koopa;
+import com.svalentino.characters.KoopaState;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.InteractableObject;
 import com.svalentino.characters.Mario;
@@ -24,12 +25,16 @@ public class GameContactListener implements ContactListener {
             return;
 
         if (col == (MarioGame.ENEMY_COL)) {
-            if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).isMovingShell()) {
+            if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).getCurrentState() == KoopaState.MOVING_SHELL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
+                Koopa movingShell = (Koopa) fixtureA.getUserData();
                 enemy.receiveHit();
-            } else if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).isMovingShell()) {
+                movingShell.reverse();
+            } else if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).getCurrentState() == KoopaState.MOVING_SHELL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
+                Koopa movingShell = (Koopa) fixtureB.getUserData();
                 enemy.receiveHit();
+                movingShell.reverse();
             } else {
                 Enemy enemy1 = (Enemy) fixtureA.getUserData();
                 Enemy enemy2 = (Enemy) fixtureB.getUserData();
@@ -38,14 +43,33 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        if (col == (MarioGame.ENEMY_COL | MarioGame.DEFAULT_COL) ||
-                col == (MarioGame.ENEMY_COL)) {
+        else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
+            if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).getCurrentState() == KoopaState.SHELL) {
+                Mario mario = (Mario) fixtureA.getUserData();
+                Koopa koopa = (Koopa) fixtureB.getUserData();
+                koopa.kickShell(mario.getXCoordinate() >= koopa.getXCoordinate());
+            } else if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).getCurrentState() == KoopaState.SHELL) {
+                Koopa koopa = (Koopa) fixtureA.getUserData();
+                Mario mario = (Mario) fixtureB.getUserData();
+                koopa.kickShell(mario.getXCoordinate() >= koopa.getXCoordinate());
+            } else {
+                if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                    Mario mario = (Mario) fixtureA.getUserData();
+                    mario.setDead(true);
+                } else {
+                    Mario mario = (Mario) fixtureB.getUserData();
+                    mario.setDead(true);
+                }
+            }
+        }
+
+        if (col == (MarioGame.ENEMY_COL | MarioGame.DEFAULT_COL)) {
             if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
                 enemy.reverse();
             } else {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
-                enemy.receiveHit();
+                enemy.reverse();
             }
         }
 
@@ -78,26 +102,6 @@ public class GameContactListener implements ContactListener {
             } else {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
                 enemy.receiveHit();
-            }
-        }
-
-        else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_COL)) {
-            if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).isShell()) {
-                Mario mario = (Mario) fixtureA.getUserData();
-                Koopa koopa = (Koopa) fixtureB.getUserData();
-                koopa.kickShell(mario.getXCoordinate() <= koopa.getOriginX());
-            } else if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).isShell()) {
-                Koopa koopa = (Koopa) fixtureA.getUserData();
-                Mario mario = (Mario) fixtureB.getUserData();
-                koopa.kickShell(mario.getXCoordinate() <= koopa.getOriginX());
-            } else {
-                if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
-                    Mario mario = (Mario) fixtureA.getUserData();
-                    mario.setDead(true);
-                } else {
-                    Mario mario = (Mario) fixtureB.getUserData();
-                    mario.setDead(true);
-                }
             }
         }
     }

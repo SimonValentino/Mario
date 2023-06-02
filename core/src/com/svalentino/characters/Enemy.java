@@ -21,11 +21,16 @@ public abstract class Enemy extends Sprite implements Disposable {
 
     public abstract void update(float dt);
     public abstract void receiveHit();
+
     public void reverse() {
         movement.x = -movement.x;
     }
 
     public Body getBody() {
         return body;
+    }
+
+    public float getXCoordinate() {
+        return body.getPosition().x;
     }
 }
