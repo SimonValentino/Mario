@@ -92,7 +92,15 @@ public class GameContactListener implements ContactListener {
         }
 
         else if (col == (MarioGame.MARIO_COL | MarioGame.ENEMY_HEAD_COL)) {
-            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+            if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).getCurrentState() == KoopaState.SHELL) {
+                Koopa koopa = (Koopa) fixtureA.getUserData();
+                Mario mario = (Mario) fixtureB.getUserData();
+                koopa.kickShell(mario.getXCoordinate() >= koopa.getXCoordinate());
+            } else if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).getCurrentState() == KoopaState.SHELL) {
+                Koopa koopa = (Koopa) fixtureB.getUserData();
+                Mario mario = (Mario) fixtureA.getUserData();
+                koopa.kickShell(mario.getXCoordinate() >= koopa.getXCoordinate());
+            } else if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
                 enemy.receiveHit();
             } else {
