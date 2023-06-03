@@ -112,6 +112,10 @@ public class GameContactListener implements ContactListener {
                 enemy.receiveHit();
             }
         }
+
+        else if (col == (MarioGame.MARIO_COL | MarioGame.FLAGPOLE_COL)) {
+
+        }
     }
 
     /*

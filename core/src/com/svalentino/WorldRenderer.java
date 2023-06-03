@@ -148,6 +148,16 @@ public class WorldRenderer implements Disposable {
         constructGoombas();
         constructCementAndPipes();
         constructKoopas();
+        constructFlagpole();
+    }
+
+    private void constructFlagpole() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new Flagpole(this, rect);
+        }
     }
 
     private void constructGoombas() {

@@ -37,6 +37,7 @@ public class MarioGame extends Game {
 	public static final short DEFAULT_COL = 128;
 	public static final short ENEMY_HEAD_COL = 256;
 	public static final short MARIO_HEAD_COL = 512;
+	public static final short FLAGPOLE_COL = 1024;
 
 	// Holds all sprites and images
 	// Public so all screens can have access to it

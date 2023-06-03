@@ -1,5 +1,6 @@
 package com.svalentino.characters;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,7 @@ public class Mario extends Sprite implements Disposable {
     private final World world;
     private Body mario;
     private boolean isDead;
+    private boolean flagpoleHit = false;
 
     // Body dimensions
     public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
@@ -31,8 +33,6 @@ public class Mario extends Sprite implements Disposable {
         super(worldRenderer.atlas.findRegion("small_mario_stand"));
         this.isDead = false;
         this.world = worldRenderer.getWorld();
-
-
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set((marioWidth + MarioGame.TILE_LENGTH * 5) * MarioGame.SCALE,
@@ -61,6 +61,10 @@ public class Mario extends Sprite implements Disposable {
         mario.createFixture(fixtureDef).setUserData(this);
     }
     public void update(float dt) {
+        if (flagpoleHit) {
+            mario.setLinearVelocity(new Vector2(0f, -10f));
+        }
+
         setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
     }
     public void die() {
@@ -75,7 +79,13 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void bounceUpAfterEnemyHit() {
-        mario.applyLinearImpulse(new Vector2(0f, 40f), mario.getWorldCenter(), true);
+        float yVelocity  = mario.getLinearVelocity().y;
+        Gdx.app.log("Y", "" + yVelocity);
+        mario.applyLinearImpulse(new Vector2(0f,  yVelocity > -10 ? yVelocity * -1f + 8f : yVelocity * (yVelocity > -25f ? -1.8f : -1.65f)), mario.getWorldCenter(), true);
+    }
+
+    public void hitFlagpole() {
+        flagpoleHit = true;
     }
 
     public void moveRight() {

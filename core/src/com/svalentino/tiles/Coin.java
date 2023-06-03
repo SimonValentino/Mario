@@ -24,8 +24,4 @@ public class Coin extends PhysicalObject implements InteractableObject {
         GameHud.updateCoins();
         SoundManager.COIN_SOUND.play();
     }
-
-    public void hitMarioFeet() {
-        hitMarioHead();
-    }
 }
