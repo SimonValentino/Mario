@@ -14,6 +14,9 @@ public class SoundManager {
     public static final Music DEATH_SOUND = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Death Sound Effect.mp3"));
     public static final Sound GAME_OVER_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Game Over Sound Effect.mp3"));
     public static final Sound ENEMY_HIT_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Goomba Death Sound Effect.mp3"));
+    public static final Sound FLAGPOLE_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Flagpole.mp3"));
+    public static final Sound STAGE_WIN_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Stage Win.mp3"));
+    public static final Sound ITSA_ME_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/It's-a Me Mario!.mp3"));
     // --Commented out by Inspection (5/29/2023 11:55 AM):public static final Sound PIPE_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Mario Pipe Sound Effect.mp3"));
 
 

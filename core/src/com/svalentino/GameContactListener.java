@@ -1,5 +1,6 @@
 package com.svalentino;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -114,7 +115,11 @@ public class GameContactListener implements ContactListener {
         }
 
         else if (col == (MarioGame.MARIO_COL | MarioGame.FLAGPOLE_COL)) {
-
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Mario mario = (Mario) fixtureA.getUserData();
+                mario.hitFlagpole();
+            } else {
+            }
         }
     }
 

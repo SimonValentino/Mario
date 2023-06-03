@@ -21,11 +21,12 @@ public class Mario extends Sprite implements Disposable {
     private Body mario;
     private boolean isDead;
     private boolean flagpoleHit = false;
+    private boolean walkedOff = false;
 
     // Body dimensions
     public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 0.5f;
-    private final float marioMaxSpeed = 11.4f;
+    private final float marioMaxSpeed = 111f;
 
     // Sounds
 
@@ -47,7 +48,7 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
                 | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL
-                | MarioGame.ENEMY_HEAD_COL | MarioGame.DEFAULT_COL;
+                | MarioGame.ENEMY_HEAD_COL | MarioGame.DEFAULT_COL | MarioGame.FLAGPOLE_COL;
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef).setUserData(this);
@@ -62,11 +63,20 @@ public class Mario extends Sprite implements Disposable {
     }
     public void update(float dt) {
         if (flagpoleHit) {
-            mario.setLinearVelocity(new Vector2(0f, -10f));
+            mario.setLinearVelocity(new Vector2(1f, -10f));
         }
 
         setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
     }
+
+    public void walkOffStage() {
+        if (!walkedOff) {
+            SoundManager.STAGE_WIN_SOUND.play();
+            mario.applyLinearImpulse(new Vector2(15f, 0), mario.getWorldCenter(), true);
+            walkedOff = true;
+        }
+    }
+
     public void die() {
         resetPosition();
     }
@@ -80,11 +90,19 @@ public class Mario extends Sprite implements Disposable {
 
     public void bounceUpAfterEnemyHit() {
         float yVelocity  = mario.getLinearVelocity().y;
-        Gdx.app.log("Y", "" + yVelocity);
         mario.applyLinearImpulse(new Vector2(0f,  yVelocity > -10 ? yVelocity * -1f + 8f : yVelocity * (yVelocity > -25f ? -1.8f : -1.65f)), mario.getWorldCenter(), true);
     }
 
     public void hitFlagpole() {
+        SoundManager.THEME_SONG.stop();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        SoundManager.FLAGPOLE_SOUND.play();
         flagpoleHit = true;
     }
 
@@ -99,7 +117,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void resetPosition() {
-        mario.setTransform(new Vector2(5f, 5f), mario.getAngle());
+        mario.setTransform(new Vector2(5f, 2f), mario.getAngle());
     }
     
     public boolean isDead() {
@@ -122,7 +140,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     private boolean isOnGround() {
-        return mario.getLinearVelocity().y == 0;
+        return mario.getLinearVelocity().y == 0 || true;
     }
 
     public Body getBody() {
@@ -131,6 +149,10 @@ public class Mario extends Sprite implements Disposable {
 
     public void setDead(boolean dead) {
         isDead = dead;
+    }
+
+    public boolean isFlagpoleHit() {
+        return flagpoleHit;
     }
 
     @Override

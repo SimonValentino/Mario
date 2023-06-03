@@ -38,7 +38,8 @@ public class WorldRenderer implements Disposable {
     private List<Goomba> goombas;
     private List<Koopa> koopas;
 
-    
+    private float timeElapsedSinceFlagpole = 0.0f;
+    private float timeElapsedSinceWalkedOffStage = 0.0f;
 
 
     public WorldRenderer(TiledMap map) {
@@ -65,45 +66,77 @@ public class WorldRenderer implements Disposable {
     }
 
     public void updateWorld(float delta, GameHud hud, SpriteManager spriteManager) {
-        getInput(delta);
-        MarioGame.batch.begin();
-        MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), 50, 10 + delta);
-        MarioGame.batch.end();
-        for (Goomba goomba : goombas)
-            goomba.update(delta);
+        if (mario.isFlagpoleHit()) {
+            hud.stopTimer();
+            flagpoleHit(delta);
+        } else {
+            getInput(delta);
 
-        for (Koopa koopa : koopas)
-            koopa.update(delta);
+            for (Goomba goomba : goombas)
+                goomba.update(delta);
+            for (Koopa koopa : koopas)
+                koopa.update(delta);
+            mario.update(delta);
+            MarioGame.batch.begin();
+            MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), 50, 10 + delta);
+            MarioGame.batch.end();
 
-        world.step(1 / 60f, 6, 6);
+
+            world.step(1 / 60f, 6, 6);
 
 
-        if(mario.isDead()) {
-            freeze();
-            timeElapsed += delta;
-            SoundManager.THEME_SONG.stop();
-            SoundManager.SPED_UP_THEME_SONG.stop();
-            SoundManager.DEATH_SOUND.setVolume(1f);
-            SoundManager.DEATH_SOUND.play();
-            if(timeElapsed >= 2.5f) {
-                int newLives = hud.getNumLives()-1;
-                hud.setNumLives(newLives);
-                hud.updateLives();
-                hud.resetWorldTimer();
-                mario.die();
-                mario.setDead(false);
-                if(hud.getNumLives() > 0) {
-                    SoundManager.THEME_SONG.play();
-                    timeElapsed = 0;
-                    unfreeze();
-                    resetEnemies();
+            if (mario.isDead()) {
+                freeze();
+                timeElapsed += delta;
+                SoundManager.THEME_SONG.stop();
+                SoundManager.SPED_UP_THEME_SONG.stop();
+                SoundManager.DEATH_SOUND.setVolume(1f);
+                SoundManager.DEATH_SOUND.play();
+                if (timeElapsed >= 2.5f) {
+                    int newLives = hud.getNumLives() - 1;
+                    hud.setNumLives(newLives);
+                    hud.updateLives();
+                    hud.resetWorldTimer();
+                    mario.die();
+                    mario.setDead(false);
+                    if (hud.getNumLives() > 0) {
+                        SoundManager.THEME_SONG.play();
+                        timeElapsed = 0;
+                        unfreeze();
+                        resetEnemies();
+                    } else {
+                        SoundManager.GAME_OVER_SOUND.play();
+                    }
+
                 }
-                else {
-                    SoundManager.GAME_OVER_SOUND.play();
-                }
-
             }
         }
+    }
+
+    private void flagpoleHit(float dt) {
+        if (timeElapsedSinceFlagpole <= 3.5f) {
+            timeElapsedSinceFlagpole += dt;
+            mario.update(dt);
+        } else if (timeElapsedSinceWalkedOffStage <= 7f) {
+            timeElapsedSinceWalkedOffStage += dt;
+            mario.walkOffStage();
+        } else {
+            end();
+        }
+
+        world.step(1 / 60f, 6, 6);
+    }
+
+    private void end() {
+        SoundManager.ITSA_ME_SOUND.play();
+
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.exit(0);
     }
 
     private void getInput(float delta) {
