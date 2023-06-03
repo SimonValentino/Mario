@@ -81,13 +81,13 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        else if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
-            if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
-                Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
-                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
-
-                Coin c = (Coin) colFixture.getUserData();
-                c.hitMarioFeet();
+        else if (col == (MarioGame.MARIO_COL | MarioGame.COIN_COl)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Coin coin = (Coin) fixtureB.getUserData();
+                coin.hitMarioHead();
+            } else {
+                Coin coin = (Coin) fixtureA.getUserData();
+                coin.hitMarioHead();
             }
         }
 

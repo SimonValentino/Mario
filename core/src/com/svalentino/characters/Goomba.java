@@ -11,8 +11,8 @@ import com.svalentino.WorldRenderer;
 
 public class Goomba extends Enemy {
 
-    private final float goombaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
-    private final float goombaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
+    private final float goombaWidth = MarioGame.TILE_LENGTH / 2 - 2.5f;
+    private final float goombaHeight = MarioGame.TILE_LENGTH / 2 - 2.5f;
     private boolean isDead = false;
     private boolean hasDied = false;
 
@@ -40,8 +40,8 @@ public class Goomba extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-6f, 11).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(6f, 11).scl(MarioGame.SCALE);
+        vertice[0] = new Vector2(-7f, 10).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(7f, 10).scl(MarioGame.SCALE);
         vertice[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
         vertice[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
         head.set(vertice);
