@@ -14,7 +14,8 @@ import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
 import com.svalentino.GameHud;
-import com.svalentino.SpriteManager;
+import com.svalentino.screens.PlayScreen;
+
 public class Mario extends Sprite implements Disposable {
     private final World world;
     private Body mario;
@@ -25,12 +26,18 @@ public class Mario extends Sprite implements Disposable {
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 0.5f;
     private final float marioMaxSpeed = 11.4f;
 
+    public TextureRegion small_mario_stand;
+
     // Sounds
 
-    public Mario(World world, WorldRenderer worldRenderer) {
-        super(worldRenderer.atlas.findRegion("small_marrio_stand"));
+    public Mario(World world) {
+        super(PlayScreen.atlas.findRegion("little_mario"));
+        setBounds(0, 0, marioWidth, marioHeight);
         this.isDead = false;
         this.world = world;
+        small_mario_stand = new TextureRegion(getTexture(), 0, 0, 16 ,16);
+            setBounds(0, 0, 1, 1);
+            setRegion(small_mario_stand);
 
 
 
@@ -68,7 +75,7 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.filter.categoryBits = MarioGame.MARIO_HEAD_COL;
         mario.createFixture(fixtureDef).setUserData(this);
     }
-    public void update(float dt) {
+    public void update(float delta) {
         setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
     }
     public void die() {
