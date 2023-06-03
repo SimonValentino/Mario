@@ -10,9 +10,6 @@ import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
 
 public class Goomba extends Enemy {
-
-    private final float goombaWidth = MarioGame.TILE_LENGTH / 2 - 2.5f;
-    private final float goombaHeight = MarioGame.TILE_LENGTH / 2 - 2.5f;
     private boolean isDead = false;
     private boolean hasDied = false;
 
@@ -28,7 +25,7 @@ public class Goomba extends Enemy {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(goombaWidth * MarioGame.SCALE, goombaHeight * MarioGame.SCALE);
+        hitbox.setAsBox(enemyWidth * MarioGame.SCALE, enemyHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
         fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.BRICK_COL |
@@ -40,8 +37,8 @@ public class Goomba extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-7f, 10).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(7f, 10).scl(MarioGame.SCALE);
+        vertice[0] = new Vector2(-5.5f, 10).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(5.5f, 10).scl(MarioGame.SCALE);
         vertice[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
         vertice[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
         head.set(vertice);
@@ -49,8 +46,6 @@ public class Goomba extends Enemy {
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
-        // How much mario will bounce up
-        fixtureDef.restitution = 0.9f;
         body.createFixture(fixtureDef).setUserData(this);
     }
 

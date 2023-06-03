@@ -102,9 +102,13 @@ public class GameContactListener implements ContactListener {
                 koopa.kickShell(mario.getXCoordinate() >= koopa.getXCoordinate());
             } else if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
+                Mario mario = (Mario) fixtureA.getUserData();
+                mario.bounceUpAfterEnemyHit();
                 enemy.receiveHit();
             } else {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
+                Mario mario = (Mario) fixtureB.getUserData();
+                mario.bounceUpAfterEnemyHit();
                 enemy.receiveHit();
             }
         }

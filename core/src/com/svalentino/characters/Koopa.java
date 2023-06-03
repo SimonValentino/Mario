@@ -10,10 +10,6 @@ import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
 
 public class Koopa extends Enemy {
-    private WorldRenderer wr;
-
-    private final float koopaWidth = MarioGame.TILE_LENGTH / 2 - 1f;
-    private final float koopaHeight = MarioGame.TILE_LENGTH / 2 - 1f;
 
     private KoopaState currentState = KoopaState.WALKING;
     private KoopaState previousState;
@@ -25,7 +21,6 @@ public class Koopa extends Enemy {
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
-        wr = worldRenderer;
         movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
 
         BodyDef bodyDef = new BodyDef();
@@ -35,7 +30,7 @@ public class Koopa extends Enemy {
 
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(koopaWidth * MarioGame.SCALE, koopaHeight * MarioGame.SCALE);
+        hitbox.setAsBox(enemyWidth * MarioGame.SCALE, enemyHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
         fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.BRICK_COL |
@@ -47,8 +42,8 @@ public class Koopa extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertices = new Vector2[4];
-        vertices[0] = new Vector2(-6f, 9).scl(MarioGame.SCALE);
-        vertices[1] = new Vector2(6f, 9).scl(MarioGame.SCALE);
+        vertices[0] = new Vector2(-5.5f, 10).scl(MarioGame.SCALE);
+        vertices[1] = new Vector2(5.5f, 10).scl(MarioGame.SCALE);
         vertices[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
         vertices[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
         head.set(vertices);
@@ -56,8 +51,6 @@ public class Koopa extends Enemy {
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
-        // How much mario will bounce up
-        fixtureDef.restitution = 0.9f;
         body.createFixture(fixtureDef).setUserData(this);
     }
 
