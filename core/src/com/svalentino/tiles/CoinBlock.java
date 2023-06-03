@@ -1,6 +1,5 @@
 package com.svalentino.tiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
 import com.svalentino.GameHud;
@@ -9,7 +8,7 @@ import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
 
 public class CoinBlock extends PhysicalObject implements InteractableObject {
-    private TiledMapTileSet tileset;
+    private final TiledMapTileSet tileset;
 
     public CoinBlock(WorldRenderer wr, Rectangle hitbox) {
         super(wr, hitbox);

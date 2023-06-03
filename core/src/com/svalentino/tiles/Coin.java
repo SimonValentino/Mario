@@ -1,6 +1,5 @@
 package com.svalentino.tiles;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -12,7 +13,6 @@ import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
-import com.svalentino.SpriteManager;
 
 /*
 Actual rendering of the MarioGame is delegated to a screen.
@@ -32,21 +32,22 @@ public class PlayScreen implements Screen {
     private final WorldRenderer worldRenderer;
     private final Box2DDebugRenderer box2DRenderer;
 
-    private final SpriteManager spriteManager;
+
+    public static TextureAtlas atlas;
 
 
     public PlayScreen(MarioGame game) {
 
+        atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
 
         this.game = game;
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
         this.vport = new FitViewport(MarioGame.WIDTH * MarioGame.SCALE, MarioGame.HEIGHT * MarioGame.SCALE, camera);
-        this.hud = new GameHud(game.batch);
-        this.spriteManager = new SpriteManager();
+        this.hud = new GameHud(MarioGame.batch);
         this.box2DRenderer = new Box2DDebugRenderer();
 
-        this.worldRenderer = new WorldRenderer("MarioMap.tmx");
+        this.worldRenderer = new WorldRenderer("MarioMap.tmx", camera, game);
 
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
@@ -74,6 +75,7 @@ public class PlayScreen implements Screen {
         // setup where the batch will project to
         // getting the hud's camera
         hud.stage.draw();
+
     }
 
     /*
@@ -113,16 +115,16 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
-        worldRenderer.updateWorld(delta, hud, spriteManager);
+        worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
         camera.update();
         worldRenderer.setView(camera);
-        
+
         if(hud.getNumLives() <= 0) {
             SoundManager.SPED_UP_THEME_SONG.stop();
             SoundManager.DEATH_SOUND.play();
-            game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
+            MarioGame.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
