@@ -10,7 +10,7 @@ big_mario
   orig: 336, 32
   offset: 0, 0
   index: -1
-little_mario
+small_mario
   rotate: false
   xy: 1, 1
   size: 220, 16

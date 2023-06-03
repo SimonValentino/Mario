@@ -1,5 +1,7 @@
 package com.svalentino.characters;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -9,29 +11,52 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
-import com.svalentino.MarioGame;
-import com.svalentino.WorldRenderer;
-import com.svalentino.SoundManager;
 import com.svalentino.GameHud;
-import com.svalentino.SpriteManager;
-public class Mario extends Sprite implements Disposable {
-    private final World world;
-    private Body mario;
-    private boolean isDead;
+import com.svalentino.MarioGame;
+import com.svalentino.SoundManager;
+import com.svalentino.screens.PlayScreen;
 
+public class Mario extends Sprite implements Disposable {
     // Body dimensions
     public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 0.5f;
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 0.5f;
+    private final World world;
+    private final Body mario;
     private final float marioMaxSpeed = 11.4f;
-
-    // Sounds
-
-    public Mario(World world, WorldRenderer worldRenderer) {
-        super(worldRenderer.atlas.findRegion("small_marrio_stand"));
-        this.isDead = false;
+    private final Animation marioRun;
+    private final Animation marioJump;
+    public TextureRegion marioStand;
+    public State currentState;
+    public State previousState;
+    private boolean isDead;
+    private boolean flagpoleHit = false;
+    private float stateTimer;
+    private boolean runningRight;
+    public Mario(World world) {
+        super(PlayScreen.atlas.findRegion("small_mario"));
         this.world = world;
 
+        currentState = State.STANDING;
+        previousState = State.STANDING;
+        stateTimer = 0;
+        runningRight = true;
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        for (int i = 1; i < 4; i++)
+            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
+        marioRun = new Animation(0.1f, frames);
+        frames.clear();
+
+        for (int i = 4; i < 6; i++)
+            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
+        marioJump = new Animation(0.1f, frames);
+
+        this.isDead = false;
+
+        marioStand = new TextureRegion(getTexture(), 0, 0, 16, 16);
+        setBounds(0, 0, 1, 1);
+        setRegion(marioStand);
 
 
         BodyDef bodyDef = new BodyDef();
@@ -68,9 +93,69 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.filter.categoryBits = MarioGame.MARIO_HEAD_COL;
         mario.createFixture(fixtureDef).setUserData(this);
     }
-    public void update(float dt) {
+
+    // Sounds
+
+    public void update(float delta) {
         setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
+        setRegion(getFrame(delta));
+        if (flagpoleHit) {
+            mario.setLinearVelocity(new Vector2(0f, -10f));
+        }
     }
+
+    public void bounceUpAfterEnemyHit() {
+        mario.applyLinearImpulse(new Vector2(0f, 40f), mario.getWorldCenter(), true);
+        float yVelocity = mario.getLinearVelocity().y;
+        Gdx.app.log("Y", "" + yVelocity);
+        mario.applyLinearImpulse(new Vector2(0f, yVelocity > -10 ? yVelocity * -1f + 8f : yVelocity * (yVelocity > -25f ? -1.8f : -1.65f)), mario.getWorldCenter(), true);
+    }
+
+    public void hitFlagpole() {
+        flagpoleHit = true;
+    }
+
+    public TextureRegion getFrame(float delta) {
+        currentState = getState();
+
+        TextureRegion region;
+        switch (currentState) {
+            case JUMPING:
+                region = (TextureRegion) marioJump.getKeyFrame(stateTimer);
+                break;
+            case RUNNING:
+                region = (TextureRegion) marioRun.getKeyFrame(stateTimer, true);
+                break;
+            case FALLING:
+            case STANDING:
+            default:
+                region = marioStand;
+                break;
+        }
+        if ((mario.getLinearVelocity().x < 0 || !runningRight) && !region.isFlipX()) {
+            region.flip(true, false);
+            runningRight = false;
+        } else if ((mario.getLinearVelocity().x > 0 || runningRight) && region.isFlipX()) {
+            region.flip(true, false);
+            runningRight = true;
+        }
+
+        stateTimer = currentState == previousState ? stateTimer + delta : 0;
+        previousState = currentState;
+        return region;
+    }
+
+    public State getState() {
+        if (mario.getLinearVelocity().y > 0 || (mario.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+            return State.JUMPING;
+        else if (mario.getLinearVelocity().y < 0)
+            return State.FALLING;
+        else if (mario.getLinearVelocity().x != 0)
+            return State.RUNNING;
+        else
+            return State.STANDING;
+    }
+
     public void die() {
         resetPosition();
     }
@@ -95,9 +180,13 @@ public class Mario extends Sprite implements Disposable {
     public void resetPosition() {
         mario.setTransform(new Vector2(5f, 5f), mario.getAngle());
     }
-    
+
     public boolean isDead() {
         return getYCoordinate() <= -8 || GameHud.worldTimer <= 3 || isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public float getXCoordinate() {
@@ -111,8 +200,9 @@ public class Mario extends Sprite implements Disposable {
     private boolean isBelowMaxSpeedRight() {
         return mario.getLinearVelocity().x < marioMaxSpeed;
     }
+
     private boolean isBelowMaxSpeedLeft() {
-        return mario.getLinearVelocity().x > - marioMaxSpeed;
+        return mario.getLinearVelocity().x > -marioMaxSpeed;
     }
 
     private boolean isOnGround() {
@@ -123,12 +213,10 @@ public class Mario extends Sprite implements Disposable {
         return mario;
     }
 
-    public void setDead(boolean dead) {
-        isDead = dead;
-    }
-
     @Override
     public void dispose() {
         world.dispose();
     }
+
+    public enum State {FALLING, JUMPING, STANDING, RUNNING}
 }

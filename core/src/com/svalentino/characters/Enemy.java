@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
-import com.svalentino.tiles.InteractableObject;
 
 public abstract class Enemy extends Sprite implements Disposable {
     protected World world;

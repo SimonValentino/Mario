@@ -44,7 +44,7 @@ public class PlayScreen implements Screen {
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
         this.vport = new FitViewport(MarioGame.WIDTH * MarioGame.SCALE, MarioGame.HEIGHT * MarioGame.SCALE, camera);
-        this.hud = new GameHud(game.batch);
+        this.hud = new GameHud(MarioGame.batch);
         this.box2DRenderer = new Box2DDebugRenderer();
 
         this.worldRenderer = new WorldRenderer("MarioMap.tmx", camera, game);
@@ -120,11 +120,11 @@ public class PlayScreen implements Screen {
         camera.position.x = worldRenderer.getMarioX();
         camera.update();
         worldRenderer.setView(camera);
-        
+
         if(hud.getNumLives() <= 0) {
             SoundManager.SPED_UP_THEME_SONG.stop();
             SoundManager.DEATH_SOUND.play();
-            game.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
+            MarioGame.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
         if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {

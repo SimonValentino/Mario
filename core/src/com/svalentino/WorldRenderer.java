@@ -6,9 +6,6 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -27,48 +24,50 @@ import com.svalentino.tiles.CoinBlock;
 import com.svalentino.tiles.Ground;
 
 public class WorldRenderer implements Disposable {
-    private Vector2 gravity = new Vector2(0, -62.5f);
-    private World world = new World(gravity, true);
-    private TiledMap map;
-    private Mario mario;
+    private final Vector2 gravity = new Vector2(0, -62.5f);
+    private final World world = new World(gravity, true);
+    private final TiledMap map;
+    private final Mario mario;
     public float timeElapsed;
 
-    public TextureAtlas atlas;
-    private OrthogonalTiledMapRenderer renderer;
+    private final OrthogonalTiledMapRenderer renderer;
     private List<Goomba> goombas;
     private List<Koopa> koopas;
+    private final MarioGame game;
+    private final OrthographicCamera camera;
 
-    
 
 
-    public WorldRenderer(TiledMap map) {
-        atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
-        mario = new Mario(world, this);
+
+    public WorldRenderer(TiledMap map, OrthographicCamera camera, MarioGame game) {
+        this.game = game;
+        this.camera = camera;
+        mario = new Mario(world);
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructWorld();
         world.setContactListener(new GameContactListener());
     }
 
-    public WorldRenderer(String mapName) {
-        this(new TmxMapLoader().load(mapName));
+    public WorldRenderer(String mapName, OrthographicCamera camera, MarioGame game) {
+
+        this(new TmxMapLoader().load(mapName), camera, game);
     }
 
     public void render() {
         renderer.render();
-//        MarioGame.batch.draw(texture, 100, 10);
-//        MarioGame.batch.end();
+        MarioGame.batch.setProjectionMatrix(camera.combined);
+        MarioGame.batch.begin();
+        mario.draw(MarioGame.batch);
+        MarioGame.batch.end();
     }
 
     public void setView(OrthographicCamera camera) {
         renderer.setView(camera);
     }
 
-    public void updateWorld(float delta, GameHud hud, SpriteManager spriteManager) {
+    public void updateWorld(float delta, GameHud hud) {
         getInput(delta);
-        MarioGame.batch.begin();
-        MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), 50, 10 + delta);
-        MarioGame.batch.end();
         for (Goomba goomba : goombas)
             goomba.update(delta);
 
@@ -76,7 +75,7 @@ public class WorldRenderer implements Disposable {
             koopa.update(delta);
 
         world.step(1 / 60f, 6, 6);
-
+        mario.update(delta);
 
         if(mario.isDead()) {
             freeze();
@@ -148,6 +147,7 @@ public class WorldRenderer implements Disposable {
         constructGoombas();
         constructCementAndPipes();
         constructKoopas();
+        constructFlagpole();
     }
 
     private void constructGoombas() {
@@ -214,6 +214,14 @@ public class WorldRenderer implements Disposable {
         for (RectangleMapObject obj : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             rect = obj.getRectangle();
             new Brick(this, rect);
+        }
+    }
+    private void constructFlagpole() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new Flagpole(this, rect);
         }
     }
 
