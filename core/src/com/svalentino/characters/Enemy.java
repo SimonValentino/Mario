@@ -14,13 +14,19 @@ public abstract class Enemy extends Sprite implements Disposable {
     protected Body body;
     public Vector2 movement;
 
+    protected final float enemyWidth = MarioGame.TILE_LENGTH / 2 - 1f;
+    protected final float enemyHeight = MarioGame.TILE_LENGTH / 2 - 2.5f ;
+
     public Enemy(WorldRenderer worldRenderer, float x, float y) {
         this.world = worldRenderer.getWorld();
         setPosition(x, y);
     }
 
     public abstract void update(float dt);
+
     public abstract void receiveHit();
+
+    public abstract void obliterate();
 
     public void reverse() {
         movement.x = -movement.x;

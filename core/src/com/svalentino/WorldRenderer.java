@@ -33,44 +33,42 @@ public class WorldRenderer implements Disposable {
     private Mario mario;
     public float timeElapsed;
 
+    public TextureAtlas atlas;
     private OrthogonalTiledMapRenderer renderer;
     private List<Goomba> goombas;
     private List<Koopa> koopas;
-    private MarioGame game;
-    private OrthographicCamera camera;
 
     
 
 
-    public WorldRenderer(TiledMap map, OrthographicCamera camera, MarioGame game) {
-        this.game = game;
-        this.camera = camera;
-        mario = new Mario(world);
+    public WorldRenderer(TiledMap map) {
+        atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
+        mario = new Mario(world, this);
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
         constructWorld();
         world.setContactListener(new GameContactListener());
     }
 
-    public WorldRenderer(String mapName, OrthographicCamera camera, MarioGame game) {
-
-        this(new TmxMapLoader().load(mapName), camera, game);
+    public WorldRenderer(String mapName) {
+        this(new TmxMapLoader().load(mapName));
     }
 
     public void render() {
         renderer.render();
-        game.batch.setProjectionMatrix(camera.combined);
-        game.batch.begin();
-        mario.draw(game.batch);
-        game.batch.end();
+//        MarioGame.batch.draw(texture, 100, 10);
+//        MarioGame.batch.end();
     }
 
     public void setView(OrthographicCamera camera) {
         renderer.setView(camera);
     }
 
-    public void updateWorld(float delta, GameHud hud) {
+    public void updateWorld(float delta, GameHud hud, SpriteManager spriteManager) {
         getInput(delta);
+        MarioGame.batch.begin();
+        MarioGame.batch.draw(spriteManager.getSmall_mario_stand(), 50, 10 + delta);
+        MarioGame.batch.end();
         for (Goomba goomba : goombas)
             goomba.update(delta);
 
@@ -78,7 +76,7 @@ public class WorldRenderer implements Disposable {
             koopa.update(delta);
 
         world.step(1 / 60f, 6, 6);
-            mario.update(delta);
+
 
         if(mario.isDead()) {
             freeze();

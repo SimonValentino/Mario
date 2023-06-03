@@ -27,10 +27,10 @@ public class GameContactListener implements ContactListener {
         if (col == (MarioGame.ENEMY_COL)) {
             if (fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).getCurrentState() == KoopaState.MOVING_SHELL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
-                enemy.receiveHit();
+                enemy.obliterate();
             } else if (fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).getCurrentState() == KoopaState.MOVING_SHELL) {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
-                enemy.receiveHit();
+                enemy.obliterate();
             } else {
                 Enemy enemy1 = (Enemy) fixtureA.getUserData();
                 Enemy enemy2 = (Enemy) fixtureB.getUserData();
@@ -81,13 +81,13 @@ public class GameContactListener implements ContactListener {
             }
         }
 
-        else if (Coin.class.isAssignableFrom(fixtureA.getUserData().getClass()) || Coin.class.isAssignableFrom((fixtureB.getUserData().getClass()))) {
-            if (fixtureA.getUserData().equals("feet") || fixtureB.getUserData().equals("feet")) {
-                Fixture marioFeet = fixtureA.getUserData().equals("feet") ? fixtureA : fixtureB;
-                Fixture colFixture = fixtureA == marioFeet ? fixtureB : fixtureA;
-
-                Coin c = (Coin) colFixture.getUserData();
-                c.hitMarioFeet();
+        else if (col == (MarioGame.MARIO_COL | MarioGame.COIN_COl)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Coin coin = (Coin) fixtureB.getUserData();
+                coin.hitMarioHead();
+            } else {
+                Coin coin = (Coin) fixtureA.getUserData();
+                coin.hitMarioHead();
             }
         }
 
@@ -102,11 +102,19 @@ public class GameContactListener implements ContactListener {
                 koopa.kickShell(mario.getXCoordinate() >= koopa.getXCoordinate());
             } else if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
                 Enemy enemy = (Enemy) fixtureB.getUserData();
+                Mario mario = (Mario) fixtureA.getUserData();
+                mario.bounceUpAfterEnemyHit();
                 enemy.receiveHit();
             } else {
                 Enemy enemy = (Enemy) fixtureA.getUserData();
+                Mario mario = (Mario) fixtureB.getUserData();
+                mario.bounceUpAfterEnemyHit();
                 enemy.receiveHit();
             }
+        }
+
+        else if (col == (MarioGame.MARIO_COL | MarioGame.FLAGPOLE_COL)) {
+
         }
     }
 
