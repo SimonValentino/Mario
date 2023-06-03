@@ -1,21 +1,34 @@
 package com.svalentino.characters;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Array;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
+import com.svalentino.screens.PlayScreen;
 
 public class Goomba extends Enemy {
     private boolean isDead = false;
     private boolean hasDied = false;
 
-    public Goomba(WorldRenderer worldRenderer, float x, float y) {
-        super(worldRenderer, x, y);
+    private float stateTime;
+    private Animation walkAnimation;
+    private Array<TextureRegion> frames;
+    private boolean setToDestroy;
+    private boolean destroyed;
 
+    public Goomba(WorldRenderer worldRenderer, float x, float y){
+        super(worldRenderer, x, y);
+        destroyed = false;
+        setToDestroy = false;
         movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
 
         BodyDef bodyDef = new BodyDef();
@@ -46,26 +59,55 @@ public class Goomba extends Enemy {
         fixtureDef.shape = head;
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
+
         body.createFixture(fixtureDef).setUserData(this);
+        frames = new Array<TextureRegion>();
+        for(int i = 0; i < 2; i++)
+            frames.add(new TextureRegion(PlayScreen.atlas.findRegion("goomba"), i * 16, 0, 16, 16));
+        walkAnimation = new Animation(0.4f, frames);
+        stateTime = 0;
+        setBounds(getX(), getY(), 1, 1);
+        setToDestroy = false;
+        destroyed = false;
     }
+
 
     @Override
     public void dispose() {
 
     }
 
-    @Override
-    public void update(float dt) {
+
+    public void update(float delta) {
         if (hasDied && !isDead) {
             world.destroyBody(body);
             isDead = true;
         }
 
         body.setLinearVelocity(movement);
+
+        stateTime += delta;
+        if(setToDestroy && !destroyed){
+            world.destroyBody(body);
+            destroyed = true;
+            setRegion(new TextureRegion(PlayScreen.atlas.findRegion("goomba"), 32, 0, 16, 16));
+            stateTime = 0;
+        }
+        else if(!destroyed) {
+            body.setLinearVelocity(movement);
+            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+            setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
+        }
     }
 
+    public void draw(Batch batch) {
+        if(!destroyed || stateTime < 0.3) {
+            super.draw(batch);
+        }
+    }
     @Override
     public void receiveHit() {
+        setToDestroy = true;
         hasDied = true;
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);

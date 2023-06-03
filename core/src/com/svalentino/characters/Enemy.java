@@ -7,10 +7,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
+import com.svalentino.screens.PlayScreen;
 
 public abstract class Enemy extends Sprite implements Disposable {
     protected World world;
     protected Body body;
+    protected PlayScreen screen;
     public Vector2 movement;
 
     protected final float enemyWidth = MarioGame.TILE_LENGTH / 2 - 1f;
@@ -18,6 +20,7 @@ public abstract class Enemy extends Sprite implements Disposable {
 
     public Enemy(WorldRenderer worldRenderer, float x, float y) {
         this.world = worldRenderer.getWorld();
+        this.screen = screen;
         setPosition(x, y);
     }
 

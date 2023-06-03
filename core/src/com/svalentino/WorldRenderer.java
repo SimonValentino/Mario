@@ -59,6 +59,9 @@ public class WorldRenderer implements Disposable {
         MarioGame.batch.setProjectionMatrix(camera.combined);
         MarioGame.batch.begin();
         mario.draw(MarioGame.batch);
+        for(Goomba goomba : goombas) {
+            goomba.draw(MarioGame.batch);
+        }
         MarioGame.batch.end();
     }
 
@@ -140,11 +143,11 @@ public class WorldRenderer implements Disposable {
     }
 
     private void constructWorld() {
+        constructGoombas();
         constructGround();
         constructBricks();
         constructCoinBlocks();
         constructCoins();
-        constructGoombas();
         constructCementAndPipes();
         constructKoopas();
         constructFlagpole();
