@@ -1,6 +1,8 @@
-package com.svalentino;
+package com.svalentino.tiles;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.svalentino.MarioGame;
+import com.svalentino.WorldRenderer;
 import com.svalentino.tiles.PhysicalObject;
 
 public class Flagpole extends PhysicalObject {

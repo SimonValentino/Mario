@@ -21,6 +21,8 @@ import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.DefaultTile;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.CoinBlock;
+import com.svalentino.tiles.ExitDoor;
+import com.svalentino.tiles.Flagpole;
 import com.svalentino.tiles.Ground;
 
 public class WorldRenderer implements Disposable {
@@ -179,6 +181,16 @@ public class WorldRenderer implements Disposable {
         constructCementAndPipes();
         constructKoopas();
         constructFlagpole();
+        constructExitDoor();
+    }
+
+    private void constructExitDoor() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new ExitDoor(this, rect);
+        }
     }
 
     private void constructGoombas() {

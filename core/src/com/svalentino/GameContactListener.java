@@ -119,6 +119,18 @@ public class GameContactListener implements ContactListener {
                 Mario mario = (Mario) fixtureA.getUserData();
                 mario.hitFlagpole();
             } else {
+                Mario mario = (Mario) fixtureB.getUserData();
+                mario.hitFlagpole();
+            }
+        }
+
+        else if (col == (MarioGame.MARIO_COL | MarioGame.EXIT_DOOR_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Mario mario = (Mario) fixtureA.getUserData();
+                mario.goThroughExitDoor();
+            } else {
+                Mario mario = (Mario) fixtureB.getUserData();
+                mario.goThroughExitDoor();
             }
         }
     }

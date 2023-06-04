@@ -20,11 +20,11 @@ import com.svalentino.screens.PlayScreen;
 
 public class Mario extends Sprite implements Disposable {
     // Body dimensions
-    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 1.5f;
-    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.5f;
+    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 1.35f;
+    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.35f;
     private final World world;
     private final Body mario;
-    private final float marioMaxSpeed = 111f;
+    private final float marioMaxSpeed = 51f;
     private final Animation marioRun;
     private final Animation marioJump;
     public TextureRegion marioStand;
@@ -75,7 +75,8 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
                 | MarioGame.BRICK_COL | MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL
-                | MarioGame.ENEMY_HEAD_COL | MarioGame.DEFAULT_COL | MarioGame.FLAGPOLE_COL;
+                | MarioGame.ENEMY_HEAD_COL | MarioGame.DEFAULT_COL | MarioGame.FLAGPOLE_COL
+                | MarioGame.EXIT_DOOR_COL;
 
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef).setUserData(this);
@@ -97,13 +98,11 @@ public class Mario extends Sprite implements Disposable {
         mario.createFixture(fixtureDef).setUserData(this);
     }
 
-    // Sounds
-
     public void update(float delta) {
         setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
         setRegion(getFrame(delta));
         if (flagpoleHit) {
-            mario.setLinearVelocity(new Vector2(1f, -10f));
+            mario.setLinearVelocity(new Vector2(0f, -10f));
         }
     }
     public void walkOffStage(float delta) {
@@ -112,9 +111,14 @@ public class Mario extends Sprite implements Disposable {
 
         if (!walkedOff) {
             SoundManager.STAGE_WIN_SOUND.play();
-            mario.applyLinearImpulse(new Vector2(15f, 0), mario.getWorldCenter(), true);
             walkedOff = true;
         }
+
+        mario.setLinearVelocity(new Vector2(15f, -60f));
+    }
+
+    public void goThroughExitDoor() {
+        // make mario disappear
     }
 
     public void bounceUpAfterEnemyHit() {
