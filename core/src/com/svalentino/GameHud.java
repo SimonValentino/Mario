@@ -39,6 +39,7 @@ public class GameHud implements Disposable {
     private Label timeLabel;
     private Label marioLabel;
 
+    private boolean gameNotOver = true;
 
     public GameHud(SpriteBatch batch) {
         worldTimer = timeInLevel;
@@ -85,7 +86,7 @@ public class GameHud implements Disposable {
         
         timeCount += dt;
         if(timeCount >= 1 ) {
-            if(worldTimer >= 3.5) {
+            if(worldTimer >= 3.5 && gameNotOver) {
                 worldTimer--;
                 String strWorldTimer = Integer.toString(worldTimer - 3);
                 countdownLabel.setText(String.format("%0" + strWorldTimer.length() + "d", worldTimer - 3));
@@ -104,7 +105,9 @@ public class GameHud implements Disposable {
             numLivesLabel.setText(String.format("%0" + Integer.toString(numLives).length() + "d", numLives));
         }
     }
-
+    public void stopTimer() {
+        gameNotOver = false;
+    }
     private void constructLabels() {
         countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));

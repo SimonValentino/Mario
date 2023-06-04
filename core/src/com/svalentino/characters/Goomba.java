@@ -115,6 +115,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void obliterate() {
+        setToDestroy = true;
         hasDied = true;
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);

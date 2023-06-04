@@ -114,7 +114,11 @@ public class GameContactListener implements ContactListener {
         }
 
         else if (col == (MarioGame.MARIO_COL | MarioGame.FLAGPOLE_COL)) {
-
+            if (fixtureA.getFilterData().categoryBits == MarioGame.MARIO_COL) {
+                Mario mario = (Mario) fixtureA.getUserData();
+                mario.hitFlagpole();
+            } else {
+            }
         }
     }
 
