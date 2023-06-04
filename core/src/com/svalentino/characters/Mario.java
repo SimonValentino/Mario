@@ -24,7 +24,7 @@ public class Mario extends Sprite implements Disposable {
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.35f;
     private final World world;
     private final Body mario;
-    private final float marioMaxSpeed = 51f;
+    private final float marioMaxSpeed = 11.8f;
     private final Animation marioRun;
     private final Animation marioJump;
     public TextureRegion marioStand;
@@ -122,9 +122,8 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void bounceUpAfterEnemyHit() {
-        mario.applyLinearImpulse(new Vector2(0f, 40f), mario.getWorldCenter(), true);
         float yVelocity = mario.getLinearVelocity().y;
-        mario.applyLinearImpulse(new Vector2(0f, yVelocity > -10 ? yVelocity * -1f + 8f : yVelocity * (yVelocity > -25f ? -1.8f : -1.65f)), mario.getWorldCenter(), true);
+        mario.applyLinearImpulse(new Vector2(0f, yVelocity > -10 ? yVelocity * -1f + 9f : yVelocity * (yVelocity > -25f ? -1.9f : -1.65f)), mario.getWorldCenter(), true);
     }
 
     public void hitFlagpole() {
@@ -194,12 +193,12 @@ public class Mario extends Sprite implements Disposable {
 
     public void moveRight() {
         if (isBelowMaxSpeedRight())
-            mario.applyLinearImpulse(new Vector2(0.7f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(0.6f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
         if (isBelowMaxSpeedLeft())
-            mario.applyLinearImpulse(new Vector2(-0.7f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(-0.6f, 0), mario.getWorldCenter(), true);
     }
 
     public void resetPosition() {
