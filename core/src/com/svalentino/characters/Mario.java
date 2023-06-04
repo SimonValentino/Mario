@@ -106,7 +106,10 @@ public class Mario extends Sprite implements Disposable {
             mario.setLinearVelocity(new Vector2(1f, -10f));
         }
     }
-    public void walkOffStage() {
+    public void walkOffStage(float delta) {
+        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
+        setRegion(getFrame(delta));
+
         if (!walkedOff) {
             SoundManager.STAGE_WIN_SOUND.play();
             mario.applyLinearImpulse(new Vector2(15f, 0), mario.getWorldCenter(), true);

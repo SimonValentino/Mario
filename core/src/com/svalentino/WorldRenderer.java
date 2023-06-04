@@ -119,7 +119,7 @@ public class WorldRenderer implements Disposable {
             mario.update(dt);
         } else if (timeElapsedSinceWalkedOffStage <= 7f) {
             timeElapsedSinceWalkedOffStage += dt;
-            mario.walkOffStage();
+            mario.walkOffStage(dt);
         } else {
             end();
         }
