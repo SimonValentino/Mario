@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -69,8 +70,8 @@ public class Mario extends Sprite implements Disposable {
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
+        CircleShape hitbox = new CircleShape();
+        hitbox.setRadius(6 * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
