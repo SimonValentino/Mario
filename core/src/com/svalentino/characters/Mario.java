@@ -37,6 +37,7 @@ public class Mario extends Sprite implements Disposable {
     private boolean runningRight;
 
     private boolean walkedOff = false;
+    private boolean wentThroughExitDoor = false;
 
     public Mario(World world) {
         super(PlayScreen.atlas.findRegion("small_mario"));
@@ -107,8 +108,12 @@ public class Mario extends Sprite implements Disposable {
         }
     }
     public void walkOffStage(float delta) {
-        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
-        setRegion(getFrame(delta));
+        if (wentThroughExitDoor)
+            setPosition(0, 0);
+        else {
+            setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
+            setRegion(getFrame(delta));
+        }
 
         if (!walkedOff) {
             SoundManager.STAGE_WIN_SOUND.play();
@@ -119,6 +124,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void goThroughExitDoor() {
+        wentThroughExitDoor = true;
     }
 
     public void bounceUpAfterEnemyHit() {

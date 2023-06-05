@@ -29,7 +29,7 @@ public class Goomba extends Enemy {
         super(worldRenderer, x, y);
         destroyed = false;
         setToDestroy = false;
-        movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
+        movement = new Vector2(6f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8f);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(getX(), getY());
@@ -50,8 +50,8 @@ public class Goomba extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5.5f, 10f).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(5.5f, 10f).scl(MarioGame.SCALE);
+        vertice[0] = new Vector2(-5.9f, 10f).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(5.9f, 10f).scl(MarioGame.SCALE);
         vertice[2] = new Vector2(-3f, 3f).scl(MarioGame.SCALE);
         vertice[3] = new Vector2(3f, 3f).scl(MarioGame.SCALE);
         head.set(vertice);
@@ -95,7 +95,7 @@ public class Goomba extends Enemy {
         }
         else if(!destroyed) {
             body.setLinearVelocity(movement);
-            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2 + 0.1f);
             setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
         }
     }

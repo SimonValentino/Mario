@@ -21,7 +21,7 @@ public class Koopa extends Enemy {
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
-        movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), 0);
+        movement = new Vector2(6f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8f);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(getX(), getY());
@@ -42,8 +42,8 @@ public class Koopa extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertices = new Vector2[4];
-        vertices[0] = new Vector2(-5.5f, 10f).scl(MarioGame.SCALE);
-        vertices[1] = new Vector2(5.5f, 10f).scl(MarioGame.SCALE);
+        vertices[0] = new Vector2(-5.9f, 10f).scl(MarioGame.SCALE);
+        vertices[1] = new Vector2(5.9f, 10f).scl(MarioGame.SCALE);
         vertices[2] = new Vector2(-3f, 3).scl(MarioGame.SCALE);
         vertices[3] = new Vector2(3f, 3).scl(MarioGame.SCALE);
         head.set(vertices);
