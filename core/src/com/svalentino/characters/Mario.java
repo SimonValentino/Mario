@@ -118,7 +118,6 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void goThroughExitDoor() {
-        // make mario disappear
     }
 
     public void bounceUpAfterEnemyHit() {
@@ -230,12 +229,14 @@ public class Mario extends Sprite implements Disposable {
     }
 
     private boolean isOnGround() {
-
-        return mario.getLinearVelocity().y == 0 || true;
+        return true;
+        //return mario.getLinearVelocity().y <= 0.01 && mario.getLinearVelocity().y >= -0.01;
     }
+
     public boolean isFlagpoleHit() {
         return flagpoleHit;
     }
+
     public Body getBody() {
         return mario;
     }
