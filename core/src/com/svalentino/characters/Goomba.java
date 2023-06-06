@@ -69,6 +69,8 @@ public class Goomba extends Enemy {
         setBounds(getX(), getY(), 1, 1);
         setToDestroy = false;
         destroyed = false;
+
+        body.setActive(false);
     }
 
 

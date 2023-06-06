@@ -52,6 +52,8 @@ public class Koopa extends Enemy {
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_HEAD_COL;
         fixtureDef.filter.maskBits = MarioGame.MARIO_COL;
         body.createFixture(fixtureDef).setUserData(this);
+
+        body.setActive(false);
     }
 
     @Override
