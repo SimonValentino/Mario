@@ -134,6 +134,7 @@ public class Koopa extends Enemy {
             movement.x = 0;
             stateTime = 0f;
         }
+        SoundManager.ENEMY_HIT_SOUND.play();
     }
 
     @Override
@@ -151,6 +152,7 @@ public class Koopa extends Enemy {
             movement.x = 10f;
 
         currentState = KoopaState.MOVING_SHELL;
+        SoundManager.ENEMY_HIT_SOUND.play();
         stateTime = 0;
     }
     public void draw(Batch batch) {

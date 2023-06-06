@@ -21,8 +21,8 @@ import com.svalentino.screens.PlayScreen;
 
 public class Mario extends Sprite implements Disposable {
     // Body dimensions
-    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 1.35f;
-    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.35f;
+    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 1.55f;
+    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.55f;
     private final World world;
     private final Body mario;
     private final float marioMaxSpeed = 12f;
@@ -71,8 +71,10 @@ public class Mario extends Sprite implements Disposable {
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        CircleShape hitbox = new CircleShape();
-        hitbox.setRadius(6 * MarioGame.SCALE);
+//        CircleShape hitbox = new CircleShape();
+//        hitbox.setRadius(6 * MarioGame.SCALE);
+        PolygonShape hitbox = new PolygonShape();
+        hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
@@ -235,7 +237,7 @@ public class Mario extends Sprite implements Disposable {
         return flagpoleHit;
     }
 
-    public Body getBody() {
+     public Body getBody() {
         return mario;
     }
 
