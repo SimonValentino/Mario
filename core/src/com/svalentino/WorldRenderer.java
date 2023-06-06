@@ -78,18 +78,27 @@ public class WorldRenderer implements Disposable {
             hud.stopTimer();
             flagpoleHit(delta);
         } else {
-            getInput(delta);
+            if (!mario.isDead()) {
+                getInput(delta);
 
-            for (Goomba goomba : goombas)
-                goomba.update(delta);
+                for (Goomba goomba : goombas) {
+                    if (mario.getXCoordinate() > goomba.getXCoordinate() - (13 * MarioGame.TILE_LENGTH * MarioGame.SCALE))
+                        goomba.getBody().setActive(true);
+                    goomba.update(delta);
+                }
 
-            for (Koopa koopa : koopas)
-                koopa.update(delta);
+                for (Koopa koopa : koopas) {
+                    if (mario.getXCoordinate() > koopa.getXCoordinate() - (13 * MarioGame.TILE_LENGTH * MarioGame.SCALE))
+                        koopa.getBody().setActive(true);
 
-            world.step(1 / 60f, 6, 6);
-            mario.update(delta);
+                    koopa.update(delta);
+                }
 
-            if (mario.isDead()) {
+                world.step(1 / 60f, 6, 6);
+                mario.update(delta);
+            }
+
+            else {
                 freeze();
                 timeElapsed += delta;
                 SoundManager.THEME_SONG.stop();

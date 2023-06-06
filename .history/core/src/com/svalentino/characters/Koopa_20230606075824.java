@@ -1,12 +1,9 @@
 package com.svalentino.characters;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.utils.Array;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.SoundManager;
@@ -16,8 +13,6 @@ public class Koopa extends Enemy {
 
     private KoopaState currentState = KoopaState.WALKING;
     private KoopaState previousState;
-    private Animation walkAnimation;
-    private Array<TextureRegion> frames;
     private float stateTime = 0.0f;
 
     private boolean isDead = false;

@@ -97,15 +97,14 @@ public class Goomba extends Enemy {
             setRegion(new TextureRegion(PlayScreen.atlas.findRegion("goomba"), 32, 0, 16, 16));
             stateTime = 0;
         }
-        if(setToObliterate && !obliterated){
-            body.applyLinearImpulse(new Vector2(0f, 20f), body.getWorldCenter(),true);
+        if(setToDestroy && !destroyed){
+            world.destroyBody(body);
             obliterated = true;
             setRegion(new TextureRegion(PlayScreen.atlas.findRegion("goomba"), 0, 0, 16, 16));
             flip(false, true);
-          //  world.destroyBody(body);
             stateTime = 0;
         }
-        else if(!destroyed && !obliterated) {
+        else if(!destroyed) {
             body.setLinearVelocity(movement);
             setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2 + 0.1f);
             setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
@@ -127,7 +126,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void obliterate() {
-        setToObliterate = true;
+        setToDestroy = true;
         hasDied = true;
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);

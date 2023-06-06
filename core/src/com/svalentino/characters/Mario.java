@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -36,6 +37,7 @@ public class Mario extends Sprite implements Disposable {
     private boolean runningRight;
 
     private boolean walkedOff = false;
+    private boolean wentThroughExitDoor = false;
 
     public Mario(World world) {
         super(PlayScreen.atlas.findRegion("small_mario"));
@@ -69,8 +71,8 @@ public class Mario extends Sprite implements Disposable {
         mario = world.createBody(bodyDef);
 
         FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape hitbox = new PolygonShape();
-        hitbox.setAsBox(marioWidth * MarioGame.SCALE, marioHeight * MarioGame.SCALE);
+        CircleShape hitbox = new CircleShape();
+        hitbox.setRadius(6 * MarioGame.SCALE);
 
         fixtureDef.filter.categoryBits = MarioGame.MARIO_COL;
         fixtureDef.filter.maskBits = MarioGame.GROUND_COL | MarioGame.COIN_COl
@@ -81,17 +83,9 @@ public class Mario extends Sprite implements Disposable {
         fixtureDef.shape = hitbox;
         mario.createFixture(fixtureDef).setUserData(this);
 
-        EdgeShape bottom = new EdgeShape();
-        bottom.set(new Vector2((-marioHeight / 1.1f) * MarioGame.SCALE, (-marioHeight - 0.1f) * MarioGame.SCALE),
-                new Vector2((marioHeight / 1.1f) * MarioGame.SCALE, ((-marioHeight - 0.1f)) * MarioGame.SCALE));
-        fixtureDef.shape = bottom;
-        fixtureDef.isSensor = true;
-        fixtureDef.filter.categoryBits = -1;
-        mario.createFixture(fixtureDef).setUserData("feet");
-
         EdgeShape top = new EdgeShape();
-        top.set(new Vector2((-marioHeight / 1.1f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
-                new Vector2((marioHeight / 1.1f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
+        top.set(new Vector2((-marioHeight / 1.3f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
+                new Vector2((marioHeight / 1.3f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
         fixtureDef.shape = top;
         fixtureDef.isSensor = true;
         fixtureDef.filter.categoryBits = MarioGame.MARIO_HEAD_COL;
@@ -106,8 +100,12 @@ public class Mario extends Sprite implements Disposable {
         }
     }
     public void walkOffStage(float delta) {
-        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
-        setRegion(getFrame(delta));
+        if (wentThroughExitDoor)
+            setPosition(0, 0);
+        else {
+            setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
+            setRegion(getFrame(delta));
+        }
 
         if (!walkedOff) {
             SoundManager.STAGE_WIN_SOUND.play();
@@ -118,6 +116,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void goThroughExitDoor() {
+        wentThroughExitDoor = true;
     }
 
     public void bounceUpAfterEnemyHit() {
