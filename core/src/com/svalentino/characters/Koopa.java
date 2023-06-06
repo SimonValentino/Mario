@@ -89,10 +89,10 @@ public class Koopa extends Enemy {
                 break;
         }
 
-        if(movement.x > 0 && region.isFlipX() == false){
+        if(movement.x > 0 && !region.isFlipX()){
             region.flip(true, false);
         }
-        if(movement.x < 0 && region.isFlipX() == true){
+        if(movement.x < 0 && region.isFlipX()){
             region.flip(true, false);
         }
 
@@ -113,9 +113,9 @@ public class Koopa extends Enemy {
         }
 
         stateTime += dt;
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2 + 0.1f);
+        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2 + 0.2f);
         setRegion(getFrame(dt));
-        if (currentState == KoopaState.SHELL && stateTime > 4) {
+        if (currentState == KoopaState.SHELL && stateTime > 4.5) {
             currentState = KoopaState.WALKING;
             movement.x = 5f * (Math.random() - 0.5 >= 0 ? 1 : -1);
             stateTime = 0;

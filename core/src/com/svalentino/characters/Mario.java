@@ -228,8 +228,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     private boolean isOnGround() {
-        return true;
-        //return mario.getLinearVelocity().y <= 0.01 && mario.getLinearVelocity().y >= -0.01;
+        return mario.getLinearVelocity().y <= 0.01 && mario.getLinearVelocity().y >= -0.01;
     }
 
     public boolean isFlagpoleHit() {
