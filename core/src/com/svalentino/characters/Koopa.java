@@ -80,6 +80,7 @@ public class Koopa extends Enemy {
 
         switch (currentState){
             case SHELL:
+            case MOVING_SHELL:
                 region = shell;
                 break;
             case WALKING:
@@ -94,6 +95,7 @@ public class Koopa extends Enemy {
         if(movement.x < 0 && region.isFlipX() == true){
             region.flip(true, false);
         }
+
         stateTime = currentState == previousState ? stateTime + dt : 0;
         previousState = currentState;
         return region;
@@ -111,6 +113,7 @@ public class Koopa extends Enemy {
         }
 
         stateTime += dt;
+        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2 + 0.1f);
         setRegion(getFrame(dt));
         if (currentState == KoopaState.SHELL && stateTime > 4) {
             currentState = KoopaState.WALKING;
@@ -128,9 +131,6 @@ public class Koopa extends Enemy {
             movement.x = 0;
             stateTime = 0f;
         }
-
-        SoundManager.ENEMY_HIT_SOUND.play();
-        GameHud.updateScore(300);
     }
 
     @Override
