@@ -98,11 +98,10 @@ public class Goomba extends Enemy {
             stateTime = 0;
         }
         if(setToObliterate && !obliterated){
-            body.applyLinearImpulse(new Vector2(0f, 20f), body.getWorldCenter(),true);
+            world.destroyBody(body);
             obliterated = true;
             setRegion(new TextureRegion(PlayScreen.atlas.findRegion("goomba"), 0, 0, 16, 16));
             flip(false, true);
-            world.destroyBody(body);
             stateTime = 0;
         }
         else if(!destroyed && !obliterated) {
