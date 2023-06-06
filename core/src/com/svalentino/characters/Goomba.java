@@ -113,6 +113,9 @@ public class Goomba extends Enemy {
     }
 
     public void draw(Batch batch) {
+        if(setToObliterate) {
+            setPosition(-100, -100);
+        }
         if(!destroyed || stateTime < 0.3) {
             super.draw(batch);
         }
@@ -127,7 +130,7 @@ public class Goomba extends Enemy {
 
     @Override
     public void obliterate() {
-        setToDestroy = true;
+        setToObliterate = true;
         hasDied = true;
         SoundManager.ENEMY_HIT_SOUND.play();
         GameHud.updateScore(300);
