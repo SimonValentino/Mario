@@ -47,7 +47,7 @@ public class PlayScreen implements Screen {
         this.hud = new GameHud(MarioGame.batch);
         this.box2DRenderer = new Box2DDebugRenderer();
 
-        this.worldRenderer = new WorldRenderer("MarioMap.tmx", camera, game);
+        this.worldRenderer = new WorldRenderer("Level2.tmx", camera, game);
 
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
