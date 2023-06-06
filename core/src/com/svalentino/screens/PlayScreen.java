@@ -70,7 +70,7 @@ public class PlayScreen implements Screen {
         worldRenderer.render();
 
         // render the Box2D blocks
-        box2DRenderer.render(worldRenderer.getWorld(), camera.combined);
+    //    box2DRenderer.render(worldRenderer.getWorld(), camera.combined);
 
         // setup where the batch will project to
         // getting the hud's camera
