@@ -69,9 +69,10 @@ public class MarioGame extends Game {
 	}
 
 	public void playThemeSong() {
-
 		SoundManager.THEME_SONG.setLooping(true);
 		SoundManager.THEME_SONG.setVolume(0.15f);
 		SoundManager.THEME_SONG.play();
 	}
+
+
 }

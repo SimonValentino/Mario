@@ -25,7 +25,7 @@ public class Mario extends Sprite implements Disposable {
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.55f;
     private final World world;
     private final Body mario;
-    private final float marioMaxSpeed = 12f;
+    private final float marioMaxSpeed = 52f;
     private final Animation marioRun;
     private final Animation marioJump;
     public TextureRegion marioStand;

@@ -14,6 +14,9 @@ import com.svalentino.MarioGame;
 import com.svalentino.WorldRenderer;
 import com.svalentino.SoundManager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*
 Actual rendering of the MarioGame is delegated to a screen.
 Any screen class should implement Screen.
@@ -21,7 +24,8 @@ Any screen class should implement Screen.
 public class PlayScreen implements Screen {
     private final MarioGame game;
 
-
+    int levelNumber = 1;
+    Map<Integer, String> levels;
 
     private final OrthographicCamera camera;
     private final Viewport vport;
@@ -29,7 +33,7 @@ public class PlayScreen implements Screen {
     private final GameHud hud;
 
     private final GameOverScreen gameOverScreen;
-    private final WorldRenderer worldRenderer;
+    private WorldRenderer worldRenderer;
     private final Box2DDebugRenderer box2DRenderer;
 
 
@@ -37,7 +41,7 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen(MarioGame game) {
-
+        constructLevels();
         atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
 
         this.game = game;
@@ -47,7 +51,7 @@ public class PlayScreen implements Screen {
         this.hud = new GameHud(MarioGame.batch);
         this.box2DRenderer = new Box2DDebugRenderer();
 
-        this.worldRenderer = new WorldRenderer("Level2.tmx", camera, game);
+        this.worldRenderer = new WorldRenderer(levels.get(levelNumber), camera, game);
 
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
@@ -115,6 +119,12 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
+        if (worldRenderer.isGameOver()) {
+            levelNumber++;
+            this.worldRenderer = new WorldRenderer(levels.get(levelNumber), camera, game);
+            return;
+        }
+
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
@@ -133,5 +143,11 @@ public class PlayScreen implements Screen {
             SoundManager.SPED_UP_THEME_SONG.play();
         }
 
+    }
+
+    private void constructLevels() {
+        levels = new HashMap<>();
+        levels.put(1, "MarioMap.tmx");
+        levels.put(2, "Level2.tmx");
     }
 }

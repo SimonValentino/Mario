@@ -40,8 +40,7 @@ public class WorldRenderer implements Disposable {
     private final MarioGame game;
     private final OrthographicCamera camera;
 
-
-
+    private boolean isGameOver = false;
 
     public WorldRenderer(TiledMap map, OrthographicCamera camera, MarioGame game) {
         this.game = game;
@@ -148,7 +147,7 @@ public class WorldRenderer implements Disposable {
                 throw new RuntimeException(e);
             }
 
-            System.exit(0);
+            isGameOver = true;
         }
     private void getInput(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
@@ -290,6 +289,10 @@ public class WorldRenderer implements Disposable {
 
     public TiledMap getMap() {
         return map;
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
     }
 
     @Override
