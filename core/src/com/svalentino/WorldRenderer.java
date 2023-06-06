@@ -66,6 +66,9 @@ public class WorldRenderer implements Disposable {
         for(Goomba goomba : goombas) {
             goomba.draw(MarioGame.batch);
         }
+        for(Koopa koopa : koopas) {
+            koopa.draw(MarioGame.batch);
+        }
         MarioGame.batch.end();
     }
 

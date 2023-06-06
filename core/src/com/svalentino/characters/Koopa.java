@@ -11,6 +11,7 @@ import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.SoundManager;
 import com.svalentino.WorldRenderer;
+import com.svalentino.screens.PlayScreen;
 
 public class Koopa extends Enemy {
 
@@ -18,7 +19,10 @@ public class Koopa extends Enemy {
     private KoopaState previousState;
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
+    private TextureRegion shell;
     private float stateTime = 0.0f;
+
+    public enum KoopaState {WALKING, SHELL, MOVING_SHELL}
 
     private boolean isDead = false;
     private boolean hasDied = false;
@@ -27,6 +31,17 @@ public class Koopa extends Enemy {
         super(worldRenderer, x, y);
 
         movement = new Vector2(6f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8f);
+        
+        frames = new Array<TextureRegion>();
+        frames.add(new TextureRegion(PlayScreen.atlas.findRegion("turtle"), 0, 0, 16, 24));
+        frames.add(new TextureRegion(PlayScreen.atlas.findRegion("turtle"), 16, 0, 16, 24));
+        shell = new TextureRegion(PlayScreen.atlas.findRegion("turtle"), 64, 0, 16, 24);
+
+        walkAnimation = new Animation(0.2f, frames);
+        currentState = previousState = KoopaState.WALKING;
+
+        setBounds(getX(), getY(), 1f, 1.2f);
+
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(getX(), getY());
@@ -60,7 +75,29 @@ public class Koopa extends Enemy {
 
         body.setActive(false);
     }
+    public TextureRegion getFrame(float dt){
+        TextureRegion region;
 
+        switch (currentState){
+            case SHELL:
+                region = shell;
+                break;
+            case WALKING:
+            default:
+                region = (TextureRegion) walkAnimation.getKeyFrame(stateTime, true);
+                break;
+        }
+
+        if(movement.x > 0 && region.isFlipX() == false){
+            region.flip(true, false);
+        }
+        if(movement.x < 0 && region.isFlipX() == true){
+            region.flip(true, false);
+        }
+        stateTime = currentState == previousState ? stateTime + dt : 0;
+        previousState = currentState;
+        return region;
+    }
     @Override
     public void dispose() {
 
@@ -74,7 +111,7 @@ public class Koopa extends Enemy {
         }
 
         stateTime += dt;
-
+        setRegion(getFrame(dt));
         if (currentState == KoopaState.SHELL && stateTime > 4) {
             currentState = KoopaState.WALKING;
             movement.x = 5f * (Math.random() - 0.5 >= 0 ? 1 : -1);
