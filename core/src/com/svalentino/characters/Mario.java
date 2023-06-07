@@ -84,6 +84,7 @@ public class Mario extends Sprite implements Disposable {
                 | MarioGame.EXIT_DOOR_COL;
 
         fixtureDef.shape = hitbox;
+        fixtureDef.friction = 0.4f;
         mario.createFixture(fixtureDef).setUserData(this);
 
         EdgeShape top = new EdgeShape();
@@ -207,7 +208,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public boolean isDead() {
-        return getYCoordinate() <= WorldRenderer.getCameraY() - 9.1f || GameHud.worldTimer <= 3 || isDead;
+        return getYCoordinate() <= WorldRenderer.getCameraY() - 8.8f || GameHud.worldTimer <= 3 || isDead;
     }
 
     public void setDead(boolean dead) {
