@@ -132,6 +132,15 @@ public class PlayScreen implements Screen {
             camera.position.x = worldRenderer.getMarioX();
         else
             camera.position.x = 12.5f * MarioGame.TILE_LENGTH * MarioGame.SCALE;
+        if(levelNumber == 4) {
+            System.out.println(camera.position.y);
+            if(worldRenderer.getMarioY() > 12.5 * MarioGame.TILE_LENGTH * MarioGame.SCALE) {
+                camera.position.y = worldRenderer.getMarioY();
+            }
+            if(worldRenderer.getMarioY() < 12.5 * MarioGame.TILE_LENGTH * MarioGame.SCALE && camera.position.y > 7.5) {
+                camera.position.y = worldRenderer.getMarioY();
+            }
+        }
         camera.update();
         worldRenderer.setView(camera);
 

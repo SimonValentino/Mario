@@ -297,6 +297,9 @@ public class WorldRenderer implements Disposable {
     public float getMarioX() {
         return mario.getXCoordinate();
     }
+    public float getMarioY() {
+        return mario.getYCoordinate();
+    }
 
     public TiledMap getMap() {
         return map;
