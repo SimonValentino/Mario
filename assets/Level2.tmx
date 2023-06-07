@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="767">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="771">
  <tileset firstgid="1" source="MarioTileset.tsx"/>
  <layer id="1" name="bg" width="240" height="15">
   <data encoding="base64" compression="zlib">
@@ -632,7 +632,7 @@
   <object id="738" x="960" y="192" width="16" height="16"/>
   <object id="740" x="2544" y="192" width="16" height="16"/>
   <object id="741" x="2752" y="192" width="16" height="16"/>
-  <object id="766" x="2016" y="96" width="16" height="16"/>
+  <object id="770" x="2023" y="94.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="11" name="koopas">
   <object id="743" x="2992" y="192" width="16" height="16"/>
@@ -643,7 +643,7 @@
   <object id="749" x="1328" y="80" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="flagpole">
-  <object id="750" x="3376" y="32" width="16" height="160"/>
+  <object id="768" x="3380.42" y="41.2413" width="6.07872" height="150.448"/>
  </objectgroup>
  <objectgroup id="13" name="exit">
   <object id="752" x="3632" y="176" width="16" height="32"/>
