@@ -185,10 +185,10 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void jump() {
-       // if (isOnGround()) {
+        if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
             SoundManager.JUMP_SOUND.play(0.05f);
-      //  }
+        }
     }
 
     public void moveRight() {
