@@ -21,6 +21,6 @@ public class Coin extends PhysicalObject implements InteractableObject {
         getCell().setTile(null);
         GameHud.updateScore(200);
         GameHud.updateCoins(1);
-        SoundManager.COIN_SOUND.play();
+        SoundManager.COIN_SOUND.play(0.25f);
     }
 }

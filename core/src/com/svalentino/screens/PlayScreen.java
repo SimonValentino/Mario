@@ -161,11 +161,11 @@ public class PlayScreen implements Screen {
                 break;
             case 2:
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Underground.mp3"));
-                SoundManager.THEME_SONG.setVolume(0.3f);
+                SoundManager.THEME_SONG.setVolume(1f);
                 break;
             case 3:
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Level Theme.mp3"));
-                SoundManager.THEME_SONG.setVolume(0.15f);
+                SoundManager.THEME_SONG.setVolume(0.3f);
 
         }
     }
