@@ -26,7 +26,7 @@ public class GameHud implements Disposable {
     private int numLives;
 
     private static int coins;
-    final private int timeInLevel = 100;
+    final private int timeInLevel = 103;
 
     private Label numLivesLabel;
 
@@ -107,6 +107,10 @@ public class GameHud implements Disposable {
     }
     public void stopTimer() {
         gameNotOver = false;
+    }
+
+    public void resumeTimer() {
+        gameNotOver = true;
     }
     private void constructLabels() {
         countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer),

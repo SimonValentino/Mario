@@ -56,6 +56,9 @@ public class PlayScreen implements Screen {
 
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
+
+        hud.resetWorldTimer();
+        hud.resumeTimer();
     }
 
     @Override
