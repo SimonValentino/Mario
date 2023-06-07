@@ -98,7 +98,7 @@ public class GameHud implements Disposable {
             numLives--;
             numLivesLabel.setText(String.format("%01d", numLives));
         }
-        if(coins == 100) {
+        if(coins >= 100) {
             coins = 0;
             numLives++;
             SoundManager.ONE_UP_SOUND.play();
