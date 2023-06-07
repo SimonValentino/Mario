@@ -25,7 +25,7 @@ public class Mario extends Sprite implements Disposable {
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.55f;
     private final World world;
     private final Body mario;
-    private final float marioMaxSpeed = 52f;
+    private final float marioMaxSpeed = 12f;
     private final Animation marioRun;
     private final Animation marioJump;
     public TextureRegion marioStand;
@@ -49,7 +49,7 @@ public class Mario extends Sprite implements Disposable {
         runningRight = true;
         Array<TextureRegion> frames = new Array<>();
         for (int i = 1; i < 4; i++)
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
+            frames.add(new TextureRegion(getTexture(), i * 16, 0, 15, 16) );
         marioRun = new Animation(0.1f, frames);
         frames.clear();
 
@@ -193,12 +193,12 @@ public class Mario extends Sprite implements Disposable {
 
     public void moveRight() {
         if (isBelowMaxSpeedRight())
-            mario.applyLinearImpulse(new Vector2(0.55f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(0.65f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
         if (isBelowMaxSpeedLeft())
-            mario.applyLinearImpulse(new Vector2(-0.5f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(-0.65f, 0), mario.getWorldCenter(), true);
     }
 
     public void resetPosition() {

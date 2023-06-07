@@ -113,7 +113,7 @@ public class GameHud implements Disposable {
         gameNotOver = true;
     }
     private void constructLabels() {
-        countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer),
+        countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer - 3),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("%06d", score),
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -136,8 +136,8 @@ public class GameHud implements Disposable {
         score += points;
         scoreLabel.setText(String.format("%06d", score));
     }
-    public static void updateCoins() {
-        coins += 1;
+    public static void updateCoins(int numCoins) {
+        coins += numCoins;
         numCoinsLabel.setText(String.format("%0" + Integer.toString(coins).length() + "d", coins));
     }
     public void updateLives() {
@@ -145,7 +145,7 @@ public class GameHud implements Disposable {
     }
     public void resetWorldTimer() {
         worldTimer = timeInLevel;
-        countdownLabel.setText(String.format("%0" + Integer.toString(worldTimer).length() + "d", worldTimer));
+        countdownLabel.setText(String.format("%0" + Integer.toString(worldTimer).length() + "d", worldTimer - 3));
 
     }
 

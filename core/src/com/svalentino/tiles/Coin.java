@@ -20,7 +20,7 @@ public class Coin extends PhysicalObject implements InteractableObject {
         setCategory(MarioGame.DESTROYED_COL);
         getCell().setTile(null);
         GameHud.updateScore(200);
-        GameHud.updateCoins();
+        GameHud.updateCoins(1);
         SoundManager.COIN_SOUND.play();
     }
 }

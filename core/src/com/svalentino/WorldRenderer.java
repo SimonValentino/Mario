@@ -108,7 +108,6 @@ public class WorldRenderer implements Disposable {
                 freeze();
                 timeElapsed += delta;
                 SoundManager.THEME_SONG.stop();
-                SoundManager.UNDERGROUND_THEME_SONG.stop();
                 SoundManager.SPED_UP_THEME_SONG.stop();
                 SoundManager.DEATH_SOUND.setVolume(1f);
                 SoundManager.DEATH_SOUND.play();
@@ -149,7 +148,6 @@ public class WorldRenderer implements Disposable {
             }
 
             game.setScreen(new PlayScreen(game, screen.getHud(), screen.getLevelNumber() + 1));
-            SoundManager.UNDERGROUND_THEME_SONG.play();
         }
     private void getInput(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))

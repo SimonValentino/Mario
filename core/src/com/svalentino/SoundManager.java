@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 public class SoundManager {
-    public static final Music THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+    public static Music THEME_SONG;
     public static final Music SPED_UP_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Sped up Theme Music.mp3"));
     public static final Sound COIN_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/coin.wav"));
     public static final Sound BLANK_BLOCK_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/bump.wav"));
@@ -17,7 +17,4 @@ public class SoundManager {
     public static final Sound FLAGPOLE_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Flagpole.mp3"));
     public static final Sound STAGE_WIN_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Stage Win (2).mp3"));
     public static final Sound ITSA_ME_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/It's-a Me Mario!.mp3"));
-    public  static final Music UNDERGROUND_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Underground Theme Song.mp3"));
-
-
 }

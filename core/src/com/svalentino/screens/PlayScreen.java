@@ -59,6 +59,9 @@ public class PlayScreen implements Screen {
 
         hud.resetWorldTimer();
         hud.resumeTimer();
+
+        configureThemeSong();
+        game.playThemeSong();
     }
 
     @Override
@@ -145,8 +148,26 @@ public class PlayScreen implements Screen {
 
     private void constructLevels() {
         levels = new HashMap<>();
-        levels.put(1, "MarioMap.tmx");
+        levels.put(1, "Level1.tmx");
         levels.put(2, "Level2.tmx");
+        levels.put(3, "Level3.tmx");
+    }
+
+    private void configureThemeSong() {
+        switch (levelNumber) {
+            case 1:
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.15f);
+                break;
+            case 2:
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Underground.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.3f);
+                break;
+            case 3:
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Level Theme.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.15f);
+
+        }
     }
 
     public MarioGame getGame() {

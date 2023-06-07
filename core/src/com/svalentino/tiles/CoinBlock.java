@@ -26,8 +26,8 @@ public class CoinBlock extends PhysicalObject implements InteractableObject {
             SoundManager.COIN_SOUND.play();
 
         getCell().setTile(tileset.getTile(28));
-        GameHud.updateScore(200);
-        GameHud.updateCoins();
+        GameHud.updateScore(1000);
+        GameHud.updateCoins(5);
 
     }
 
