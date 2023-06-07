@@ -45,7 +45,7 @@ public class GameHud implements Disposable {
         worldTimer = timeInLevel;
         timeCount = 0;
         score = 0;
-        numLives = 1;
+        numLives = 3;
         coins = 0;
         vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, new OrthographicCamera());
 
