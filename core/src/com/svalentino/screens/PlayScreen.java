@@ -128,7 +128,10 @@ public class PlayScreen implements Screen {
     private void update(float delta) {
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
-        camera.position.x = worldRenderer.getMarioX();
+        if (worldRenderer.getMarioX() > 12.5 * MarioGame.TILE_LENGTH * MarioGame.SCALE)
+            camera.position.x = worldRenderer.getMarioX();
+        else
+            camera.position.x = 12.5f * MarioGame.TILE_LENGTH * MarioGame.SCALE;
         camera.update();
         worldRenderer.setView(camera);
 
