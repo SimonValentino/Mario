@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
 import com.svalentino.SoundManager;
+import com.svalentino.WorldRenderer;
 import com.svalentino.screens.PlayScreen;
 
 public class Mario extends Sprite implements Disposable {
@@ -206,7 +207,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public boolean isDead() {
-        return getYCoordinate() <= -8 || GameHud.worldTimer <= 3 || isDead;
+        return getYCoordinate() <= WorldRenderer.getCameraY() - 9.1f || GameHud.worldTimer <= 3 || isDead;
     }
 
     public void setDead(boolean dead) {

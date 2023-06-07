@@ -33,7 +33,7 @@ public class Koopa extends Enemy {
     public Koopa(WorldRenderer worldRenderer, float x, float y) {
         super(worldRenderer, x, y);
 
-        movement = new Vector2(6f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8f);
+        movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8.5f);
         
         frames = new Array<TextureRegion>();
         frames.add(new TextureRegion(PlayScreen.atlas.findRegion("turtle"), 0, 0, 16, 24));

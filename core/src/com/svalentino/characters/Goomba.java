@@ -31,7 +31,7 @@ public class Goomba extends Enemy {
         super(worldRenderer, x, y);
         destroyed = false;
         setToDestroy = false;
-        movement = new Vector2(6f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8f);
+        movement = new Vector2(5f * (Math.random() - 0.5 >= 0 ? 1 : -1), -8f);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(getX(), getY());

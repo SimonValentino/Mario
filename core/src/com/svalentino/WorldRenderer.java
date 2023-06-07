@@ -44,7 +44,7 @@ public class WorldRenderer implements Disposable {
     private final OrthographicCamera camera;
 
     private boolean isGameOver = false;
-    private PlayScreen screen;
+    private static PlayScreen screen;
 
     public WorldRenderer(TiledMap map, PlayScreen screen) {
         this.screen = screen;
@@ -307,6 +307,10 @@ public class WorldRenderer implements Disposable {
 
     public boolean isGameOver() {
         return isGameOver;
+    }
+
+    public static float getCameraY() {
+        return screen.getCameraY();
     }
 
     @Override
