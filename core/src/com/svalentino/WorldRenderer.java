@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.characters.Goomba;
 import com.svalentino.characters.Koopa;
 import com.svalentino.characters.Mario;
+import com.svalentino.screens.PlayScreen;
 import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.DefaultTile;
 import com.svalentino.tiles.Coin;
@@ -41,10 +42,12 @@ public class WorldRenderer implements Disposable {
     private final OrthographicCamera camera;
 
     private boolean isGameOver = false;
+    private PlayScreen screen;
 
-    public WorldRenderer(TiledMap map, OrthographicCamera camera, MarioGame game) {
-        this.game = game;
-        this.camera = camera;
+    public WorldRenderer(TiledMap map, PlayScreen screen) {
+        this.screen = screen;
+        this.game = screen.getGame();
+        this.camera = screen.getCamera();
         mario = new Mario(world);
         this.map = map;
         this.renderer = new OrthogonalTiledMapRenderer(map, MarioGame.SCALE);
@@ -52,9 +55,9 @@ public class WorldRenderer implements Disposable {
         world.setContactListener(new GameContactListener());
     }
 
-    public WorldRenderer(String mapName, OrthographicCamera camera, MarioGame game) {
+    public WorldRenderer(String mapName, PlayScreen screen) {
 
-        this(new TmxMapLoader().load(mapName), camera, game);
+        this(new TmxMapLoader().load(mapName), screen);
     }
 
     public void render() {
@@ -147,7 +150,7 @@ public class WorldRenderer implements Disposable {
                 throw new RuntimeException(e);
             }
 
-            isGameOver = true;
+            game.setScreen(new PlayScreen(game, screen.getHud(), screen.getLevelNumber() + 1));
         }
     private void getInput(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))

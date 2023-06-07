@@ -24,13 +24,13 @@ Any screen class should implement Screen.
 public class PlayScreen implements Screen {
     private final MarioGame game;
 
-    int levelNumber = 1;
+    int levelNumber;
     Map<Integer, String> levels;
 
     private final OrthographicCamera camera;
     private final Viewport vport;
 
-    private final GameHud hud;
+    private GameHud hud;
 
     private final GameOverScreen gameOverScreen;
     private WorldRenderer worldRenderer;
@@ -40,7 +40,8 @@ public class PlayScreen implements Screen {
     public static TextureAtlas atlas;
 
 
-    public PlayScreen(MarioGame game) {
+    public PlayScreen(MarioGame game, GameHud hud, int levelNumber) {
+        this.levelNumber = levelNumber;
         constructLevels();
         atlas = new TextureAtlas(Gdx.files.internal("Downloads/Mario_and_Enemies.pack"));
 
@@ -48,10 +49,10 @@ public class PlayScreen implements Screen {
         this.gameOverScreen = new GameOverScreen(game);
         this.camera = new OrthographicCamera();
         this.vport = new FitViewport(MarioGame.WIDTH * MarioGame.SCALE, MarioGame.HEIGHT * MarioGame.SCALE, camera);
-        this.hud = new GameHud(MarioGame.batch);
+        this.hud = hud;
         this.box2DRenderer = new Box2DDebugRenderer();
 
-        this.worldRenderer = new WorldRenderer(levels.get(levelNumber), camera, game);
+        this.worldRenderer = new WorldRenderer(levels.get(this.levelNumber), this);
 
         camera.position.set(vport.getWorldWidth() / 2, vport.getWorldHeight() / 2, 0);
         camera.update();
@@ -119,12 +120,6 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
-        if (worldRenderer.isGameOver()) {
-            levelNumber++;
-            this.worldRenderer = new WorldRenderer(levels.get(levelNumber), camera, game);
-            return;
-        }
-
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         camera.position.x = worldRenderer.getMarioX();
@@ -149,5 +144,21 @@ public class PlayScreen implements Screen {
         levels = new HashMap<>();
         levels.put(1, "MarioMap.tmx");
         levels.put(2, "Level2.tmx");
+    }
+
+    public MarioGame getGame() {
+        return game;
+    }
+
+    public GameHud getHud() {
+        return hud;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
+    public int getLevelNumber() {
+        return levelNumber;
     }
 }

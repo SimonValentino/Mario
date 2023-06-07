@@ -12,7 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.svalentino.GameHud;
 import com.svalentino.MarioGame;
+import com.svalentino.SoundManager;
 import com.svalentino.characters.Mario;
 import com.badlogic.gdx.Gdx;
 
@@ -62,7 +64,8 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            game.setScreen(new PlayScreen(game));
+            game.setScreen(new PlayScreen(game, new GameHud(MarioGame.batch), 1));
+            SoundManager.GAME_OVER_SOUND.stop();
             game.playThemeSong();
         }
 
