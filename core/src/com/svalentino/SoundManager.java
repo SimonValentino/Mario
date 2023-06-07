@@ -17,6 +17,7 @@ public class SoundManager {
     public static final Sound FLAGPOLE_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Flagpole.mp3"));
     public static final Sound STAGE_WIN_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Stage Win (2).mp3"));
     public static final Sound ITSA_ME_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/It's-a Me Mario!.mp3"));
+    public  static final Music UNDERGROUND_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Underground Theme Song.mp3"));
 
 
 }

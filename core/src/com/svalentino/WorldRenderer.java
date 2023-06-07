@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -107,6 +108,7 @@ public class WorldRenderer implements Disposable {
                 freeze();
                 timeElapsed += delta;
                 SoundManager.THEME_SONG.stop();
+                SoundManager.UNDERGROUND_THEME_SONG.stop();
                 SoundManager.SPED_UP_THEME_SONG.stop();
                 SoundManager.DEATH_SOUND.setVolume(1f);
                 SoundManager.DEATH_SOUND.play();
@@ -118,10 +120,6 @@ public class WorldRenderer implements Disposable {
                     mario.setDead(false);
                     if (hud.getNumLives() > 0) {
                         game.setScreen(new PlayScreen(game, screen.getHud(), screen.getLevelNumber()));
-//                        SoundManager.THEME_SONG.play();
-//                        timeElapsed = 0;
-//                        unfreeze();
-//                        resetEnemies();
                     } else {
                         SoundManager.GAME_OVER_SOUND.play();
                     }
@@ -151,6 +149,7 @@ public class WorldRenderer implements Disposable {
             }
 
             game.setScreen(new PlayScreen(game, screen.getHud(), screen.getLevelNumber() + 1));
+            SoundManager.UNDERGROUND_THEME_SONG.play();
         }
     private void getInput(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
