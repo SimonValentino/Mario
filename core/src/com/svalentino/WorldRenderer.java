@@ -23,6 +23,7 @@ import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.DefaultTile;
 import com.svalentino.tiles.Coin;
 import com.svalentino.tiles.CoinBlock;
+import com.svalentino.tiles.EnemyBorder;
 import com.svalentino.tiles.ExitDoor;
 import com.svalentino.tiles.Flagpole;
 import com.svalentino.tiles.Ground;
@@ -193,6 +194,7 @@ public class WorldRenderer implements Disposable {
         constructKoopas();
         constructFlagpole();
         constructExitDoor();
+        constructEnemyBorders();
     }
 
     private void constructExitDoor() {
@@ -223,6 +225,15 @@ public class WorldRenderer implements Disposable {
             rect = obj.getRectangle();
             koopas.add(new Koopa(this, rect.getX() * MarioGame.SCALE,
                     rect.getY() * MarioGame.SCALE));
+        }
+    }
+
+    private void constructEnemyBorders() {
+        Rectangle rect;
+
+        for (RectangleMapObject obj : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)) {
+            rect = obj.getRectangle();
+            new EnemyBorder(this, rect);
         }
     }
 

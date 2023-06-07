@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="754">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="767">
  <tileset firstgid="1" source="MarioTileset.tsx"/>
  <layer id="1" name="bg" width="240" height="15">
   <data encoding="base64" compression="zlib">
@@ -11,12 +11,12 @@
    eJztmEtOAzEMhsMSBGU9VygC9t2i3CTH4PANopEsK87TeY5/6VdnpulMxs4XJ9VKKS0Wi6ezsb4FbB7tziAXE3gOY4G/n0k4bzP3dUatGi/IrwEWftvw6+7Frd35he/WQrnxCtW8UB+Pp9Ie+iX1l87dSvWXWl/VqCUvoeflPpOD7V78/gq/7Arxy81ETn9ynr8DvyPVK7fCL79w7o7Edq1Uwq+oTjmxTf1vyaeW/O6y/9XgU6Nzqn3KO6a2o9ZRBlmUp5Yx24HfXeqv27dq4tzXnpNfSqvx+2zH2gvzeIupNC618Szht0Sl/L4CQ+3AL86dr+6m7B1D351x/Xq1Y+2jIb+t57Cc+/ty22IfU8rvm/XF+h1d5+T38HgF4Xzg4935peosxS9HXe6xBsl5Ruqa2DcODnAtNuZL+P2ruZ/AsAaP3P8a9BlqE2tXK653xGvkFdbJFKe5151i8xxXbGK/nzEHJfxeHv4Cx04j1s+Q25sKc4znEqpdrYTf/2P4v1vKdZ9C/PaMzYx5qOH3W43lF/NH8Ytrbg9+z6xe/Pae22acS0v6UMvvjzjqVFF7x9H9970DxenoforF3E7VzEys1Fdxuu+C/jcl
   </data>
  </layer>
- <objectgroup id="3" name="ground" visible="0">
+ <objectgroup id="3" name="ground">
   <object id="2" x="0" y="208" width="1168" height="32"/>
   <object id="3" x="1424" y="208" width="528" height="32"/>
   <object id="5" x="2112" y="208" width="1728" height="32"/>
  </objectgroup>
- <objectgroup id="5" name="bricks" visible="0">
+ <objectgroup id="5" name="bricks">
   <object id="88" x="0" y="192" width="16" height="16"/>
   <object id="89" x="0" y="176" width="16" height="16"/>
   <object id="90" x="0" y="160" width="16" height="16"/>
@@ -427,7 +427,7 @@
   <object id="632" x="2848" y="0" width="16" height="16"/>
   <object id="633" x="2864" y="0" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="6" name="coins" visible="0">
+ <objectgroup id="6" name="coins">
   <object id="532" x="1008" y="16" width="16" height="16"/>
   <object id="533" x="1024" y="16" width="16" height="16"/>
   <object id="534" x="1040" y="16" width="16" height="16"/>
@@ -578,7 +578,7 @@
   <object id="720" x="3808" y="176" width="16" height="16"/>
   <object id="721" x="3808" y="192" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="8" name="coinblocks" visible="0">
+ <objectgroup id="8" name="coinblocks">
   <object id="599" x="160" y="144" width="16" height="16"/>
   <object id="600" x="176" y="144" width="16" height="16"/>
   <object id="601" x="192" y="144" width="16" height="16"/>
@@ -588,7 +588,7 @@
   <object id="605" x="3200" y="144" width="16" height="16"/>
   <object id="606" x="3248" y="144" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="9" name="default" visible="0">
+ <objectgroup id="9" name="default">
   <object id="607" x="288" y="192" width="16" height="16"/>
   <object id="608" x="320" y="176" width="16" height="32"/>
   <object id="609" x="352" y="160" width="16" height="48"/>
@@ -626,27 +626,34 @@
   <object id="733" x="2848" y="192" width="16" height="16"/>
   <object id="751" x="3376" y="192" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="10" name="goombas" visible="0">
+ <objectgroup id="10" name="goombas">
   <object id="734" x="1808" y="192" width="16" height="16"/>
-  <object id="736" x="1536" y="48" width="16" height="16"/>
   <object id="737" x="1008" y="192" width="16" height="16"/>
   <object id="738" x="960" y="192" width="16" height="16"/>
   <object id="740" x="2544" y="192" width="16" height="16"/>
   <object id="741" x="2752" y="192" width="16" height="16"/>
+  <object id="766" x="2016" y="96" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="11" name="koopas" visible="0">
+ <objectgroup id="11" name="koopas">
   <object id="743" x="2992" y="192" width="16" height="16"/>
   <object id="744" x="2672" y="192" width="16" height="16"/>
   <object id="745" x="2608" y="192" width="16" height="16"/>
   <object id="746" x="1584" y="192" width="16" height="16"/>
   <object id="747" x="688" y="192" width="16" height="16"/>
-  <object id="748" x="1024" y="112" width="16" height="16"/>
   <object id="749" x="1328" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup id="12" name="flagpole" visible="0">
+ <objectgroup id="12" name="flagpole">
   <object id="750" x="3376" y="32" width="16" height="160"/>
  </objectgroup>
- <objectgroup id="13" name="exit" visible="0">
+ <objectgroup id="13" name="exit">
   <object id="752" x="3632" y="176" width="16" height="32"/>
+ </objectgroup>
+ <objectgroup id="14" name="enemyborders">
+  <object id="754" x="1168" y="192" width="16" height="16"/>
+  <object id="756" x="1296" y="80" width="16" height="16"/>
+  <object id="757" x="1376" y="80" width="16" height="16"/>
+  <object id="760" x="1408" y="192" width="16" height="16"/>
+  <object id="764" x="2048" y="96" width="16" height="16"/>
+  <object id="765" x="2000" y="96" width="16" height="16"/>
  </objectgroup>
 </map>

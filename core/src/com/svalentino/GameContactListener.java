@@ -132,6 +132,18 @@ public class GameContactListener implements ContactListener {
                 mario.goThroughExitDoor();
             }
         }
+
+        else if (col == (MarioGame.ENEMY_COL | MarioGame.ENEMY_BORDER_COL)) {
+            if (fixtureA.getFilterData().categoryBits == MarioGame.ENEMY_COL) {
+                if (!(fixtureA.getUserData() instanceof Koopa && ((Koopa) fixtureA.getUserData()).getCurrentState() == Koopa.KoopaState.MOVING_SHELL)) {
+                    Enemy enemy = (Enemy) fixtureA.getUserData();
+                    enemy.reverse();
+                }
+            } else if (!(fixtureB.getUserData() instanceof Koopa && ((Koopa) fixtureB.getUserData()).getCurrentState() == Koopa.KoopaState.MOVING_SHELL)) {
+                Enemy enemy = (Enemy) fixtureB.getUserData();
+                enemy.reverse();
+            }
+        }
     }
 
     /*

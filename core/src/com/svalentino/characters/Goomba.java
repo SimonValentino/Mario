@@ -45,7 +45,7 @@ public class Goomba extends Enemy {
         fixtureDef.filter.categoryBits = MarioGame.ENEMY_COL;
         fixtureDef.filter.maskBits = MarioGame.DEFAULT_COL | MarioGame.BRICK_COL |
                 MarioGame.COIN_BLOCK_COL | MarioGame.ENEMY_COL
-                | MarioGame.MARIO_COL | MarioGame.GROUND_COL;
+                | MarioGame.MARIO_COL | MarioGame.GROUND_COL | MarioGame.ENEMY_BORDER_COL;
 
         fixtureDef.shape = hitbox;
         body.createFixture(fixtureDef).setUserData(this);

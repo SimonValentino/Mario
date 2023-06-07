@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="200" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="115">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="200" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="132">
  <tileset firstgid="1" source="MarioTileset.tsx"/>
  <layer id="1" name="bg" width="200" height="15">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer id="2" name="graphics" width="200" height="15">
   <data encoding="base64" compression="zlib">
-   eJztWM1OwzAMTtkJ2OC8ayUuwMZ9z8ZTjL8HGTB4OxyJqFkUO3HitGnXT/rUtZ1c1/FnO1VqmthZHAN2Hs44xbpR6vcCv6/vSVMab2DzHfgRYXsBXP8fc225GCrPjM9cv2P0kROPKeB5Avr4BptH4I+A7ZCtGmus8Znr9wHW/tPiV4Pblogt5he3j6XWA+rZGGrSh9R7lwQWyz3E8cXiqyfXhkSLXD82HSXQxxrG1IMYHIi6YFCTPqTeuySoWhPKtZjcweopp85yZjxpfYxhDTmoSR+lsVCn+w9sD5KKUK71lTutwvuFi5DPJeLkznUUqdoei5xQp+pjqTqORR+5MDMUNjtJ1+I+MJTP9nMpDg1bH+7R/PZxBfdugLfEf6amDw1qzWpa11jU4HPN35iNPnw5TPWOjUVuD5GEdFzt3u/r7Vge2X6k5Jq7v+cw51uAhD58s9ye4V+OPmLnyFQ7KfrQfUNzq7rftfcPLP98a0flS8n+ETtzSM4glB13v+YDtdcJxVHi3fSz7wTI1QdFo4knNR59aMTGv4Q+QnsXzL8h9RFCq+rQhwQwO/p6CX3Y6FMfVB6W0Af2LYYzm1H+1aqPVg2jj0u4dmVdL6GPnFm3r7k4B5w1of4Xa5tjN+T3GPThaoOjj2s4X2ZwBXworA/b95LE0AjSh3PXh2R8c9fB9e8RzjcZ3M76mPUxYX1w39XF/Rno4w/SKCK8
+   eJztWM1OwzAMTtkJ2OC8ayUuwMZ9z8ZTjL8HGTB4OxyJqFkUO3HjNGnXT/q0rZ1cx/FnO1VqmthZHAN2Hs44xbpR6vcCv6/vSVMab2DzHfgRYXsBXP9/ptpyUSrPjM9cv2P0kRKPKeB5Avr4BptH4I+A7ZCtGmus8Znr9wH2/tPiV4Pblogt5he3j/WtB9SzMdSkD6l15wQWyz3E8cXiqyfXSqJFrh+bjhIYYg9j6kEMDkRdMKhJH1Lrzgmq1oRyLSZ3sHrKqbOcGU9aH2PYQw5q0kduLNTp+QM7g/RFKNeGyp1W4f3CRcjnHHFy5zqKVG2PRUqo++pjqTqORR+pMDMUNjtJ1+IhUMpn+7kUS8PWh/tpvvu4gns3wFviP1PThwa1ZzXtayxq8Lnmd8xGH74cpnrHxiK3h0hCOq527/f1diyPbD/65Jp7vucw5V2AhD58s9ye4d/U9KH7huZWdd9r7x9Y/vn2jsqXnP0jduaQnEEoO+55zQfqrBOKo8Ta9LPvBIitAdMHRaOJJzUefWjExj+HPkJnF8y/kvoIoVV16EMCmB19PYc+bAypDyoPc+gDexfDmc0o/2rVR6vK6OMSrl1Z13PoI2XWHWouTgFnT6j/xdrm2A35PQZ9uNrg6OMafi8TuAI+ZNaH7XtOYmgE6cO560Myvqn74Pr3CL83CdzO+pj1MWF9cNfq4v4M9PEHqB0ieA==
   </data>
  </layer>
  <objectgroup id="3" name="ground">
@@ -108,8 +108,6 @@
   <object id="88" x="512" y="16" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="7" name="default">
-  <object id="89" x="2640" y="128" width="16" height="112"/>
-  <object id="90" x="2352" y="128" width="16" height="112"/>
   <object id="91" x="2288" y="176" width="32" height="64"/>
   <object id="92" x="2032" y="192" width="256" height="32"/>
   <object id="93" x="1856" y="128" width="16" height="80"/>
@@ -120,6 +118,8 @@
   <object id="98" x="1488" y="48" width="16" height="16"/>
   <object id="99" x="1408" y="80" width="32" height="16"/>
   <object id="112" x="2736" y="160" width="16" height="16"/>
+  <object id="125" x="2352" y="144" width="16" height="96"/>
+  <object id="126" x="2640" y="144" width="16" height="96"/>
  </objectgroup>
  <objectgroup id="8" name="goombas">
   <object id="100" x="1312" y="112" width="16" height="16"/>
@@ -128,6 +128,7 @@
   <object id="103" x="1552" y="192" width="16" height="16"/>
   <object id="104" x="2528" y="128" width="16" height="16"/>
   <object id="105" x="2432" y="128" width="16" height="16"/>
+  <object id="131" x="752" y="80" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="9" name="koopas">
   <object id="106" x="2160" y="176" width="16" height="16"/>
@@ -141,5 +142,21 @@
  </objectgroup>
  <objectgroup id="11" name="exit">
   <object id="113" x="2992" y="144" width="16" height="32"/>
+ </objectgroup>
+ <objectgroup id="12" name="enemyborders">
+  <object id="115" x="448" y="128" width="16" height="16"/>
+  <object id="116" x="576" y="128" width="16" height="16"/>
+  <object id="117" x="800" y="160" width="16" height="16"/>
+  <object id="118" x="928" y="160" width="16" height="16"/>
+  <object id="119" x="1360" y="112" width="16" height="16"/>
+  <object id="120" x="1088" y="112" width="16" height="16"/>
+  <object id="121" x="1392" y="192" width="16" height="16"/>
+  <object id="122" x="2016" y="176" width="16" height="16"/>
+  <object id="123" x="2032" y="64" width="16" height="16"/>
+  <object id="124" x="2240" y="64" width="16" height="16"/>
+  <object id="127" x="2336" y="128" width="16" height="16"/>
+  <object id="128" x="2656" y="128" width="16" height="16"/>
+  <object id="129" x="720" y="80" width="16" height="16"/>
+  <object id="130" x="784" y="80" width="16" height="16"/>
  </objectgroup>
 </map>
