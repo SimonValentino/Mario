@@ -128,7 +128,7 @@ public class PlayScreen implements Screen {
     private void update(float delta) {
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
-        if (worldRenderer.getMarioX() > 12.5 * MarioGame.TILE_LENGTH * MarioGame.SCALE)
+        if (worldRenderer.getMarioX() > 12.5 * MarioGame.TILE_LENGTH * MarioGame.SCALE && levelNumber != 4)
             camera.position.x = worldRenderer.getMarioX();
         else
             camera.position.x = 12.5f * MarioGame.TILE_LENGTH * MarioGame.SCALE;
@@ -154,6 +154,7 @@ public class PlayScreen implements Screen {
         levels.put(1, "Level1.tmx");
         levels.put(2, "Level2.tmx");
         levels.put(3, "Level3.tmx");
+        levels.put(4, "Level4.tmx");
     }
 
     private void configureThemeSong() {
@@ -169,6 +170,10 @@ public class PlayScreen implements Screen {
             case 3:
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Level Theme.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.3f);
+            case 4:
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.15f);
+                break;
 
         }
     }
