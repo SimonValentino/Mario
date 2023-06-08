@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.svalentino.characters.Goomba;
 import com.svalentino.characters.Koopa;
 import com.svalentino.characters.Mario;
+import com.svalentino.screens.GameWonScreen;
 import com.svalentino.screens.PlayScreen;
 import com.svalentino.tiles.Brick;
 import com.svalentino.tiles.DefaultTile;
@@ -148,7 +149,11 @@ public class WorldRenderer implements Disposable {
                 throw new RuntimeException(e);
             }
 
-            game.setScreen(new PlayScreen(game, screen.getHud(), screen.getLevelNumber() + 1));
+            if (screen.getLevelNumber() == 5) {
+                game.setScreen(new GameWonScreen(game));
+            } else {
+                game.setScreen(new PlayScreen(game, screen.getHud(), screen.getLevelNumber() + 1));
+            }
         }
     private void getInput(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))

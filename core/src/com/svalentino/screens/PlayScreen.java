@@ -127,6 +127,8 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
+        MarioGame.timePlayed += delta;
+
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         if (levelNumber == 4 && camera.position.y < 85f) {
@@ -177,12 +179,12 @@ public class PlayScreen implements Screen {
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Level Theme.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.45f);
             case 4:
-                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Theme.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.22f);
                 break;
             case 5:
-                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
-                SoundManager.THEME_SONG.setVolume(0.15f);
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Athletic Theme.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.4f);
                 break;
         }
     }
