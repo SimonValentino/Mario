@@ -159,6 +159,7 @@ public class PlayScreen implements Screen {
         levels.put(2, "Level2.tmx");
         levels.put(3, "Level3.tmx");
         levels.put(4, "Level4.tmx");
+        levels.put(5, "CreditsLevel.tmx");
     }
 
     private void configureThemeSong() {
@@ -178,7 +179,10 @@ public class PlayScreen implements Screen {
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.15f);
                 break;
-
+            case 5:
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.15f);
+                break;
         }
     }
 
