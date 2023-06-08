@@ -46,12 +46,12 @@ public class MarioGame extends Game {
 	public static SpriteBatch batch;
 
 	/*
-	init sprite bach and set the screen to PlayScreen
+	init sprite batch and set the screen to PlayScreen
 	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		super.setScreen(new PlayScreen(this, new GameHud(batch), 5));
+		super.setScreen(new PlayScreen(this, new GameHud(batch), 1));
 	}
 
 	@Override

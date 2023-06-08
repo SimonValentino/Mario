@@ -116,7 +116,7 @@ public class Mario extends Sprite implements Disposable {
             walkedOff = true;
         }
 
-        mario.setLinearVelocity(new Vector2(15f, -30f));
+        mario.setLinearVelocity(new Vector2(15f, -55f));
     }
 
     public void goThroughExitDoor() {
