@@ -126,6 +126,8 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
+        MarioGame.timePlayed += delta;
+
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         if (levelNumber == 4 && camera.position.y < 85f) {
