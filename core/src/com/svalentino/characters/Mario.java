@@ -26,7 +26,7 @@ public class Mario extends Sprite implements Disposable {
     public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.55f;
     private final World world;
     private final Body mario;
-    private final float marioMaxSpeed = 12f;
+    private final float marioMaxSpeed = 11.7f;
     private final Animation marioRun;
     private final Animation marioJump;
     public TextureRegion marioStand;
@@ -84,7 +84,7 @@ public class Mario extends Sprite implements Disposable {
                 | MarioGame.EXIT_DOOR_COL;
 
         fixtureDef.shape = hitbox;
-        fixtureDef.friction = 0.4f;
+        fixtureDef.friction = 0.3f;
         mario.createFixture(fixtureDef).setUserData(this);
 
         EdgeShape top = new EdgeShape();
@@ -116,7 +116,7 @@ public class Mario extends Sprite implements Disposable {
             walkedOff = true;
         }
 
-        mario.setLinearVelocity(new Vector2(15f, -60f));
+        mario.setLinearVelocity(new Vector2(15f, 0f));
     }
 
     public void goThroughExitDoor() {
@@ -187,20 +187,20 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void jump() {
-        //if (isOnGround()) {
+        if (isOnGround()) {
             mario.applyLinearImpulse(new Vector2(0, 24f), mario.getWorldCenter(), true);
             SoundManager.JUMP_SOUND.play(0.05f);
-        //}
+        }
     }
 
     public void moveRight() {
         if (isBelowMaxSpeedRight())
-            mario.applyLinearImpulse(new Vector2(0.65f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(0.55f, 0), mario.getWorldCenter(), true);
     }
 
     public void moveLeft() {
         if (isBelowMaxSpeedLeft())
-            mario.applyLinearImpulse(new Vector2(-0.65f, 0), mario.getWorldCenter(), true);
+            mario.applyLinearImpulse(new Vector2(-0.55f, 0), mario.getWorldCenter(), true);
     }
 
     public void resetPosition() {

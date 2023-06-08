@@ -101,7 +101,7 @@ public class WorldRenderer implements Disposable {
                     koopa.update(delta);
                 }
 
-                world.step(1 / 60f, 15, 15);
+                world.step(1 / 60f, 10, 10);
                 mario.update(delta);
             }
 
