@@ -51,7 +51,7 @@ public class MarioGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		super.setScreen(new PlayScreen(this, new GameHud(batch), 4));
+		super.setScreen(new PlayScreen(this, new GameHud(batch), 1));
 	}
 
 	@Override
