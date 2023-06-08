@@ -87,7 +87,9 @@ public class PlayScreen implements Screen {
         // setup where the batch will project to
         // getting the hud's camera
         hud.stage.draw();
-
+        if (MarioGame.START_TIME == 0.0f) {
+            MarioGame.START_TIME = System.nanoTime();
+        }
     }
 
     /*
@@ -127,8 +129,6 @@ public class PlayScreen implements Screen {
     }
 
     private void update(float delta) {
-        MarioGame.timePlayed += delta;
-
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
         if (levelNumber == 4 && camera.position.y < 85f) {

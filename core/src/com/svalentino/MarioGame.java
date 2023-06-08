@@ -45,7 +45,7 @@ public class MarioGame extends Game {
 	// Public so all screens can have access to it
 	public static SpriteBatch batch;
 
-	public static float timePlayed = 0.0f;
+	public static float START_TIME = 0.0f;
 
 	/*
 	init sprite batch and set the screen to PlayScreen
@@ -53,7 +53,7 @@ public class MarioGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		super.setScreen(new PlayScreen(this, new GameHud(batch), 1));
+		super.setScreen(new PlayScreen(this, new GameHud(batch), 5));
 	}
 
 	@Override
