@@ -28,6 +28,8 @@ public class GameWonScreen implements Screen {
     private final OrthographicCamera camera;
 
     public GameWonScreen (MarioGame game) {
+        SoundManager.DELFINO_PLAZA_SONG.play();
+
         this.camera = new OrthographicCamera();
         this.game = game;
 
@@ -47,11 +49,17 @@ public class GameWonScreen implements Screen {
         table.setFillParent(true);
 
         Label label = new Label("YOU WIN", font);
-        Label timeLabel = new Label("You beat the game in " + MarioGame.timePlayed + " seconds", font);
+        Label timeLabel = new Label("Completed in " + MarioGame.timePlayed + " seconds", font);
+        Label creditsLabel = new Label("By Simon Valentino and Marrio Jeyakumar", font);
+        Label thanksLabel = new Label("Thanks for playing!", font);
 
         table.add(label).expandX();
         table.row();
         table.add(timeLabel).expandX().padTop(20);
+        table.row();
+        table.add(creditsLabel).expandX().padTop(20);
+        table.row();
+        table.add(thanksLabel).expandX().padTop(20);
 
         stage.addActor(table);
     }

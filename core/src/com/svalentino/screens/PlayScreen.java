@@ -182,8 +182,8 @@ public class PlayScreen implements Screen {
                 SoundManager.THEME_SONG.setVolume(0.22f);
                 break;
             case 5:
-                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
-                SoundManager.THEME_SONG.setVolume(0.15f);
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Athletic Theme.mp3"));
+                SoundManager.THEME_SONG.setVolume(0.4f);
                 break;
         }
     }
