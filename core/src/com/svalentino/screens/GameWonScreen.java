@@ -28,7 +28,7 @@ public class GameWonScreen implements Screen {
     private final OrthographicCamera camera;
 
     public GameWonScreen (MarioGame game) {
-        SoundManager.DELFINO_PLAZA_SONG.play();
+        SoundManager.GAME_WON_SONG.play();
 
         this.camera = new OrthographicCamera();
         this.game = game;

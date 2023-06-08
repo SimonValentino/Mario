@@ -178,7 +178,7 @@ public class PlayScreen implements Screen {
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Level Theme.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.45f);
             case 4:
-                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Theme.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.22f);
                 break;
             case 5:
