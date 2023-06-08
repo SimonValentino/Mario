@@ -59,6 +59,7 @@ public class PlayScreen implements Screen {
 
         hud.resetWorldTimer();
         hud.resumeTimer();
+        hud.setLevel("1-" + levelNumber);
 
         configureThemeSong();
         game.playThemeSong();
