@@ -38,6 +38,9 @@ public class GameHud implements Disposable {
     private static Label scoreLabel;
     private Label timeLabel;
     private Label marioLabel;
+    private Label levelLabel;
+    private Label worldLabel;
+    String level;
 
     private boolean gameNotOver = true;
 
@@ -48,7 +51,7 @@ public class GameHud implements Disposable {
         numLives = 3;
         coins = 0;
         vport = new FitViewport(MarioGame.WIDTH, MarioGame.HEIGHT, new OrthographicCamera());
-
+        level = "1-1";
         constructLabels();
         constructStage(batch);
     }
@@ -69,12 +72,14 @@ public class GameHud implements Disposable {
         table.add(timeLabel).expandX().padTop(5f);
         table.add(livesLabel).expandX().padTop(5f);
         table.add(coinsLabel).expandX().padTop(5f);
+        table.add(worldLabel).expandX().padTop(5f);
         table.row();
         // new row
         table.add(scoreLabel).expandX();
         table.add(countdownLabel).expandX();
         table.add(numLivesLabel).expandX();
         table.add(numCoinsLabel).expandX();
+        table.add(levelLabel).expandX();
 
         stage.addActor(table);
     }
@@ -113,14 +118,12 @@ public class GameHud implements Disposable {
         gameNotOver = true;
     }
     private void constructLabels() {
-        countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer - 3),
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d", score),
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        numCoinsLabel = new Label(String.format("%01d", coins),
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        numLivesLabel = new Label(String.format("%01d", numLives),
-                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownLabel = new Label(String.format("%0" + Integer.toString(timeInLevel).length() + "d", worldTimer - 3), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        numCoinsLabel = new Label(String.format("%01d", coins), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        numLivesLabel = new Label(String.format("%01d", numLives), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label(level, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
         timeLabel = new Label("TIME",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         marioLabel = new Label("MARIO",
@@ -129,6 +132,9 @@ public class GameHud implements Disposable {
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         coinsLabel = new Label("COINS",
                 new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel = new Label("WORLD",
+                new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
     }
 
@@ -164,5 +170,9 @@ public class GameHud implements Disposable {
     }
     public void setNumLives(int numLives) {
         this.numLives = numLives;
+    }
+    public void setLevel(String level) {
+        this.level = level;
+        levelLabel.setText(level);
     }
 }

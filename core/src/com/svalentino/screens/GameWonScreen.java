@@ -50,7 +50,7 @@ public class GameWonScreen implements Screen {
 
         Label label = new Label("YOU WIN", font);
         Label timeLabel = new Label("Completed in " + MarioGame.timePlayed + " seconds", font);
-        Label creditsLabel = new Label("By Simon Valentino and Marrio Jeyakumar", font);
+        Label creditsLabel = new Label("By Marrio Jeyakumar and Simon Valentino", font);
         Label thanksLabel = new Label("Thanks for playing!", font);
 
         table.add(label).expandX();
