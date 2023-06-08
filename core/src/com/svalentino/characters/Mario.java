@@ -22,8 +22,8 @@ import com.svalentino.screens.PlayScreen;
 
 public class Mario extends Sprite implements Disposable {
     // Body dimensions
-    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 1.55f;
-    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 1.55f;
+    public static float marioWidth = MarioGame.TILE_LENGTH / 2 - 2.35f;
+    public static float marioHeight = MarioGame.TILE_LENGTH / 2 - 3f;
     private final World world;
     private final Body mario;
     private final float marioMaxSpeed = 11.7f;
@@ -88,7 +88,7 @@ public class Mario extends Sprite implements Disposable {
         mario.createFixture(fixtureDef).setUserData(this);
 
         EdgeShape top = new EdgeShape();
-        top.set(new Vector2((-marioHeight / 1.7f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE),
+        top.set(new Vector2((-marioHeight / 1.7f) * MarioGame.SCALE, (marioHeight + 1f) * MarioGame.SCALE),
                 new Vector2((marioHeight / 1.7f) * MarioGame.SCALE, (marioHeight + 0.1f) * MarioGame.SCALE));
         fixtureDef.shape = top;
         fixtureDef.isSensor = true;
@@ -97,7 +97,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void update(float delta) {
-        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2);
+        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2 + 0.05f);
         setRegion(getFrame(delta));
         if (flagpoleHit) {
             mario.setLinearVelocity(new Vector2(0f, -10f));

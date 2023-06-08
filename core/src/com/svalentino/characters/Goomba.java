@@ -52,8 +52,8 @@ public class Goomba extends Enemy {
 
         PolygonShape head = new PolygonShape();
         Vector2[] vertice = new Vector2[4];
-        vertice[0] = new Vector2(-5.3f, 10f).scl(MarioGame.SCALE);
-        vertice[1] = new Vector2(5.3f, 10f).scl(MarioGame.SCALE);
+        vertice[0] = new Vector2(-5.35f, 10f).scl(MarioGame.SCALE);
+        vertice[1] = new Vector2(5.35f, 10f).scl(MarioGame.SCALE);
         vertice[2] = new Vector2(-3f, 3f).scl(MarioGame.SCALE);
         vertice[3] = new Vector2(3f, 3f).scl(MarioGame.SCALE);
         head.set(vertice);
