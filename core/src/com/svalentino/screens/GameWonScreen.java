@@ -38,7 +38,7 @@ public class GameWonScreen implements Screen {
         stage = new Stage(vport, batch);
 
         camera.position.set(4, 4, 0);
-        camera.zoom += 42f;
+        camera.zoom += 50f;
         camera.update();
 
 
