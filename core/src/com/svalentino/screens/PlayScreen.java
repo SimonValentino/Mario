@@ -170,21 +170,32 @@ public class PlayScreen implements Screen {
             case 1:
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.22f);
+                SoundManager.SPED_UP_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Mario Theme Music Speed.mp3"));
+                SoundManager.SPED_UP_THEME_SONG.setVolume(0.22f);
                 break;
             case 2:
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Underground.mp3"));
                 SoundManager.THEME_SONG.setVolume(3f);
+                SoundManager.SPED_UP_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Underground Speed.mp3"));
+                SoundManager.SPED_UP_THEME_SONG.setVolume(3f);
                 break;
             case 3:
-                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Level Theme.mp3"));
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Level3 Song.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.45f);
+                SoundManager.SPED_UP_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Level3 Song Speed.mp3"));
+                SoundManager.SPED_UP_THEME_SONG.setVolume(0.45f);
+                break;
             case 4:
                 SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Theme.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.22f);
+                SoundManager.SPED_UP_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Sky Theme Speed.mp3"));
+                SoundManager.SPED_UP_THEME_SONG.setVolume(0.22f);
                 break;
             case 5:
-                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Athletic Theme.mp3"));
+                SoundManager.THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Delfino Plaza.mp3"));
                 SoundManager.THEME_SONG.setVolume(0.4f);
+                SoundManager.SPED_UP_THEME_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Delfino Plaza Speed.mp3"));
+                SoundManager.SPED_UP_THEME_SONG.setVolume(0.4f);
                 break;
         }
     }

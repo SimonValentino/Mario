@@ -69,17 +69,17 @@ public class GameHud implements Disposable {
         // expandX() allows all labels to share space on the x-axis
         // top row
         table.add(marioLabel).expandX().padTop(5f);
-        table.add(timeLabel).expandX().padTop(5f);
-        table.add(livesLabel).expandX().padTop(5f);
         table.add(coinsLabel).expandX().padTop(5f);
         table.add(worldLabel).expandX().padTop(5f);
+        table.add(livesLabel).expandX().padTop(5f);
+        table.add(timeLabel).expandX().padTop(5f);
         table.row();
         // new row
         table.add(scoreLabel).expandX();
-        table.add(countdownLabel).expandX();
-        table.add(numLivesLabel).expandX();
         table.add(numCoinsLabel).expandX();
         table.add(levelLabel).expandX();
+        table.add(numLivesLabel).expandX();
+        table.add(countdownLabel).expandX();
 
         stage.addActor(table);
     }
