@@ -18,4 +18,5 @@ public class SoundManager {
     public static final Sound STAGE_WIN_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/Stage Win (2).mp3"));
     public static final Sound ITSA_ME_SOUND = Gdx.audio.newSound(Gdx.files.internal("Downloads/Sounds & Music/It's-a Me Mario!.mp3"));
     public static final Music GAME_WON_SONG = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Game Won.mp3"));
+    public static final Music SPEED_UP_MUSIC = Gdx.audio.newMusic(Gdx.files.internal("Downloads/Sounds & Music/Speed Up.wav"));
 }

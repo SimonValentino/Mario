@@ -111,6 +111,7 @@ public class WorldRenderer implements Disposable {
                 timeElapsed += delta;
                 SoundManager.THEME_SONG.stop();
                 SoundManager.SPED_UP_THEME_SONG.stop();
+                SoundManager.SPEED_UP_MUSIC.stop();
                 SoundManager.DEATH_SOUND.setVolume(1f);
                 SoundManager.DEATH_SOUND.play();
                 if (timeElapsed >= 2.5f) {

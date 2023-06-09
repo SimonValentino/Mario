@@ -148,9 +148,14 @@ public class PlayScreen implements Screen {
             MarioGame.batch.setProjectionMatrix(gameOverScreen.stage.getCamera().combined);
             game.setScreen(new GameOverScreen(game));
         }
-        if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5) {
+
+        if (hud.getWorldTimer() <= hud.getTimeInLevel() / 5f && hud.getWorldTimer() >= hud.getTimeInLevel() / 5f - 0.1f) {
             SoundManager.THEME_SONG.stop();
-            SoundManager.SPED_UP_THEME_SONG.setVolume(0.15f);
+            SoundManager.SPEED_UP_MUSIC.play();
+        }
+
+        if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5f - 3f) {
+            SoundManager.THEME_SONG.stop();
             SoundManager.SPED_UP_THEME_SONG.play();
         }
 
