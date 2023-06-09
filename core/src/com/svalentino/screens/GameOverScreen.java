@@ -38,7 +38,7 @@ public class GameOverScreen implements Screen {
         stage = new Stage(vport, batch);
 
         camera.position.set(4, 4, 0);
-        camera.zoom += 22f;
+        camera.zoom += 25f;
         camera.update();
 
 
