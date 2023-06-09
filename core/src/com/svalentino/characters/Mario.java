@@ -97,7 +97,7 @@ public class Mario extends Sprite implements Disposable {
     }
 
     public void update(float delta) {
-        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2 + 0.1f);
+        setPosition(getXCoordinate() - getWidth() / 2, getYCoordinate() - getHeight() / 2 + 0.15f);
         setRegion(getFrame(delta));
         if (flagpoleHit) {
             mario.setLinearVelocity(new Vector2(0f, -10f));
