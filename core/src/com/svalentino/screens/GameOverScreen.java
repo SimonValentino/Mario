@@ -64,6 +64,7 @@ public class GameOverScreen implements Screen {
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            MarioGame.START_TIME = 0.0f;
             game.setScreen(new PlayScreen(game, new GameHud(MarioGame.batch), 1));
             SoundManager.GAME_OVER_SOUND.stop();
             game.playThemeSong();
