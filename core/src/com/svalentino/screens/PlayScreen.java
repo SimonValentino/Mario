@@ -131,7 +131,7 @@ public class PlayScreen implements Screen {
     private void update(float delta) {
         worldRenderer.updateWorld(delta, hud);
         hud.update(delta);
-        if (levelNumber == 4 && camera.position.y < 85f) {
+        if (levelNumber == 4 && camera.position.y < 92.5f) {
             camera.position.y = camera.position.y + 0.02f;
         }
         else if (worldRenderer.getMarioX() > 12.5 * MarioGame.TILE_LENGTH * MarioGame.SCALE)
@@ -149,12 +149,12 @@ public class PlayScreen implements Screen {
             game.setScreen(new GameOverScreen(game));
         }
 
-        if (hud.getWorldTimer() <= hud.getTimeInLevel() / 5f && hud.getWorldTimer() >= hud.getTimeInLevel() / 5f - 0.1f) {
+        if (hud.getWorldTimer() <= 30 && hud.getWorldTimer() >= 29.5) {
             SoundManager.THEME_SONG.stop();
             SoundManager.SPEED_UP_MUSIC.play();
         }
 
-        if(hud.getWorldTimer() <= hud.getTimeInLevel() / 5f - 3f) {
+        if(hud.getWorldTimer() <= 27) {
             SoundManager.THEME_SONG.stop();
             SoundManager.SPED_UP_THEME_SONG.play();
         }
