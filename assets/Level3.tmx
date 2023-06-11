@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="200" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="139">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="200" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="157">
  <tileset firstgid="1" source="MarioTileset.tsx"/>
  <layer id="1" name="bg" width="200" height="15">
   <data encoding="base64" compression="zlib">
@@ -8,7 +8,7 @@
  </layer>
  <layer id="2" name="graphics" width="200" height="15">
   <data encoding="base64" compression="zlib">
-   eJztWNtSAjEM7cqrl2demfFRfefb/AVvKPDgP6iIclE/znSGDqXTpM023S0LZ+YMsMtk0zQnSVepbmJocR8w9PCIXfQrpdYn+H19T5rSGIPNCXAaYbsH7G8+U225aCvPjM9cv2P0kRKPLuC2A/pYgM0lcCVgO2SrxBprfOb6PYe9/7L4XeG2JWKL+cXtY3XrAfVsDCXpQ2rdOYHFcgRxfLb44sm1NjFAri+rLSXQxB7G1IMYzIm6YFCSPqTWnRNUrQnlWkzuYPWUU2c5M560PvZhDzkoSR+50VO75w/sDFIXoVxrKncGCu8XLkI+54iTO9dRpGp7LFJCXVcfp2rLfdFHKswMhc1O0rW4CbTls/1cim3D1of7ab77eAb3zoEXxH+6pg8Nas9K2tdYlOBzye+YjT58OUz1jiuL3B4iCem42r3f19uxPLL9qJNr7vmew5R3ARL68M1yI4Z/XdOH7hua12r7vfT+geWfb++ofMnZP2JnDskZhLLjntd8oM46oThKrE0/+1KA2BowfVA0mrhRzehjItT7Y+OfQx+hswvmX5v6CGGgytCHBDA7+noOfdhI0ccYYrQATiP3j8rDHPrA3sVwZjPKvzb08RqZl23o4w6u3VvXc+gjZdZtai7WMNrQcVoxNMLZE+p/sbY5dkN+S+pjDfd+NvyNiInBX8BPVxscfTzA78cEPgHfM+vD9j0nMVSC9OHQ9SEZ39R9cP37gN+zBH4e9XHUR4f1wV2ri7cD0Mc/juJBLw==
+   eJztWMlSwzAMdeiV5dxrZzgCd76NX2ArtD3wD2yFLsDHIc/UU9djyVYsJ07aN/OmbdJRZFlPkqNUP3FtsQu49vCAXQwrpdZH+H19T5rSmIDNKXAWYXsAHG4+U225aCvPjM9cv2P0kRKPPuCmB/pYgM0lcCVgO2SrxBprfOb6PYe9/7L4XeG2JWKL+cXtY3XrAfVsDCXpQ2rdOYHFcgxxfLL47Mm1NjFCri+rLSXQxB7G1IMYzIm6YFCSPqTWnRNUrQnlWkzuYPWUU2c5M560PrqwhxyUpI/cGKjd8wd2BqmLUK41lTsjhfcLFyGfc8TJnesoUrU9FimhrquPY7VlV/SRCjNDYbOTdC1uAm35bD+XYtug9OHr5ybHT+D7KfBM7Y8+NKg9K2lfY1GCzyW/Y66jD90zLixye4gkpONq935fb8fyyPajTq6553sOU94FSOjDN8uNGf51QR9YDvvu6b6heam230vvH1j++faOypec/SN25pCcQSg77nnNB+qsE4qjxNr0s88FiK0B04fJY0ofV6oZfUyFen9s/HPoI3R2wfxrUx8hjFQZ+pAAZkdf554fYvRhI0UfE4jRAjiL3D8qD3PoA3sXw5nNKP/a0MdLZF62oY9buHZnXc+hj5RZt6m5WMNoQ8dpxdAIZ0+o/8Xa5tgN+S2pjzXc+9nwNyImBn8BP11tcPRxD78fEvgIfMusD9v3nMRQCdKHfdeHZHxT98H17x1+fyTw86CPgz56rA/uWl287oE+/gGOETcI
   </data>
  </layer>
  <objectgroup id="3" name="ground">
@@ -103,6 +103,16 @@
   <object id="83" x="2624" y="32" width="16" height="16"/>
   <object id="84" x="2608" y="32" width="16" height="16"/>
   <object id="85" x="2592" y="32" width="16" height="16"/>
+  <object id="147" x="2848" y="96" width="16" height="16"/>
+  <object id="148" x="2864" y="96" width="16" height="16"/>
+  <object id="149" x="2880" y="96" width="16" height="16"/>
+  <object id="150" x="2896" y="96" width="16" height="16"/>
+  <object id="151" x="2912" y="96" width="16" height="16"/>
+  <object id="152" x="2912" y="112" width="16" height="16"/>
+  <object id="153" x="2896" y="112" width="16" height="16"/>
+  <object id="154" x="2880" y="112" width="16" height="16"/>
+  <object id="155" x="2864" y="112" width="16" height="16"/>
+  <object id="156" x="2848" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="coinblocks">
   <object id="86" x="1728" y="144" width="16" height="16"/>
@@ -142,7 +152,7 @@
   <object id="135" x="2740.42" y="9.2413" width="6.07872" height="150.448"/>
  </objectgroup>
  <objectgroup id="11" name="exit">
-  <object id="113" x="2992" y="144" width="16" height="32"/>
+  <object id="140" x="2992" y="0" width="16" height="176"/>
  </objectgroup>
  <objectgroup id="12" name="enemyborders">
   <object id="115" x="448" y="128" width="16" height="16"/>
